@@ -7,6 +7,7 @@
         </div>
         <div class="col s12">
           <h4 class="thin">Estamos mejorando sitio web para ti,<br> esperalo pronto</h4>
+          <Countdown date="2019-06-19"></Countdown>
         </div>
         <div class="col s12 hide">
           <div class="input-field">
@@ -33,20 +34,16 @@ import 'materialize-css/dist/js/materialize.js'
 export default {
   name:"inconstruction",
   components: { Countdown },
-
   data() {
       return {
-          question: '',
-          answer: 'I cannot give you an answer until you ask a question!'
+        
       }
   },
   ready () {
+    //M.updateTextFields();
   },
   beforeCreate: ()=> {
-    $(document).ready(function ($) {
-      M.updateTextFields();
-     //$('#clock').text("hellow");
-   })
+
   }
 }
 
@@ -58,6 +55,7 @@ export default {
   font-weight: 100;
   text-align: center;
   color: white;
-  height: 100vh;
+  min-height: 100vh;
+  height: 100%;
 }
 </style>
