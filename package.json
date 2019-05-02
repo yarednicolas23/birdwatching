@@ -1,5 +1,5 @@
 {
-  "name": "example",
+  "name": "birdwatching",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -9,7 +9,10 @@
   },
   "dependencies": {
     "core-js": "^2.6.5",
-    "vue": "^2.6.10"
+    "jquery": "^3.4.0",
+    "materialize-css": "^1.0.0",
+    "vue": "^2.6.10",
+    "vue-router": "^3.0.6"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.6.0",
