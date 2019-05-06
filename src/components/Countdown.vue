@@ -75,17 +75,15 @@ export default {
 }
 
 .text {
-    font-size: 40px;
+    font-size: 20px;
     font-weight: 40;
-    margin-top:10px;
     margin-bottom: 10px;
     text-align: center;
 }
 
 .digit {
-    font-size: 150px;
+    font-size: 80px;
     font-weight: 100;
-    margin: 10px;
     text-align: center;
 }
 </style>

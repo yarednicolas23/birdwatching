@@ -40,4 +40,7 @@ body{
   font-family: 'Roboto', Helvetica, Arial;
   font-weight: 100;
 }
+label{
+  font-weight: 400;
+}
 </style>

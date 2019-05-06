@@ -1,23 +1,46 @@
 <template lang="html">
   <div id="inconstruction">
     <div class="container">
-      <form class="row">
+      <div class="row">
         <div class="col s12">
           <img src="../assets/img/birdwatching.gif">
         </div>
         <div class="col s12">
-          <h4 class="thin">Estamos mejorando sitio web para ti,<br> esperalo pronto</h4>
-          <Countdown date="2019-06-19"></Countdown>
-        </div>
-        <div class="col s12 hide">
-          <div class="input-field">
-            <input v-model="question" id="question" type="email" class="validate">
-            <label for="question">First Name</label>
+          <h5 class="thin no-margin">Estamos mejorando nuestro sitio web para ti, Espéralo pronto</h5>
+          <Countdown date="2019-06-30"></Countdown>
+          <div class="col s12">
+            <div id="container">
+              <div id="circle">
+                <div id="center"></div>
+              </div>
+            </div>
           </div>
         </div>
-      </form>
-      <audio id="audio" autoplay controls class="hide">
-        <source src="../assets/mp3/1630.mp3" type="audio/mpeg">
+      </div>
+      <div class="row">
+        <div class="col s12">
+          <h5 class="thin">¿Necesitas Información o quieres conocer más?<br> Déjanos tus datos y sé el primero en conocer nuestras novedades.</h5>
+        </div>
+        <form class="container" action="index.html" method="post">
+          <div class="col s12">
+            <div class="input-field">
+              <input v-model="name" id="name" type="text" class="validate white-text">
+              <label class="" for="name">Nombre</label>
+            </div>
+            <div class="input-field">
+              <input v-model="email" id="email" type="email" class="validate white-text">
+              <label class="" for="email">Email</label>
+            </div>
+            <div class="input-field">
+              <input v-model="phone" id="phone" type="number" class="validate white-text">
+              <label class="" for="question">Teléfono</label>
+            </div>
+            <GrandientButton text="Enviar"></GrandientButton>
+          </div>
+        </form>
+      </div>
+      <audio id="audio"  controls loop class="hide">
+        <source src="../assets/mp3/batara-barrado-thamnophilus-doliatus.mp3" type="audio/mpeg">
       </audio>
     </div>
   </div>
@@ -28,19 +51,21 @@ import jQuery from 'jquery'
 window.jQuery = jQuery
 
 import Countdown from './Countdown.vue';
-
-import 'materialize-css/dist/js/materialize.js'
+import GrandientButton from './GrandientButton.vue';
 
 export default {
   name:"inconstruction",
-  components: { Countdown },
+  components: { Countdown,GrandientButton },
   data() {
       return {
-        
+        "name":"",
+        "email":"",
+        "phone":""
       }
   },
   ready () {
     //M.updateTextFields();
+    jQuery("#audio").play();
   },
   beforeCreate: ()=> {
 
@@ -57,5 +82,44 @@ export default {
   color: white;
   min-height: 100vh;
   height: 100%;
+}
+@import url(https://fonts.googleapis.com/css?family=Lato:100);
+body {
+  background-color: #333;
+}
+#circle{
+  display: inline-block;
+  width:3em;
+  height:3em;
+  border-radius:50%;
+  background-color:rgba(255,255,255,0);
+  border: 0.185em solid rgba(255,255,255,1);
+  -webkit-animation: pulse 2s linear infinite;
+}
+#center{
+  width:2.5em;
+  height:2.5em;
+  background-color:rgba(255,255,255,0);
+  border: 0.1em solid rgba(255,255,255,1);
+  border-radius:50%;
+  -webkit-animation: pulse 2s linear infinite;
+}
+
+@-webkit-keyframes pulse{
+  0%{
+    transform:scale(1,1);
+    opacity:0.1;
+  }
+  20%{
+    transform:scale(1.10,1.10);
+    opacity:1;
+  }
+  90%{
+    transform:scale(1.5,1.5);
+    opacity:0;
+  }
+  100%{
+    opacity:0;
+  }
 }
 </style>
