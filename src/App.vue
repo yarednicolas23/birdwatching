@@ -18,7 +18,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 @font-face {
   font-family: 'Roboto';
   font-style: normal;
@@ -36,12 +36,8 @@ export default {
 @import url(https://fonts.googleapis.com/css?family=Roboto:100,100italic,300,300italic,400,400italic,500,500italic,700,700italic,900,900italic&subset=latin,latin-ext,cyrillic,cyrillic-ext,greek-ext,greek,vietnamese);
 @import url(https://fonts.googleapis.com/css?family=Roboto+Condensed:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext,cyrillic-ext,cyrillic,greek-ext,greek,vietnamese);
 @import url(https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700&subset=latin,latin-ext,greek-ext,greek,vietnamese,cyrillic,cyrillic-ext);
-#app {
-  font-family: 'Roboto', Helvetica, Arial;
-  font-style: normal;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 0px;
+#app{
+  color:white;
 }
 body{
   font-family: 'Roboto', Helvetica, Arial;

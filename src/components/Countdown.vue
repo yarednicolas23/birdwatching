@@ -73,14 +73,12 @@ export default {
     flex-direction: column;
     margin: 20px;
 }
-
 .text {
     font-size: 20px;
     font-weight: 40;
     margin-bottom: 10px;
     text-align: center;
 }
-
 .digit {
     font-size: 80px;
     font-weight: 100;

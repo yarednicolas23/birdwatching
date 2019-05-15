@@ -1,5 +1,5 @@
 <template lang="html">
-    <a class="btn-design blue-gradient" href=""><span>{{text}}</span></a>
+    <button class="btn-design blue-gradient" type="submit"><span>{{text}}</span></button>
 </template>
 
 <script>
@@ -16,6 +16,7 @@ export default {
 <style lang="css">
 /* Mixins */
 .btn-design {
+  border:0px solid transparent;
   display: inline-block;
   margin: 1em 0;
   padding: 0.5em 2em;
@@ -49,5 +50,10 @@ export default {
 .blue-gradient {
   box-shadow: -1px 0 0 1px rgba(30, 176, 255, 0.75), -1px -1px 0 1px rgba(15, 89, 255, 0.25), -1px 1px 0 1px rgba(94, 142, 226, 0.25), 0 -1px 0 1px rgba(67, 98, 255, 0.5), 0 1px 0 1px rgba(30, 232, 131, 0.5), 1px -1px 0 1px rgba(81, 255, 183, 0.25), 1px 1px 0 1px rgba(49, 255, 179, 0.25), 1px 0 0 1px rgba(31, 239, 164, 0.75);
 }
-
+.blue-gradient:hover {
+  background:-webkit-linear-gradient(left, #16b9b1, #2f80cb);
+}
+.blue-gradient:hover span{
+ -webkit-text-fill-color: white;
+}
 </style>

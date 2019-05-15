@@ -1,4 +1,4 @@
-# example
+# Birdwatchings Colombia
 
 ## Project setup
 ```

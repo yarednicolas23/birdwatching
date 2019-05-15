@@ -22,7 +22,7 @@
         <div class="col s12">
           <h5 class="thin">¿Necesitas Información o quieres conocer más?<br> Déjanos tus datos y sé el primero en conocer nuestras novedades.</h5>
         </div>
-        <form class="container" action="index.html" method="post">
+        <form class="container" v-on:submit.prevent="submit">
           <div class="col s12">
             <div class="input-field">
               <input v-model="name" id="name" type="text" class="validate white-text">
@@ -50,9 +50,10 @@
 <script>
 import jQuery from 'jquery'
 window.jQuery = jQuery
+import firebase from 'firebase'
 
-import Countdown from './Countdown.vue';
-import GrandientButton from './GrandientButton.vue';
+import Countdown from '../components/Countdown.vue';
+import GrandientButton from '../components/GrandientButton.vue'
 
 export default {
   name:"inconstruction",
@@ -62,10 +63,18 @@ export default {
         "name":"",
         "email":"",
         "phone":"",
+        "users":[],
         title: 'Birdwatching Colombia',
         description:'Avistamiento de aves, viaja por el país con la mayor diversidad de aves del mundo. Ofrecemos rutas que cubren casi el 80% del país.',
         keywords: 'Aviatur, Birdwatching, avistamiento de aves, diversidad, fauna, especies, aves exóticas, aves, rutas, Colombia, aves de Colombia'
       }
+  },
+  methods: {
+    submit: function () {
+      firebase.database().ref("users").once('value', (snapshot)=> {
+        this.users = snapshot.val()
+      })
+    }
   },
   ready () {
     //M.updateTextFields();
