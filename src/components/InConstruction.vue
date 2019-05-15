@@ -4,7 +4,7 @@
       <div class="row">
         <div class="col s12">
           <h1 class="hide">Birdwatching Colombia</h1>
-          <img src="../assets/img/birdwatching.gif">
+          <img class="responsive-img" src="../assets/img/birdwatching.gif">
         </div>
         <div class="col s12">
           <h5 class="thin no-margin">Estamos mejorando nuestro sitio web para ti, Espéralo pronto</h5>

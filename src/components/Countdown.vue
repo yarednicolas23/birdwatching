@@ -1,20 +1,20 @@
 <template lang="html">
   <div class="row">
-    <div class="col s3">
+    <div class="col s12 m6 l3">
       <p class="digit">{{ days | two_digits }}</p>
-      <p class="text">Days</p>
+      <p class="text">Días</p>
     </div>
-    <div class="col s3">
+    <div class="col s12 m6 l3">
       <p class="digit">{{ hours | two_digits }}</p>
-      <p class="text">Hours</p>
+      <p class="text">Horas</p>
     </div>
-    <div class="col s3">
+    <div class="col s12 m6 l3">
       <p class="digit">{{ minutes | two_digits }}</p>
-      <p class="text">Minutes</p>
+      <p class="text">Minutos</p>
     </div>
-    <div class="col s3">
+    <div class="col s12 m6 l3">
       <p class="digit">{{ seconds | two_digits }}</p>
-      <p class="text">Seconds</p>
+      <p class="text">Segundos</p>
     </div>
   </div>
 </template>
