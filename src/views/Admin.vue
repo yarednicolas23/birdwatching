@@ -78,4 +78,7 @@ export default{
 .capitalize{
   text-transform:capitalize;
 }
+nav {
+  padding:0 10px;
+}
 </style>

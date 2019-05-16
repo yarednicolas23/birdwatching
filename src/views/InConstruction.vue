@@ -40,8 +40,8 @@
           </div>
         </form>
       </div>
-      <audio id="audio"  controls loop class="hide">
-        <source src="../assets/mp3/batara-barrado-thamnophilus-doliatus.mp3" type="audio/mpeg">
+      <audio id="audio" autoplay controls loop class="hide">
+        <source src="../assets/mp3/birdwatching.mp3" type="audio/mpeg">
       </audio>
     </div>
   </div>
