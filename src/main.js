@@ -10,6 +10,9 @@ window.JQuery = require('jquery')
 
 import 'materialize-css/dist/css/materialize.css'
 import 'materialize-css/dist/js/materialize.js'
+import 'material-design-icons/iconfont/material-icons.css'
+
+//import M from 'materialize-css'
 
 Vue.use(VueMeta)
 Vue.config.productionTip = false

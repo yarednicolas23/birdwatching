@@ -78,20 +78,20 @@ export default {
   },
   ready () {
     //M.updateTextFields();
-    jQuery("#audio").play();
+    jQuery("#audio").play()
   },
   beforeCreate: ()=> {
 
   },
   metaInfo () {
-      return {
-        title: this.title,
-        meta: [
-          { vmid: 'description', name: 'description', content: this.description },
-          { vmid: 'keywords', name: 'keywords', content: this.keywords }
-        ]
-      }
+    return {
+      title: this.title,
+      meta: [
+        { vmid: 'description', name: 'description', content: this.description },
+        { vmid: 'keywords', name: 'keywords', content: this.keywords }
+      ]
     }
+  }
 }
 
 </script>

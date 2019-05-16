@@ -21,10 +21,13 @@ export default {
 <style scoped>
 @font-face {
   font-family: 'Roboto';
-  font-style: normal;
   font-weight: 100;
-  src: local('Roboto Thin'), local('Roboto-Thin'), url('./assets/fonts/Roboto/Roboto-Thin.ttf') format('ttf');
-  unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+  src: local('Roboto Thin'), local('Roboto Thin'), url('./assets/fonts/Roboto/Roboto-Thin.ttf') format('ttf');
+}
+@font-face {
+  font-family: 'Roboto';
+  font-weight: 200;
+  src: local('Roboto Thin'), local('Roboto Thin'), url('./assets/fonts/Roboto/Roboto-Thin.ttf') format('ttf');
 }
 @font-face {
   font-family: 'Roboto';
@@ -37,13 +40,12 @@ export default {
 @import url(https://fonts.googleapis.com/css?family=Roboto+Condensed:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext,cyrillic-ext,cyrillic,greek-ext,greek,vietnamese);
 @import url(https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700&subset=latin,latin-ext,greek-ext,greek,vietnamese,cyrillic,cyrillic-ext);
 #app{
-  color:white;
 }
 body{
-  font-family: 'Roboto', Helvetica, Arial;
+  font-family: 'Roboto', Helvetica;
   font-weight: 100;
 }
-label{
-  font-weight: 400;
+.thin{
+  font-weight: 100;
 }
 </style>
