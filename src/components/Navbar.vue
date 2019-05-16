@@ -1,7 +1,14 @@
 <template>
-  <div class="">
-    {{msg}}
-  </div>
+  <nav id="nav" class="transparent">
+    <div class="nav-wrapper">
+      <a href="#" class="brand-logo"><img class="responsive-img" src="../assets/img/logo.png" alt=""> </a>
+      <ul id="nav-mobile" class="right hide-on-med-and-down">
+        <li><a href="sass.html">Sass</a></li>
+        <li><a href="badges.html">Components</a></li>
+        <li><a href="collapsible.html">JavaScript</a></li>
+      </ul>
+    </div>
+  </nav>
 </template>
 
 <script>
@@ -9,28 +16,21 @@ export default {
   name: 'navbar',
   data (){
     return {
-      msg: 'tt',
-      title:'Titulo',
-      description:'Descripción',
-      keywords: 'palabras clave'
+
     }
-  },
-  metaInfo () {
-      return {
-        title: this.title,
-        titleTemplate: null,
-        meta: [
-          { vmid: 'description', name: 'description', content: this.description },
-          { vmid: 'keywords', name: 'keywords', content: this.keywords }
-        ]
-      }
-    }
+  }
 }
 
 </script>
 
 <style lang="css">
-#inconstruction {
-  margin-top: 0px;
+#nav{
+  box-shadow: none;
+}
+.nav-wrapper{
+  padding:2% 5%;
+}
+.responsive-img{
+  max-height: 50px;
 }
 </style>
