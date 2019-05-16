@@ -23,7 +23,7 @@
             </thead>
             <tbody class="thin">
               <tr v-for="user in users.list" v-bind:key="user.username">
-                <td class="capitalize">{{user.username}}</td>
+                <td class="capitalize">{{user.name}}</td>
                 <td>{{user.email}}</td>
                 <td>{{user.phone}}</td>
               </tr>

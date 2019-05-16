@@ -25,15 +25,15 @@
         <form class="container" v-on:submit.prevent="submit">
           <div class="col s12">
             <div class="input-field">
-              <input v-model="name" id="name" type="text" class="validate white-text">
+              <input v-model="form.name" id="name" type="text" class="validate white-text">
               <label class="" for="name">Nombre</label>
             </div>
             <div class="input-field">
-              <input v-model="email" id="email" type="email" class="validate white-text">
+              <input v-model="form.email" id="email" type="email" class="validate white-text">
               <label class="" for="email">Email</label>
             </div>
             <div class="input-field">
-              <input v-model="phone" id="phone" type="number" class="validate white-text">
+              <input v-model="form.phone" id="phone" type="number" class="validate white-text">
               <label class="" for="question">Teléfono</label>
             </div>
             <GrandientButton text="Enviar"></GrandientButton>
@@ -51,6 +51,7 @@
 import jQuery from 'jquery'
 window.jQuery = jQuery
 import firebase from 'firebase'
+import M from 'materialize-css'
 
 import Countdown from '../components/Countdown.vue';
 import GrandientButton from '../components/GrandientButton.vue'
@@ -60,19 +61,25 @@ export default {
   components: { Countdown,GrandientButton },
   data() {
       return {
-        "name":"",
-        "email":"",
-        "phone":"",
+        "form":{
+          "name":"",
+          "email":"",
+          "phone":""
+        },
         "users":[],
-        title: 'Birdwatching Colombia',
-        description:'Avistamiento de aves, viaja por el país con la mayor diversidad de aves del mundo. Ofrecemos rutas que cubren casi el 80% del país.',
-        keywords: 'Aviatur, Birdwatching, avistamiento de aves, diversidad, fauna, especies, aves exóticas, aves, rutas, Colombia, aves de Colombia'
+        "title": 'Birdwatching Colombia',
+        "description":'Avistamiento de aves, viaja por el país con la mayor diversidad de aves del mundo. Ofrecemos rutas que cubren casi el 80% del país.',
+        "keywords": 'Aviatur, Birdwatching, avistamiento de aves, diversidad, fauna, especies, aves exóticas, aves, rutas, Colombia, aves de Colombia'
       }
   },
   methods: {
     submit: function () {
-      firebase.database().ref("users").once('value', (snapshot)=> {
-        this.users = snapshot.val()
+      M.toast({html: 'Cargando...'})
+      firebase.database().ref().child('users').push(this.form)
+      .once( "value", function() {
+        M.toast({html: 'Tu Registro fue Exitoso'})
+      }, function (error) {
+        M.toast({html: 'Ups:'+error})
       })
     }
   },
