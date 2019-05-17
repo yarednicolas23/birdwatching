@@ -83,12 +83,11 @@ export default {
       })
     }
   },
-  ready () {
+  mounted() {
     //M.updateTextFields();
-    jQuery("#audio").play()
   },
   beforeCreate: ()=> {
-
+    $("#audio").play()
   },
   metaInfo () {
     return {

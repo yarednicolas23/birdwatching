@@ -4,7 +4,7 @@
       <Navbar/>
       <div class="col s12">
         <div class="col s12 m6 l6">
-
+          <h1 class="bebasbold white-text">Hummingbird</h1>
         </div>
       </div>
     </div>
@@ -45,7 +45,7 @@ export default {
 <style lang="css" scoped>
 #home{
   background-size: cover;
-  filter:saturate(1.2);
+  filter:saturate(1.4);
 }
 #content{
   min-height: 100vh;
@@ -53,6 +53,7 @@ export default {
   min-width: 100vh;
   width: 100%;
   margin:0px;
+  padding:0% 5%;
   background: linear-gradient(to right,black, transparent);
 }
 </style>

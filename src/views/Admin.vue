@@ -5,7 +5,7 @@
         <a href="#" class="brand-logo">Administrador</a>
       </div>
       <div class="nav-content">
-        <span class="nav-title digit">Usuarios Registrados</span>
+        <span class="nav-title digit">Usuarios Registrados </span>
         <a class="btn-floating btn-large halfway-fab waves-effect waves-light teal">
           <i class="material-icons indigo">add</i>
         </a>
@@ -13,22 +13,41 @@
     </nav>
     <div class="row">
       <div class="col s12 m6 l6">
-          <table class="white-text">
-            <thead>
-              <tr>
-                  <th>Nombre</th>
-                  <th>Email</th>
-                  <th>Telefóno</th>
-              </tr>
-            </thead>
-            <tbody class="thin">
-              <tr v-for="user in users.list" v-bind:key="user.username">
-                <td class="capitalize">{{user.name}}</td>
-                <td>{{user.email}}</td>
-                <td>{{user.phone}}</td>
-              </tr>
-            </tbody>
-          </table>
+        <table class="white-text">
+          <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Email</th>
+                <th>Telefóno</th>
+            </tr>
+          </thead>
+          <tbody class="thin" v-if="users.list != 0">
+            <tr v-for="user in users.list" v-bind:key="user.username">
+              <td class="capitalize">{{user.name}}</td>
+              <td>{{user.email}}</td>
+              <td>{{user.phone}}</td>
+            </tr>
+          </tbody>
+          <div class="center" v-else>
+            <div class="preloader-wrapper active">
+              <div class="spinner-layer spinner-blue-only">
+                <div class="circle-clipper left">
+                  <div class="circle"></div>
+                </div><div class="gap-patch">
+                  <div class="circle"></div>
+                </div><div class="circle-clipper right">
+                  <div class="circle"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </table>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col s12">
+          <h3 class="thin white-text">Galeria</h3>
+          <div class="divider"></div>
       </div>
     </div>
   </div>

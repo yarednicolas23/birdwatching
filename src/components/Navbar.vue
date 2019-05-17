@@ -1,7 +1,7 @@
 <template>
   <nav id="nav" class="transparent">
     <div class="nav-wrapper">
-      <a href="#" class="brand-logo"><img class="responsive-img" src="../assets/img/logo.png" alt=""> </a>
+      <a href="#" class="brand-logo"><img id="logo" class="responsive-img" src="../assets/img/logo.png" alt=""> </a>
       <ul id="nav-mobile" class="right hide-on-med-and-down">
         <li><a href="sass.html">Sass</a></li>
         <li><a href="badges.html">Components</a></li>
@@ -28,9 +28,9 @@ export default {
   box-shadow: none;
 }
 .nav-wrapper{
-  padding:2% 5%;
+  padding:2% 0%;
 }
-.responsive-img{
+#logo{
   max-height: 50px;
 }
 </style>
