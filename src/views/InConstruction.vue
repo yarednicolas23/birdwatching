@@ -1,5 +1,6 @@
 <template lang="html">
   <div id="inconstruction">
+    <SocialShare/>
     <div class="container">
       <div class="row">
         <div class="col s12">
@@ -55,10 +56,11 @@ import M from 'materialize-css'
 
 import Countdown from '../components/Countdown.vue';
 import GrandientButton from '../components/GrandientButton.vue'
+import SocialShare from '../components/SocialShare.vue'
 
 export default {
   name:"inconstruction",
-  components: { Countdown,GrandientButton },
+  components: { Countdown,GrandientButton,SocialShare },
   data() {
       return {
         "form":{

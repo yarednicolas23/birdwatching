@@ -21,7 +21,12 @@ export default {
 <style lang="css">
 @font-face {
   font-family: 'Roboto';
+  font-weight: 100;
   src: url('./assets/fonts/Roboto/Roboto-Thin.ttf');
+}
+@font-face {
+  font-family: 'Roboto-Light';
+  src: url('./assets/fonts/Roboto/Roboto-Light.ttf');
 }
 @font-face {
   font-family: 'BebasNeueBold';
@@ -35,8 +40,8 @@ export default {
 #app{
 }
 body{
-  font-family: 'Roboto', Helvetica;
-  font-weight: 100;
+  font-family: 'Roboto-Ligh', Helvetica;
+  font-weight: 200;
 }
 .thin{
   font-weight: 100;

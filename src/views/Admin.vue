@@ -1,18 +1,14 @@
 <template lang="html">
   <div class="row blue-grey darken-4">
-    <nav class="blue-grey darken-4 nav-extended">
+    <nav class="blue-grey darken-4">
       <div class="nav-wrapper">
         <a href="#" class="brand-logo">Administrador</a>
-      </div>
-      <div class="nav-content">
-        <span class="nav-title digit">Usuarios Registrados </span>
-        <a class="btn-floating btn-large halfway-fab waves-effect waves-light teal">
-          <i class="material-icons indigo">add</i>
-        </a>
       </div>
     </nav>
     <div class="row">
       <div class="col s12 m6 l6">
+        <h4 class="bold white-text">Usuarios Registrados</h4>
+        <div class="divider"></div>
         <table class="white-text">
           <thead>
             <tr>
@@ -46,8 +42,26 @@
     </div>
     <div class="row">
       <div class="col s12">
-          <h3 class="thin white-text">Galeria</h3>
+          <h4 class="thin white-text">Galeria</h4>
           <div class="divider"></div>
+          <div class="col s12">
+            <div class="col s12 m6 l6"  v-for="(bird,key) in gallery.list" v-bind:key="key">
+              <div class="card horizontal">
+                <div class="card-image">
+                  <img :src="'img/'+bird.img">
+                  <span class="card-title">{{bird.name}}</span>
+                </div>
+                <div class="card-stacked">
+                  <div class="card-content">
+                    <p>{{bird.description}}</p>
+                  </div>
+                  <div class="card-action">
+                    <a href="#">This is a link</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
       </div>
     </div>
   </div>
@@ -60,6 +74,9 @@ export default{
   name:'admin',
   data() {
       return {
+        "gallery":{
+          "list":{}
+        },
         "users":{
           "list":[],
           "length":0
@@ -75,12 +92,20 @@ export default{
         this.users.list = snapshot.val()
         this.users.length = snapshot.numChildren()
       })
+    },
+    getGallery: function () {
+      firebase.database().ref("page/home/gallery").once('value', (snapshot)=> {
+        this.gallery.list = snapshot.val()
+        //this.users.length = snapshot.numChildren()
+
+      })
     }
   },
   mounted(){
     const elems = document.querySelectorAll('.collapsible')
     M.Collapsible.init(elems)
     this.getUsers()
+    this.getGallery()
   },
   metaInfo () {
     return {
