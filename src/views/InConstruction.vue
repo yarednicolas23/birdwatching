@@ -87,7 +87,7 @@ export default {
     //M.updateTextFields();
   },
   beforeCreate: ()=> {
-    $("#audio").play()
+    jQuery("#audio").play()
   },
   metaInfo () {
     return {
