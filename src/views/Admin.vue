@@ -45,10 +45,10 @@
           <h4 class="thin white-text">Galeria</h4>
           <div class="divider"></div>
           <div class="col s12">
-            <div class="col s12 m6 l6"  v-for="(bird,key) in gallery.list" v-bind:key="key">
+            <div class="col s12 m6 l6" v-for="(bird,key) in gallery.list" v-bind:key="key">
               <div class="card horizontal">
                 <div class="card-image">
-                  <img :src="'img/'+bird.img">
+                  <img :src="getSrc(key)">
                   <span class="card-title">{{bird.name}}</span>
                 </div>
                 <div class="card-stacked">
@@ -56,12 +56,44 @@
                     <p>{{bird.description}}</p>
                   </div>
                   <div class="card-action">
-                    <a href="#">This is a link</a>
+                    <a href="#" class="green-text">editar</a>
+                    <a href="#" class="red-text">eliminar</a>
                   </div>
                 </div>
               </div>
             </div>
           </div>
+          <div class="col s12">
+            <button data-target="addgallery" class="btn waves-effect waves-light blue-grey col s12 modal-trigger" type="button" name="button">
+              Agregar Imagen
+              <i class="material-icons right">add</i>
+            </button>
+          </div>
+      </div>
+    </div>
+    <!-- Modal Structure -->
+    <div id="addgallery" class="modal">
+      <div class="modal-content">
+        <h4>Añadir Imagen</h4>
+        <div class="row">
+          <form id="uploadImg" enctype="multipart/form-data">
+            <img class="responsive-img" style="max-width: 150px;" src="" alt="">
+            <span class="add">
+              <div class="file-field input-field">
+                <div class="btn">
+                  <span>File</span>
+                  <input type="file" multiple v-on:change="uploadImg($event)">
+                </div>
+                <div class="file-path-wrapper">
+                  <input class="file-path validate" type="text" placeholder="Upload one or more files">
+                </div>
+              </div>
+            </span><br><br>
+          </form>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <a href="#!" class="modal-close waves-effect waves-green btn-flat">Cerrar</a>
       </div>
     </div>
   </div>
@@ -75,6 +107,12 @@ export default{
   data() {
       return {
         "gallery":{
+          "new":{
+            "model":{
+              "name":"",
+              "description":""
+            }
+          },
           "list":{}
         },
         "users":{
@@ -97,15 +135,49 @@ export default{
       firebase.database().ref("page/home/gallery").once('value', (snapshot)=> {
         this.gallery.list = snapshot.val()
         //this.users.length = snapshot.numChildren()
-
       })
+    },
+    getSrc(name) {
+      return require('../assets/img/'+name+'/'+ name + "-400.png")
+    },
+    uploadImg(e){
+      var data= new FormData()
+      data.append('attachment_file', e.target.files[0])
+      data.append('type', "upload_img")
+      data.append('name', "")
+      $.ajax({
+        url: 'https://apimgs.000webhostapp.com/api/upload/',
+        data: data,
+        cache: false,
+        contentType: false,
+        processData: false,
+        type: 'POST',
+        success: (data)=> {
+          try {
+            if (data=="ok") {
+              this.upload.time = new Date().getTime()
+            }
+            if (data=="error" || data!="ok") {
+              this.upload.loader=false
+              this.$root.messageService("toast", "Logo no subido")
+            }
+          } catch (e) {
+            this.upload.loader=false
+            this.$root.messageService("toast", "Logo no subido")
+          }
+        },
+      });
     }
+  },
+  created(){
+    this.getGallery()
   },
   mounted(){
     const elems = document.querySelectorAll('.collapsible')
     M.Collapsible.init(elems)
+    const elemsmodal = document.querySelectorAll('.modal');
+    M.Modal.init(elemsmodal);
     this.getUsers()
-    this.getGallery()
   },
   metaInfo () {
     return {

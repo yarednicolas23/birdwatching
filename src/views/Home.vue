@@ -9,8 +9,9 @@
           <p>Hummingbirds are birds native to the Americas and constitute the biological family Trochilidae. They are among the smallest of birds, most species measuring 7.5–13 cm (3–5 in) in length.</p>
         </div>
         <div class="col s12 m6 l6">
-          <div class="carousel" v-for="(bird,key) in home.gallery.list" v-bind:key="key">
-             <a class="carousel-item z-depth-4" href="#one!"><img v-bind:src="'/img/'+key+'/'+bird.img"></a>
+          <div class="carousel">
+             <a class="carousel-item z-depth-5" v-for="(bird,key) in home.gallery.list" v-bind:key="key"><img v-bind:src="getSrc(key)"></a>
+
            </div>
         </div>
       </div>
@@ -44,18 +45,20 @@ export default {
       firebase.database().ref("page/home/gallery").once('value', (snapshot)=> {
         this.home.gallery.list = snapshot.val()
         //this.users.length = snapshot.numChildren()
-
+        setTimeout(function () {
+          const elems = document.querySelectorAll('.carousel')
+          M.Carousel.init(elems,{fullWidth:true,padding:20})
+        }, 2000)
       })
+    },
+    getSrc(name) {
+      return require('../assets/img/'+name+'/'+ name + "-400.png")
     }
   },
   created(){
     this.getGallery()
   },
   mounted(){
-    setTimeout(function () {
-      const elems = document.querySelectorAll('.carousel')
-      M.Carousel.init(elems)
-    }, 3000)
 
   },
   beforeMount: ()=> {
@@ -85,5 +88,8 @@ export default {
   margin:0px;
   padding:0% 5%;
   background: linear-gradient(to right,black, transparent);
+}
+.carousel{
+  top: 10vh;
 }
 </style>
