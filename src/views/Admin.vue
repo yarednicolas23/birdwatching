@@ -7,9 +7,9 @@
     </nav>
     <div class="row">
       <div class="col s12 m6 l6">
-        <h4 class="bold white-text">Usuarios Registrados</h4>
-        <div class="divider"></div>
-        <table class="white-text">
+        <h5 class="thin blue-grey-text text-lighten-3">Usuarios Registrados</h5>
+        <div class="divider "></div>
+        <table class="blue-grey-text text-lighten-3">
           <thead>
             <tr>
                 <th>Nombre</th>
@@ -42,11 +42,11 @@
     </div>
     <div class="row">
       <div class="col s12">
-          <h4 class="thin white-text">Galeria</h4>
+          <h5 class="thin blue-grey-text text-lighten-3">Galería</h5>
           <div class="divider"></div>
           <div class="col s12">
             <div class="col s12 m6 l6" v-for="(bird,key) in gallery.list" v-bind:key="key">
-              <div class="card horizontal">
+              <div class="card horizontal blue-grey darken-3 white-text z-depth-4">
                 <div class="card-image">
                   <img :src="getSrc(key)">
                   <span class="card-title">{{bird.name}}</span>

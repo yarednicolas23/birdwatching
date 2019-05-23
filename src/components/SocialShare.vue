@@ -31,6 +31,6 @@ export default {
   left:20px;
 }
 .icon{
-  font-size: 2rem;
+  font-size: 1.6rem;
 }
 </style>
