@@ -56,8 +56,8 @@
                     <p>{{bird.description}}</p>
                   </div>
                   <div class="card-action">
-                    <a href="#" class="green-text">editar</a>
-                    <a href="#" class="red-text">eliminar</a>
+                    <a class="pointer green-text">editar</a>
+                    <a v-on:click="deletePicture(key)" class="pointer red-text">eliminar</a>
                   </div>
                 </div>
               </div>
@@ -82,7 +82,7 @@
               <label for="name">Nombre</label>
             </div>
             <div class="input-field col s12">
-              <textarea v-model="gallery.new.model.description" id="description" class="materialize-textarea" data-length="120" required></textarea>
+              <textarea v-model="gallery.new.model.description" id="description" class="materialize-textarea" data-length="250" required></textarea>
               <label for="description">Descripción</label>
             </div>
             <img class="responsive-img" style="max-width: 150px;" :src="upload.img+'?'+upload.time" alt="">
@@ -102,11 +102,25 @@
                 <div class="file-field input-field">
                   <div class="btn indigo" :disabled="gallery.new.model.name ? null : !null">
                     <i class="material-icons left">cloud_upload</i>
-                    <span>Subir Imagen</span>
+                    <span>Subir Imagen 400x400</span>
+                    <input type="file" multiple v-on:change="uploadImg($event,true)">
+                  </div>
+                  <div class="file-path-wrapper">
+                    <input class="file-path validate" type="text" placeholder="Upload one file of 400px">
+                  </div>
+                </div>
+              </span>
+            </div>
+            <div class="col s12">
+              <span class="add">
+                <div class="file-field input-field">
+                  <div class="btn indigo" :disabled="gallery.new.model.name ? null : !null">
+                    <i class="material-icons left">cloud_upload</i>
+                    <span>Subir Imagen Background</span>
                     <input type="file" multiple v-on:change="uploadImg($event)">
                   </div>
                   <div class="file-path-wrapper">
-                    <input class="file-path validate" type="text" placeholder="Upload one file">
+                    <input class="file-path validate" type="text" placeholder="Upload one file Background">
                   </div>
                 </div>
               </span>
@@ -114,7 +128,7 @@
           </div>
         </div>
         <div class="modal-footer">
-          <button :disabled="gallery.new.valid ? false : true" type="submit" class="modal-close waves-effect waves-green btn green">Guardar</button>
+          <button :disabled="gallery.new.valid ? false : true" type="submit" class="waves-effect waves-green btn green">Guardar</button>
           <a class="modal-close waves-effect waves-green btn-flat">Cerrar</a>
         </div>
       </form>
@@ -165,25 +179,49 @@ export default{
       })
     },
     getSrc(name) {
-      return require('../assets/img/'+name+'/'+ name + "-400.png")
+      return 'https://apimgs.000webhostapp.com/img/'+ name.replace(" ","-") + "-400.png"
+      //return require('../assets/img/'+name+'/'+ name + "-400.png")
     },
     addPicture: function() {
       M.toast({html: 'Cargando...'})
-      firebase.database().ref().child('users').push(this.form)
-      .once( "value", function() {
-        M.toast({html: 'Tu Registro fue Exitoso'})
-      }, function (error) {
-        M.toast({html: 'Ups:'+error})
+      firebase.database().ref('page/home/gallery/'+this.gallery.new.model.name.replace(" ","-"))
+      .set(this.gallery.new.model, function(error) {
+        if (error) {
+          // The write failed...
+          M.toast({html: 'Ups:'+error})
+        } else {
+          // Data saved successfully!
+          M.toast({html: 'Tu Registro fue Exitoso'})
+        }
       })
     },
-    uploadImg(e){
+    deletePicture(name) {
+      M.toast({html: 'Cargando...'})
+      firebase.database().ref('page/home/gallery/'+name)
+      .set(null,(error)=> {
+        if (error) {
+          // The write failed...
+          M.toast({html: 'Ups:'+error})
+        } else {
+          // Data saved successfully!
+          this.deleteImg(name)
+          this.deleteImg(name+'-400')
+          M.toast({html: 'Eliminado'})
+        }
+      })
+    },
+    uploadImg(e,size){
       this.gallery.new.loader = true
       var data= new FormData()
       data.append('attachment_file', e.target.files[0])
       data.append('type', "upload_img")
-      data.append('name', this.gallery.new.model.name)
+      if (size==true) {
+        data.append('name', this.gallery.new.model.name.replace(" ","-")+"-400")
+      }else {
+        data.append('name', this.gallery.new.model.name.replace(" ","-"))
+      }
       $.ajax({
-        url: 'https://apimgs.000webhostapp.com/api/upload/',
+        url: 'https://apimgs.000webhostapp.com/api/upload/index.php',
         data: data,
         cache: false,
         contentType: false,
@@ -194,7 +232,7 @@ export default{
             if (data=="ok") {
               M.toast({html: 'Imagen subida 👾'})
               this.gallery.new.valid = true
-              this.upload.img = "https://apimgs.000webhostapp.com/img/"+this.gallery.new.model.name+".png"
+              this.upload.img = "https://apimgs.000webhostapp.com/img/"+this.gallery.new.model.name.replace(" ","-")+".png"
               this.upload.time = new Date().getTime()
               this.gallery.new.loader = false
             }
@@ -205,6 +243,25 @@ export default{
             M.toast({html: 'Ups, hubo un error 👾 '})
           }
         },
+      });
+    },
+    deleteImg(name) {
+      M.toast({html: 'Cargando...! 👾'})
+      $.ajax({
+        url: 'https://apimgs.000webhostapp.com/api/delete/',
+        method: 'GET',
+        data:{
+          "type":"delete",
+          "name":name+'.png'
+        },
+        success: (data)=> {
+          if (data == "ok") {
+            M.toast({html: 'Imagen Eliminada! 👾'})
+          }
+        },
+        error: function() {
+          M.toast({html: 'Error al eliminar Imagen! 👾'})
+        }
       });
     }
   },
@@ -232,6 +289,9 @@ export default{
 }
 </script>
 <style lag="css">
+.pointer{
+  cursor: pointer;
+}
 .capitalize{
   text-transform:capitalize;
 }
