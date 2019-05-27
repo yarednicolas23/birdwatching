@@ -5,6 +5,7 @@ import InConstruction from './views/InConstruction.vue'
 import Admin from './views/Admin.vue'
 import Home from './views/Home.vue'
 import AboutUs from './views/AboutUs.vue'
+import Staff from './views/Staff.vue'
 import Error404 from './views/Error404.vue'
 
 
@@ -28,6 +29,11 @@ export default new Router({
       path: '/about',
       name: 'AboutUs',
       component: AboutUs
+    },
+    {
+      path: '/staff',
+      name: 'Staff',
+      component: Staff
     },
     {
       path: '/Admin',

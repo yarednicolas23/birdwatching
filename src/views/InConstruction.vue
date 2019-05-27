@@ -50,7 +50,6 @@
 
 <script>
 import jQuery from 'jquery'
-window.jQuery = jQuery
 import firebase from 'firebase'
 import M from 'materialize-css'
 
@@ -87,9 +86,10 @@ export default {
   },
   mounted() {
     //M.updateTextFields();
+    jQuery("#audio").play()
   },
   beforeCreate: ()=> {
-    jQuery("#audio").play()
+
   },
   metaInfo () {
     return {
