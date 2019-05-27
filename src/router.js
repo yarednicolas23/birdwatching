@@ -4,6 +4,8 @@ import Router from 'vue-router'
 import InConstruction from './views/InConstruction.vue'
 import Admin from './views/Admin.vue'
 import Home from './views/Home.vue'
+import AboutUs from './views/AboutUs.vue'
+import Error404 from './views/Error404.vue'
 
 
 Vue.use(Router)
@@ -23,6 +25,11 @@ export default new Router({
       component: Home
     },
     {
+      path: '/about',
+      name: 'AboutUs',
+      component: AboutUs
+    },
+    {
       path: '/Admin',
       name: 'Admin',
       component: Admin
@@ -30,6 +37,11 @@ export default new Router({
       // this generates a separate chunk (about.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
       //component: () => import(/* webpackChunkName: "about" */ './views/Admin.vue' )
-    }
+    },
+    {
+      path: '*',
+      name: 'Error404',
+      component: Error404
+    },
   ]
 })

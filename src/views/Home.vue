@@ -1,9 +1,6 @@
 <template lang="html">
-  <div id="home" v-bind:style="{'background-image': 'url(' + home.background + ')'}">
-  <SocialShare/>
-  <FooterFixed/>
-    <div id="content" class="row">
-      <Navbar/>
+  <div>
+    <PageTemplate :background="home.background">
       <div class="col s12">
         <div class="col s12 m12 l6 white-text">
           <h1 id="title" style="display:none" class="bebasbold no-margin scrollspy ">{{home.title}}</h1>
@@ -19,20 +16,18 @@
            </div>
         </div>
       </div>
-    </div>
+    </PageTemplate>
   </div>
 </template>
 
 <script>
-import Navbar from '../components/Navbar.vue'
-import SocialShare from '../components/SocialShare.vue'
-import FooterFixed from '../components/FooterFixed.vue'
+import PageTemplate from './PageTemplate.vue'
 
 import $ from 'jquery'
 import firebase from 'firebase'
 import M from 'materialize-css'
 export default {
-  components: { Navbar, SocialShare,FooterFixed },
+  components: { PageTemplate },
   data() {
       return {
         "home":{
@@ -85,16 +80,8 @@ export default {
         window.setInterval(() => {
             const elem = document.querySelectorAll('.carousel')
             elem[0].M_Carousel.next(1)
-        },2000);
+        },2000)
     })
-    $("#home").mousemove(function(e) {
-      var offset = $(this).offset()
-      var relativeX = (e.pageX - offset.left)
-      var relativeY = (e.pageY - offset.top)
-      var theTotal = relativeX/10+'% ' + relativeY/10+'%'
-      $('#home').css({'background-position': theTotal})
-
-    });
   },
   beforeMount: ()=> {
   },
@@ -111,19 +98,6 @@ export default {
 </script>
 
 <style lang="css" scoped>
-#home{
-  background-size: cover;
-  filter:saturate(1.4) contrast(1.1);
-}
-#content{
-  min-height: 100vh;
-  height: 100%;
-  min-width: 100vh;
-  width: 100%;
-  margin:0px;
-  padding:0% 5%;
-  background: linear-gradient(to right,black, transparent);
-}
 .carousel{
   top: 25vh;
 }
