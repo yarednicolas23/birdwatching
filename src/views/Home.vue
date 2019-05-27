@@ -6,8 +6,8 @@
       <Navbar/>
       <div class="col s12">
         <div class="col s12 m12 l6 white-text">
-          <h1 style="display:none" class="bebasbold no-margin scrollspy ">{{home.title}}</h1>
-          <p style="display:none" class="scrollspy">
+          <h1 id="title" style="display:none" class="bebasbold no-margin scrollspy ">{{home.title}}</h1>
+          <p id="description" style="display:none" class="scrollspy">
             {{home.description}}
           </p>
         </div>
@@ -74,7 +74,6 @@ export default {
       this.home.title = title
       this.home.description = description
       this.home.background = 'https://apimgs.000webhostapp.com/img/'+ background+'.png'
-      console.log(this.home.background);
       $('#home').css("background-image","url("+'https://apimgs.000webhostapp.com/img/'+ background+'.png'+")")
     }
   },
@@ -88,6 +87,14 @@ export default {
             elem[0].M_Carousel.next(1)
         },2000);
     })
+    $("#home").mousemove(function(e) {
+      var offset = $(this).offset()
+      var relativeX = (e.pageX - offset.left)
+      var relativeY = (e.pageY - offset.top)
+      var theTotal = relativeX/10+'% ' + relativeY/10+'%'
+      $('#home').css({'background-position': theTotal})
+
+    });
   },
   beforeMount: ()=> {
   },
