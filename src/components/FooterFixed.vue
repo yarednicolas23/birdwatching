@@ -16,7 +16,7 @@ export default {
           "aviatur-com":"https://aviatur.com",
           "aviatur-ecoturismo":"http://www.aviaturecoturismo.com/es/",
           "aviatur-buceo-colombia":"http://www.buceocolombia.com/",
-          "aviatur-colombia":"Short http://www.aviaturcolombia.com/"
+          "aviatur-colombia":"http://www.aviaturcolombia.com/"
         }
       }
     }

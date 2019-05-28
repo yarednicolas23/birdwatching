@@ -6,6 +6,8 @@ import Admin from './views/Admin.vue'
 import Home from './views/Home.vue'
 import AboutUs from './views/AboutUs.vue'
 import Staff from './views/Staff.vue'
+import BirdwatchingColombia from './views/BirdwatchingColombia.vue'
+
 import Error404 from './views/Error404.vue'
 
 
@@ -34,6 +36,11 @@ export default new Router({
       path: '/staff',
       name: 'Staff',
       component: Staff
+    },
+    {
+      path: '/birdwatching-colombia',
+      name: 'BirdwatchingColombia',
+      component: BirdwatchingColombia
     },
     {
       path: '/Admin',
