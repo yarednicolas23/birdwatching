@@ -11,7 +11,7 @@
         <div class="col s12 m12 l6">
           <div class="carousel">
              <a class="carousel-item waves-effect waves-light" v-for="(bird,key) in home.gallery.list" v-bind:key="key" v-on:click="setInfo(bird.name,bird.description,key)">
-               <img class="scrollspy z-depth-5" style="display:none" v-bind:src="getSrc(key)">
+               <img class="scrollspy z-depth-5" style="display:none" v-bind:src="getSrc(key+'-400')">
              </a>
            </div>
         </div>
@@ -37,7 +37,7 @@ export default {
           "title":"Hummingbird",
           "description":"Hummingbirds are birds native to the Americas and constitute the biological family Trochilidae. They are among the smallest of birds, most species measuring 7.5–13 cm (3–5 in) in length.",
           //"background":"/img/hummingbird.png"
-          "background":"https://apimgs.000webhostapp.com/img/"+"hummingbird.png"
+          "background":this.getSrc("hummingbird")
         },
         "title": 'Birdwatching Colombia',
         "description":'Avistamiento de aves, viaja por el país con la mayor diversidad de aves del mundo. Ofrecemos rutas que cubren casi el 80% del país.',
@@ -62,14 +62,14 @@ export default {
       })
     },
     getSrc(name) {
-      return 'https://apimgs.000webhostapp.com/img/'+ name + "-400.png"
-      //return require('../assets/img/'+name+'/'+ name + "-400.png")
+      return 'https://apimgs.000webhostapp.com/img/'+ name + ".png"
+      //require('../assets/img/'+ name + '.png')
+      //return './img/'+ name + '.png'
     },
     setInfo(title,description,background){
       this.home.title = title
       this.home.description = description
-      this.home.background = 'https://apimgs.000webhostapp.com/img/'+ background+'.png'
-      $('#home').css("background-image","url("+'https://apimgs.000webhostapp.com/img/'+ background+'.png'+")")
+      this.home.background = this.getSrc(background)
     }
   },
   created(){
@@ -100,5 +100,6 @@ export default {
 <style lang="css" scoped>
 .carousel{
   top: 25vh;
+  max-height: 60vh;
 }
 </style>

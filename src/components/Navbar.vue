@@ -50,7 +50,7 @@ export default {
             "name":"Short Programs",
             "dropdown":false
           },
-          "contact":{
+          "contact-us":{
             "name":"Contact Us",
             "dropdown":false
           }

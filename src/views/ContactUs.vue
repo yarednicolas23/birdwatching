@@ -1,31 +1,20 @@
 <template lang="html">
-  <div>
     <PageTemplate :background="staff.background">
       <div class="col s12">
-        <div class="col s3"></div>
-        <div class="col s3 center">
-            <img class="responsive-img circle" :src="getSrc('samy-bessudo-staff')" alt="Samy Bessudo">
-            <h3 class="white-text bebasbold">Samy Bessudo</h3>
-        </div>
-        <div class="col s1"></div>
-        <div class="col s3 center">
-            <img class="responsive-img circle" :src="getSrc('oswaldo-cortes-staff')" alt="Oswaldo Cortes">
-            <h3 class="white-text bebasbold">Oswaldo Cortes</h3>
-        </div>
+
       </div>
     </PageTemplate>
-  </div>
 </template>
 
 <script>
 import PageTemplate from './PageTemplate.vue'
-
 export default {
+  name:"ContactUs",
   components: { PageTemplate },
   data() {
       return {
         "staff":{
-          "background":this.getSrc("staff-birdwatching-colombia")
+          "background":this.getSrc("Momotus-Momota")
         },
         "title": 'Birdwatching Colombia',
         "description":'Avistamiento de aves, viaja por el país con la mayor diversidad de aves del mundo. Ofrecemos rutas que cubren casi el 80% del país.',
@@ -59,6 +48,5 @@ export default {
 }
 </script>
 
-<style lang="css" scoped>
-
+<style lang="css">
 </style>
