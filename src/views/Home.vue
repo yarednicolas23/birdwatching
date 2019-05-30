@@ -4,9 +4,21 @@
       <div class="col s12">
         <div class="col s12 m12 l6 white-text">
           <h1 id="title" style="display:none" class="bebasbold no-margin scrollspy ">{{home.title}}</h1>
-          <p id="description" style="display:none" class="scrollspy">
-            {{home.description}}
-          </p>
+          <div id="description" style="display:none" class="scrollspy">
+            <p>{{home.description}}</p>
+            <br>
+            <div class="col 12">
+              <div class="col s4">
+                <a class="btn-floating pulse waves-effect blue darken-3 waves-light tooltipped" data-position="right" data-tooltip="I am a tooltip"><i class="material-icons">place</i></a>
+              </div>
+              <div class="col s4">
+                <a class="btn-floating pulse waves-effect blue darken-3 waves-light tooltipped" data-position="right" data-tooltip="I am a tooltip"><i class="material-icons">hearing</i></a>
+              </div>
+              <div class="col s4">
+                <a class="btn-floating pulse waves-effect blue darken-3 waves-light tooltipped" data-position="right" data-tooltip="I am a tooltip"><i class="material-icons">help_outline</i></a>
+              </div>
+            </div>
+          </div>
         </div>
         <div class="col s12 m12 l6">
           <div class="carousel">
@@ -37,7 +49,7 @@ export default {
           "title":"Hummingbird",
           "description":"Hummingbirds are birds native to the Americas and constitute the biological family Trochilidae. They are among the smallest of birds, most species measuring 7.5–13 cm (3–5 in) in length.",
           //"background":"/img/hummingbird.png"
-          "background":this.getSrc("hummingbird")
+          "background":this.getSrc("Hummingbird")
         },
         "title": 'Birdwatching Colombia',
         "description":'Avistamiento de aves, viaja por el país con la mayor diversidad de aves del mundo. Ofrecemos rutas que cubren casi el 80% del país.',
@@ -62,7 +74,7 @@ export default {
       })
     },
     getSrc(name) {
-      return 'https://apimgs.000webhostapp.com/img/'+ name + ".png"
+      return 'https://apimgs.000webhostapp.com/img/'+ name + ".png?"
       //require('../assets/img/'+ name + '.png')
       //return './img/'+ name + '.png'
     },
@@ -82,6 +94,8 @@ export default {
             elem[0].M_Carousel.next(1)
         },2000)
     })
+    const tooltipped = document.querySelectorAll('.tooltipped')
+    M.Tooltip.init(tooltipped)
   },
   beforeMount: ()=> {
   },

@@ -5,7 +5,7 @@
       <ul id="nav-mobile" class="right hide-on-med-and-down">
         <li v-for="(button,key) in page.buttons" v-bind:key="key">
           <a v-bind:href="key" v-if="button.dropdown==false">{{button.name}}</a>
-          <a v-if="button.dropdown!=false" class="dropdown-trigger" :data-target="key">
+          <a v-if="button.dropdown!=false" class="dropdown-trigger" :data-target="key" @mouseover="M.Dropdown.getInstance(elem).open()">
             {{button.name}}
             <i class="material-icons right">arrow_drop_down</i>
             <!-- Dropdown Structure -->
