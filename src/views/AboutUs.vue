@@ -12,12 +12,19 @@ export default{
     return {
       "about":{
         //"background":"/img/hummingbird.png"
-        "background":"https://apimgs.000webhostapp.com/img/"+"Momotus-Momota.png"
+        "background":this.getSrc("Momotus-Momota")
       }
     }
   },
+  methods:{
+    getSrc(name) {
+      //return 'https://apimgs.000webhostapp.com/img/'+ name + ".png?"
+      require('../assets/img/'+ name + '.png')
+      return './img/'+ name + '.png'
+    }
+  },
   mounted(){
-    
+
   },
 }
 </script>

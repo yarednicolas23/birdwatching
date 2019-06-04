@@ -8,6 +8,7 @@ import AboutUs from './views/AboutUs.vue'
 import Staff from './views/Staff.vue'
 import ContactUs from './views/ContactUs.vue'
 import BirdwatchingColombia from './views/BirdwatchingColombia.vue'
+import ShortPrograms from './views/ShortPrograms.vue'
 
 import Error404 from './views/Error404.vue'
 
@@ -29,7 +30,7 @@ export default new Router({
       component: Home
     },
     {
-      path: '/about',
+      path: '/about-us',
       name: 'AboutUs',
       component: AboutUs
     },
@@ -47,6 +48,11 @@ export default new Router({
       path: '/birdwatching-colombia',
       name: 'BirdwatchingColombia',
       component: BirdwatchingColombia
+    },
+    {
+      path: '/short-programs',
+      name: 'ShortPrograms',
+      component: ShortPrograms
     },
     {
       path: '/Admin',

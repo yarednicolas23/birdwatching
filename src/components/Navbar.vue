@@ -5,7 +5,7 @@
       <ul id="nav-mobile" class="right hide-on-med-and-down">
         <li v-for="(button,key) in page.buttons" v-bind:key="key">
           <a v-bind:href="key" v-if="button.dropdown==false">{{button.name}}</a>
-          <a v-if="button.dropdown!=false" class="dropdown-trigger" :data-target="key" >
+          <a v-if="button.dropdown!=false" :href="key">
             {{button.name}}
             <i class="material-icons right">arrow_drop_down</i>
             <!-- Dropdown Structure -->
@@ -31,7 +31,7 @@ export default {
             "name":"Home",
             "dropdown":false
           },
-          "about":{
+          "about-us":{
             "name":"About Us",
             "dropdown":{
               "staff":"Staff",
@@ -46,7 +46,7 @@ export default {
               "andian":"Andes"
             }
           },
-          "shortprograms":{
+          "short-programs":{
             "name":"Short Programs",
             "dropdown":false
           },
@@ -82,12 +82,10 @@ export default {
 #logo{
   max-height: 50px;
 }
-
 .jnav {
-  width: 90%; /* MIMICS bootstrap's div.container */
   margin: auto; /* centers the ul.jnav */
-  height: 50px; /* CRITICAL defines height explicitly */
   position: relative; /* CRITICAL gives ul.jbrand & ul.jmenu-right absolute base */
+  z-index: 99;
 }
 .jnav ul li {
   position: relative; /* CRITICAL gives ul.jdropdown-menu absolute base */

@@ -1,75 +1,98 @@
 <template lang="html">
   <div class="row blue-grey darken-4">
-    <nav class="blue-grey darken-4">
+    <nav class="nav-extended blue-grey darken-4">
       <div class="nav-wrapper">
         <a href="#" class="brand-logo">Administrador</a>
       </div>
+      <div class="nav-content">
+      <ul class="tabs tabs-transparent">
+        <li class="tab"><a href="#users">Usuarios Registrados</a></li>
+        <li class="tab"><a class="active" href="#home">Home</a></li>
+        <li class="tab"><a href="#about-us">About us</a></li>
+        <li class="tab"><a href="#test4">Test 4</a></li>
+        <li class="tab disabled"><a href="#disabled">Disabled Tab</a></li>
+      </ul>
+    </div>
     </nav>
-    <div class="row">
-      <div class="col s12 m6 l6">
-        <h5 class="thin blue-grey-text text-lighten-3">Usuarios Registrados</h5>
-        <div class="divider "></div>
-        <table class="blue-grey-text text-lighten-3">
-          <thead>
-            <tr>
-                <th>Nombre</th>
-                <th>Email</th>
-                <th>Telefóno</th>
-            </tr>
-          </thead>
-          <tbody class="thin" v-if="users.list != 0">
-            <tr v-for="user in users.list" v-bind:key="user.username">
-              <td class="capitalize">{{user.name}}</td>
-              <td>{{user.email}}</td>
-              <td>{{user.phone}}</td>
-            </tr>
-          </tbody>
-          <div class="center" v-else>
-            <div class="preloader-wrapper active">
-              <div class="spinner-layer spinner-blue-only">
-                <div class="circle-clipper left">
-                  <div class="circle"></div>
-                </div><div class="gap-patch">
-                  <div class="circle"></div>
-                </div><div class="circle-clipper right">
-                  <div class="circle"></div>
+    <!-- Content of tabs -->
+    <div id="users" class="row">
+      <div class="row">
+        <div class="col s12 m6 l6">
+          <h5 class="thin blue-grey-text text-lighten-3">Usuarios Registrados</h5>
+          <div class="divider "></div>
+          <table class="blue-grey-text text-lighten-3">
+            <thead>
+              <tr>
+                  <th>Nombre</th>
+                  <th>Email</th>
+                  <th>Telefóno</th>
+              </tr>
+            </thead>
+            <tbody class="thin" v-if="users.list != 0">
+              <tr v-for="user in users.list" v-bind:key="user.username">
+                <td class="capitalize">{{user.name}}</td>
+                <td>{{user.email}}</td>
+                <td>{{user.phone}}</td>
+              </tr>
+            </tbody>
+            <div class="center" v-else>
+              <div class="preloader-wrapper active">
+                <div class="spinner-layer spinner-blue-only">
+                  <div class="circle-clipper left">
+                    <div class="circle"></div>
+                  </div><div class="gap-patch">
+                    <div class="circle"></div>
+                  </div><div class="circle-clipper right">
+                    <div class="circle"></div>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-        </table>
+          </table>
+        </div>
       </div>
     </div>
-    <div class="row">
-      <div class="col s12">
-          <h5 class="thin blue-grey-text text-lighten-3">Galería</h5>
-          <div class="divider"></div>
-          <div class="col s12">
-            <div class="col s12 m6 l6" v-for="(bird,key) in gallery.list" v-bind:key="key">
-              <div class="card horizontal blue-grey darken-3 white-text z-depth-4">
-                <div class="card-image">
-                  <img :src="getSrc(key)">
-                  <span class="card-title">{{bird.name}}</span>
-                </div>
-                <div class="card-stacked">
-                  <div class="card-content">
-                    <p>{{bird.description}}</p>
+    <div id="home" class="row">
+      <div class="row">
+        <div class="col s12">
+            <h5 class="thin blue-grey-text text-lighten-3">Galería</h5>
+            <div class="divider"></div>
+            <div class="col s12">
+              <div class="col s12 m6 l6" v-for="(bird,key) in gallery.list" v-bind:key="key">
+                <div class="card horizontal blue-grey darken-3 white-text z-depth-4">
+                  <div class="card-image">
+                    <img :src="getSrc(key)">
+                    <span class="card-title">{{bird.name}}</span>
                   </div>
-                  <div class="card-action">
-                    <a class="pointer green-text">editar</a>
-                    <a v-on:click="deletePicture(key)" class="pointer red-text">eliminar</a>
+                  <div class="card-stacked">
+                    <div class="card-content">
+                      <p>{{bird.description}}</p>
+                    </div>
+                    <div class="card-action">
+                      <a class="pointer green-text">editar</a>
+                      <a v-on:click="deletePicture(key)" class="pointer red-text">eliminar</a>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
-          <div class="col s12">
-            <button data-target="addgallery" class="btn waves-effect waves-light blue-grey col s12 modal-trigger" type="button" name="button">
-              Agregar Imagen
-              <i class="material-icons right">add</i>
-            </button>
-          </div>
+            <div class="col s12">
+              <button data-target="addgallery" class="btn waves-effect waves-light blue-grey col s12 modal-trigger" type="button" name="button">
+                Agregar Imagen
+                <i class="material-icons right">add</i>
+              </button>
+            </div>
+        </div>
       </div>
+    </div>
+    <div id="about-us" class="row">
+      Test 3
+    </div>
+    <div id="test4" class="row">
+      Test 4
+    </div>
+    <div id="disabled" class="row">
+
     </div>
     <!-- Modal Structure -->
     <div id="addgallery" class="modal">
@@ -276,6 +299,8 @@ export default{
     const characterCounter = document.querySelectorAll('.materialize-textarea')
     M.CharacterCounter.init(characterCounter)
     this.getUsers()
+    const tabs = document.querySelectorAll('.tabs')
+    M.Tabs.init(tabs)
   },
   metaInfo () {
     return {

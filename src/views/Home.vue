@@ -7,7 +7,7 @@
           <div id="description" style="display:none" class="scrollspy">
             <p>{{home.description}}</p>
             <br>
-            <div class="col 12">
+            <div class="col 12 no-padding">
               <div class="col s4">
                 <a class="btn-floating pulse waves-effect blue darken-3 waves-light tooltipped" data-position="right" data-tooltip="Ubication"><i class="material-icons">place</i></a>
               </div>
