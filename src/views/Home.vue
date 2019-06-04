@@ -9,13 +9,13 @@
             <br>
             <div class="col 12">
               <div class="col s4">
-                <a class="btn-floating pulse waves-effect blue darken-3 waves-light tooltipped" data-position="right" data-tooltip="I am a tooltip"><i class="material-icons">place</i></a>
+                <a class="btn-floating pulse waves-effect blue darken-3 waves-light tooltipped" data-position="right" data-tooltip="Ubication"><i class="material-icons">place</i></a>
               </div>
               <div class="col s4">
-                <a class="btn-floating pulse waves-effect blue darken-3 waves-light tooltipped" data-position="right" data-tooltip="I am a tooltip"><i class="material-icons">hearing</i></a>
+                <a class="btn-floating pulse waves-effect blue darken-3 waves-light tooltipped" data-position="right" data-tooltip="Lisent Bird"><i class="material-icons">hearing</i></a>
               </div>
               <div class="col s4">
-                <a class="btn-floating pulse waves-effect blue darken-3 waves-light tooltipped" data-position="right" data-tooltip="I am a tooltip"><i class="material-icons">help_outline</i></a>
+                <a class="btn-floating pulse waves-effect blue darken-3 waves-light tooltipped" data-position="right" data-tooltip="More Info"><i class="material-icons">help_outline</i></a>
               </div>
             </div>
           </div>
