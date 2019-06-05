@@ -1,22 +1,34 @@
 <template lang="html">
   <div id="aboutus">
-    <PageTemplate :background="about.background"></PageTemplate>
+    <PageTemplate :background="about.background">
+      <div class="col s12 scrollspy" v-html="about.data.code">
+
+      </div>
+    </PageTemplate>
   </div>
 </template>
 <script>
 import PageTemplate from './PageTemplate.vue'
+
+import firebase from 'firebase'
 export default{
   name:'AboutUs',
   components: { PageTemplate },
   data() {
     return {
       "about":{
+        "data":"",
         //"background":"/img/hummingbird.png"
         "background":this.getSrc("Momotus-Momota")
       }
     }
   },
   methods:{
+    getAbout(){
+      firebase.database().ref("page/about-us").once('value', (snapshot)=> {
+        this.about.data = snapshot.val()
+      })
+    },
     getSrc(name) {
       //return 'https://apimgs.000webhostapp.com/img/'+ name + ".png?"
       require('../assets/img/'+ name + '.png')
@@ -24,7 +36,7 @@ export default{
     }
   },
   mounted(){
-
+    this.getAbout()
   },
 }
 </script>

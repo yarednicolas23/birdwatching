@@ -41,9 +41,9 @@ export default {
           "tours":{
             "name":"Tours",
             "dropdown":{
-              "amazonian":"Amazonas",
-              "caribe":"Caribbean Coast",
-              "andian":"Andes"
+              "tour/amazonian":"Amazonas",
+              "tour/caribe":"Caribbean Coast",
+              "tour/andian":"Andes"
             }
           },
           "short-programs":{
@@ -91,6 +91,7 @@ export default {
   position: relative; /* CRITICAL gives ul.jdropdown-menu absolute base */
 }
 .jnav ul li ul li a {
+  background: rgba(0, 0, 0, 0.5);
   display: block;
   min-width: 200px;
   width: 100%;
