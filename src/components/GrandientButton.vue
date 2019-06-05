@@ -53,7 +53,7 @@ export default {
 .blue-gradient:hover {
   background:-webkit-linear-gradient(left, #16b9b1, #2f80cb);
 }
-.blue-gradient:hover span{
+.blue-gradient:hover span, .blue-gradient:focus span{
  -webkit-text-fill-color: white;
 }
 </style>

@@ -1,22 +1,45 @@
 <template lang="html">
-    <PageTemplate :background="staff.background">
-      <div class="col s12">
-
-      </div>
-    </PageTemplate>
+<div>
+  <PageTemplate :background="staff.background">
+    <div id="contact-us" class="col s12 center">
+      <h5 class="thin no-margin white-text">If you want more information, leave us your data and we will contact you</h5>
+      <form class="container" v-on:submit.prevent="submit">
+        <div class="col s12">
+          <div class="input-field">
+            <input id="name" type="text" class="validate white-text">
+            <label for="name">Name</label>
+          </div>
+          <div class="input-field">
+            <input id="email" type="email" class="validate white-text">
+            <label for="email">Email</label>
+          </div>
+          <div class="input-field">
+            <input id="phone" type="number" class="validate white-text">
+            <label for="phone">Phone</label>
+          </div>
+          <GrandientButton text="Enviar"></GrandientButton>
+        </div>
+      </form>
+    </div>
+  </PageTemplate>
+</div>
 </template>
 
 <script>
+import firebase from 'firebase'
+import M from 'materialize-css'
+
 import PageTemplate from './PageTemplate.vue'
+import GrandientButton from '../components/GrandientButton.vue'
 export default {
   name:"ContactUs",
-  components: { PageTemplate },
+  components: { PageTemplate, GrandientButton },
   data() {
       return {
         "staff":{
           "background":this.getSrc("Momotus-Momota")
         },
-        "title": 'Birdwatching Colombia',
+        "title": 'Contact Us - Birdwatching Colombia',
         "description":'Avistamiento de aves, viaja por el país con la mayor diversidad de aves del mundo. Ofrecemos rutas que cubren casi el 80% del país.',
         "keywords": 'Aviatur, Birdwatching, avistamiento de aves, diversidad, fauna, especies, aves exóticas, aves, rutas, Colombia, aves de Colombia'
       }
@@ -26,6 +49,15 @@ export default {
       //return 'https://apimgs.000webhostapp.com/img/'+ name + ".png"
       require('../assets/img/'+ name + '.png')
       return './img/'+ name + '.png'
+    },
+    submit: function () {
+      M.toast({html: 'Cargando...'})
+      firebase.database().ref().child('users').push(this.form)
+      .once( "value", function() {
+        M.toast({html: 'Your registration was successful'})
+      }, function (error) {
+        M.toast({html: 'Ups:'+error})
+      })
     }
   },
   created(){
@@ -49,4 +81,7 @@ export default {
 </script>
 
 <style lang="css">
+#contact-us{
+  margin-top: 70px;
+}
 </style>
