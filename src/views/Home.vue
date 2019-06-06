@@ -9,13 +9,13 @@
             <br>
             <div class="col 12 no-padding">
               <div class="col s4">
-                <a class="btn-floating pulse waves-effect blue darken-3 waves-light tooltipped" data-position="right" data-tooltip="Ubication"><i class="material-icons">place</i></a>
+                <a class="btn-floating pulse waves-effect blue darken-3 waves-light tooltipped" data-position="bottom" :data-tooltip="'Ubication'"><i class="material-icons">place</i></a>
               </div>
               <div class="col s4">
-                <a class="btn-floating pulse waves-effect blue darken-3 waves-light tooltipped" data-position="right" data-tooltip="Lisent Bird"><i class="material-icons">hearing</i></a>
+                <a class="btn-floating pulse waves-effect blue darken-3 waves-light tooltipped" data-position="bottom" data-tooltip="Lisent Bird"><i class="material-icons">hearing</i></a>
               </div>
               <div class="col s4">
-                <a class="btn-floating pulse waves-effect blue darken-3 waves-light tooltipped" data-position="right" data-tooltip="More Info"><i class="material-icons">help_outline</i></a>
+                <a class="btn-floating pulse waves-effect blue darken-3 waves-light tooltipped" data-position="bottom" data-tooltip="More Info"><i class="material-icons">help_outline</i></a>
               </div>
             </div>
           </div>
@@ -112,8 +112,18 @@ export default {
 </script>
 
 <style lang="css" scoped>
+.carousel .carousel-item {
+  width: 250px;
+  height: 250px;
+}
 .carousel{
   top: 25vh;
   max-height: 60vh;
+}
+@media only screen and (max-width: 601px){
+  .carousel{
+    top: 0vh;
+    max-height: 60vh;
+  }
 }
 </style>

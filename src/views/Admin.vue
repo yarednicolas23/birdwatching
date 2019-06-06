@@ -69,7 +69,7 @@
                       <p>{{bird.description}}</p>
                     </div>
                     <div class="card-action">
-                      <a v-on:click="editPicture(key,bird)" class="pointer green-text">editar</a>
+                      <a v-on:click="modalEditPicture(key,bird)" class="pointer green-text modal-trigger" data-target="editgallery">editar</a>
                       <a v-on:click="deletePicture(key)" class="pointer red-text">eliminar</a>
                     </div>
                   </div>
@@ -97,28 +97,35 @@
                 </div>
              </div>
            </div>
-           <div class="card-action">
-             <a class="pointer" v-on:click="updateAbout">Guardar Cambios</a>
+         </div>
+       </div>
+       <div class="col s12 m6 l6">
+         <div class="card blue-grey darken-1">
+           <div class="card-content white-text">
+             <span class="card-title">Background Image</span>
+             <div class="row">
+               <div class="slider">
+                 <ul class="slides">
+                   <li  v-for="(bird,key) in home.gallery.list" v-bind:key="key">
+                     <img :src="getSrc(key)"> <!-- random image -->
+                     <div class="caption center-align">
+                       <h3>{{key}}</h3>
+                       <p>
+                         <label class="white-text">
+                           <input name="group1" type="radio" v-on:click="about.background = key" />
+                           <span>Select image</span>
+                         </label>
+                       </p>
+                     </div>
+                   </li>
+                 </ul>
+               </div>
+             </div>
            </div>
          </div>
        </div>
-        <div class="col s12 m6 l6">
-          <div class="card horizontal">
-            <div class="card-image">
-              <img :src="getSrc('Momotus-Momota')">
-            </div>
-            <div class="card-stacked">
-              <div class="card-content">
-                <h5>Background Img</h5>
-                <p>I am a very simple card. I am good at containing small bits of information.</p>
-              </div>
-              <div class="card-action">
-                <a href="#">This is a link</a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+       <button class="btn col s12 green" v-on:click="updateAbout">Guardar Cambios <i class="material-icons right">save</i> </button>
+     </div>
     </div>
     <div id="birdwatching-colombia" class="row">
       Test 4
@@ -137,6 +144,14 @@
             <div class="input-field col s12">
               <textarea v-model="home.gallery.new.model.description" id="description" class="materialize-textarea" data-length="250" required></textarea>
               <label for="description">Descripción</label>
+            </div>
+            <div class="input-field col s12">
+              <input v-model="home.gallery.edit.audio" id="audio" type="text" class="validate" required>
+              <label for="audio">Audio link xenocanto</label>
+            </div>
+            <div class="input-field col s12">
+              <input v-model="home.gallery.edit.ubication" id="name" type="text" class="validate" required>
+              <label for="name">Ubicacion</label>
             </div>
             <img class="responsive-img" style="max-width: 150px;" :src="home.upload.img+'?'+home.upload.time" alt="">
             <div class="preloader-wrapper small active" v-if="this.home.gallery.new.loader">
@@ -187,17 +202,25 @@
       </form>
     </div>
     <div id="editgallery" class="modal">
-      <form v-on:submit.prevent="addPicture">
+      <form v-on:submit.prevent="editPicture">
         <div class="modal-content">
-          <h4>Añadir Imagen</h4>
-          <div class="row">
+          <h4>Editar Imagen</h4>
+          <div class="col s12">
             <div class="input-field col s12">
-              <input v-model="home.gallery.new.model.name" id="name" type="text" class="validate" required>
+              <input v-model="home.gallery.edit.name" id="name" type="text" class="validate" required>
               <label for="name">Nombre</label>
             </div>
             <div class="input-field col s12">
-              <textarea v-model="home.gallery.new.model.description" id="description" class="materialize-textarea" data-length="250" required></textarea>
+              <textarea v-model="home.gallery.edit.description" id="description" class="materialize-textarea" data-length="250" required></textarea>
               <label for="description">Descripción</label>
+            </div>
+            <div class="input-field col s12">
+              <input v-model="home.gallery.edit.audio" id="audio" type="text" class="validate" required>
+              <label for="audio">Audio link xenocanto</label>
+            </div>
+            <div class="input-field col s12">
+              <input v-model="home.gallery.edit.ubication" id="name" type="text" class="validate" required>
+              <label for="name">Ubicacion</label>
             </div>
             <img class="responsive-img" style="max-width: 150px;" :src="home.upload.img+'?'+home.upload.time" alt="">
             <div class="preloader-wrapper small active" v-if="this.home.gallery.new.loader">
@@ -214,7 +237,7 @@
             <div class="col s12">
               <span class="add">
                 <div class="file-field input-field">
-                  <div class="btn indigo" :disabled="home.gallery.new.model.name ? null : !null">
+                  <div class="btn indigo" :disabled="home.gallery.edit.name ? null : !null">
                     <i class="material-icons left">cloud_upload</i>
                     <span>Subir Imagen 400x400</span>
                     <input type="file" multiple v-on:change="uploadImg($event,true)">
@@ -228,7 +251,7 @@
             <div class="col s12">
               <span class="add">
                 <div class="file-field input-field">
-                  <div class="btn indigo" :disabled="home.gallery.new.model.name ? null : !null">
+                  <div class="btn indigo" :disabled="home.gallery.edit.name ? null : !null">
                     <i class="material-icons left">cloud_upload</i>
                     <span>Subir Imagen Background</span>
                     <input type="file" multiple v-on:change="uploadImg($event)">
@@ -242,7 +265,7 @@
           </div>
         </div>
         <div class="modal-footer">
-          <button :disabled="home.gallery.new.valid ? false : true" type="submit" class="waves-effect waves-green btn green">Guardar</button>
+          <button type="submit" class="waves-effect waves-green btn green">Guardar</button>
           <a class="modal-close waves-effect waves-green btn-flat">Cerrar</a>
         </div>
       </form>
@@ -295,18 +318,34 @@ export default{
     homeGallery: function () {
       firebase.database().ref("page/home/gallery").once('value', (snapshot)=> {
         this.home.gallery.list = snapshot.val()
+        setTimeout(function () {
+          M.Slider.init(document.querySelectorAll('.slider'))
+        }, 2000)
       })
     },
     addPicture: function() {
       M.toast({html: 'Cargando...'})
-      firebase.database().ref('page/home/gallery/'+this.gallery.new.model.name.replace(" ","-"))
-      .set(this.gallery.new.model, function(error) {
+      firebase.database().ref('page/home/gallery/'+this.home.gallery.new.model.name.replace(" ","-"))
+      .set(this.home.gallery.new.model, function(error) {
         if (error) {
           // The write failed...
           M.toast({html: 'Ups:'+error})
         } else {
           // Data saved successfully!
           M.toast({html: 'Tu Registro fue Exitoso'})
+        }
+      })
+    },
+    editPicture: function() {
+      M.toast({html: 'Cargando...'})
+      firebase.database().ref('page/home/gallery/'+this.home.gallery.edit.name.replace(" ","-"))
+      .set(this.home.gallery.edit, function(error) {
+        if (error) {
+          // The write failed...
+          M.toast({html: 'Ups:'+error})
+        } else {
+          // Data saved successfully!
+          M.toast({html: 'Editado :D'})
         }
       })
     },
@@ -326,8 +365,8 @@ export default{
       })
     },
     modalEditPicture:function(key,bird) {
-      this.gallery.edit[key] = bird
-      //console.log(this.gallery)
+      this.home.gallery.edit = bird
+      M.updateTextFields()
     },
     uploadImg(e,size){
       this.gallery.new.loader = true
@@ -429,6 +468,7 @@ export default{
     this.getUsers()
     const tabs = document.querySelectorAll('.tabs')
     M.Tabs.init(tabs)
+    M.Chips.init(document.querySelectorAll('.chips'))
   },
   metaInfo () {
     return {

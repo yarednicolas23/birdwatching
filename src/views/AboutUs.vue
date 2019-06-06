@@ -19,7 +19,7 @@ export default{
       "about":{
         "data":"",
         //"background":"/img/hummingbird.png"
-        "background":this.getSrc("Momotus-Momota")
+        //"background":this.getSrc("Momotus-Momota")
       }
     }
   },
@@ -27,6 +27,8 @@ export default{
     getAbout(){
       firebase.database().ref("page/about-us").once('value', (snapshot)=> {
         this.about.data = snapshot.val()
+        console.log(this.about.data)
+        //this.getSrc(this.about.data.background)
       })
     },
     getSrc(name) {
@@ -35,8 +37,10 @@ export default{
       return './img/'+ name + '.png'
     }
   },
+  created(){
+      this.getAbout()
+  },
   mounted(){
-    this.getAbout()
   },
 }
 </script>
