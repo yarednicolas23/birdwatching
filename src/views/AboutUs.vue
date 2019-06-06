@@ -1,9 +1,7 @@
 <template lang="html">
   <div id="aboutus">
     <PageTemplate :background="about.background">
-      <div class="col s12 scrollspy" v-html="about.data.code">
-
-      </div>
+      <div class="col s12 scrollspy" v-html="about.data.code"></div>
     </PageTemplate>
   </div>
 </template>
@@ -19,7 +17,7 @@ export default{
       "about":{
         "data":"",
         //"background":"/img/hummingbird.png"
-        //"background":this.getSrc("Momotus-Momota")
+        "background":this.getSrc("Momotus-Momota")
       }
     }
   },
@@ -27,8 +25,7 @@ export default{
     getAbout(){
       firebase.database().ref("page/about-us").once('value', (snapshot)=> {
         this.about.data = snapshot.val()
-        console.log(this.about.data)
-        //this.getSrc(this.about.data.background)
+        this.about.background=this.getSrc(this.about.data.background)
       })
     },
     getSrc(name) {

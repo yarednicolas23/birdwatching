@@ -7,9 +7,11 @@
       <div class="nav-content">
       <ul class="tabs tabs-transparent">
         <li class="tab"><a href="#users">Usuarios Registrados</a></li>
+        <li class="tab"><a href="#pages">Paginas</a></li>
         <li class="tab"><a class="active" href="#home">Home</a></li>
         <li class="tab"><a href="#about-us">About us</a></li>
         <li class="tab"><a href="#birdwatching-colombia">Birdwatching Colombia</a></li>
+        <li class="tab"><a href="#short-programs">Short Programs</a></li>
         <li class="tab disabled"><a href="#disabled">Disabled Tab</a></li>
       </ul>
     </div>
@@ -52,6 +54,27 @@
         </div>
       </div>
     </div>
+    <div id="pages" class="row">
+      <div class="col s12">
+        <div class="col s12 m3 l3" v-for="(page,key) in pages.list" v-bind:key="key">
+          <div class="card horizontal blue-grey darken-3 white-text z-depth-4">
+            <div class="card-image">
+              <img :src="getSrc(page.background)">
+            </div>
+            <div class="card-stacked">
+              <div class="card-content">
+                <span class="card-title">{{key}}</span>
+                <p></p>
+              </div>
+              <div class="card-action">
+                <a class="pointer green-text modal-trigger" data-target="editgallery">editar</a>
+                <a class="pointer red-text">eliminar</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
     <div id="home" class="row">
       <div class="row">
         <div class="col s12">
@@ -87,7 +110,7 @@
     </div>
     <div id="about-us" class="row">
       <div class="col s12">
-        <div class="col s12 m6 l6">
+        <div class="col s12 m8 l8">
          <div class="card blue-grey darken-1">
            <div class="card-content white-text">
              <span class="card-title">Codigo del contenido</span>
@@ -99,7 +122,7 @@
            </div>
          </div>
        </div>
-       <div class="col s12 m6 l6">
+       <div class="col s12 m4 l4">
          <div class="card blue-grey darken-1">
            <div class="card-content white-text">
              <span class="card-title">Background Image</span>
@@ -128,7 +151,88 @@
      </div>
     </div>
     <div id="birdwatching-colombia" class="row">
-      Test 4
+      <div class="col s12">
+        <div class="col s12 m8 l8">
+         <div class="card blue-grey darken-1">
+           <div class="card-content white-text">
+             <span class="card-title">Codigo del contenido</span>
+             <div class="row">
+                <div class="col s12">
+                  <CodeEditor><textarea class="code-input" v-model="birdwatching.code"></textarea></CodeEditor>
+                </div>
+             </div>
+           </div>
+         </div>
+       </div>
+       <div class="col s12 m4 l4">
+         <div class="card blue-grey darken-1">
+           <div class="card-content white-text">
+             <span class="card-title">Background Image</span>
+             <div class="row">
+               <div class="slider">
+                 <ul class="slides">
+                   <li  v-for="(bird,key) in home.gallery.list" v-bind:key="key">
+                     <img :src="getSrc(key)"> <!-- random image -->
+                     <div class="caption center-align">
+                       <h3>{{key}}</h3>
+                       <p>
+                         <label class="white-text">
+                           <input name="group1" type="radio" v-on:click="birdwatching.background = key" />
+                           <span>Select image</span>
+                         </label>
+                       </p>
+                     </div>
+                   </li>
+                 </ul>
+               </div>
+             </div>
+           </div>
+         </div>
+       </div>
+       <button class="btn col s12 green" v-on:click="updateAbout">Guardar Cambios <i class="material-icons right">save</i> </button>
+     </div>
+    </div>
+    <div id="short-programs" class="row">
+      <div class="col s12">
+        <div class="col s12 m8 l8">
+         <div class="card blue-grey darken-1">
+           <div class="card-content white-text">
+             <span class="card-title">Codigo del contenido</span>
+             <div class="row">
+                <div class="col s12">
+                  <CodeEditor><textarea class="code-input" v-model="birdwatching.code"></textarea></CodeEditor>
+                </div>
+             </div>
+           </div>
+         </div>
+       </div>
+       <div class="col s12 m4 l4">
+         <div class="card blue-grey darken-1">
+           <div class="card-content white-text">
+             <span class="card-title">Background Image</span>
+             <div class="row">
+               <div class="slider">
+                 <ul class="slides">
+                   <li  v-for="(bird,key) in home.gallery.list" v-bind:key="key">
+                     <img :src="getSrc(key)"> <!-- random image -->
+                     <div class="caption center-align">
+                       <h3>{{key}}</h3>
+                       <p>
+                         <label class="white-text">
+                           <input name="group1" type="radio" v-on:click="birdwatching.background = key" />
+                           <span>Select image</span>
+                         </label>
+                       </p>
+                     </div>
+                   </li>
+                 </ul>
+               </div>
+             </div>
+           </div>
+         </div>
+       </div>
+       <button class="btn col s12 green" v-on:click="updateAbout">Guardar Cambios <i class="material-icons right">save</i> </button>
+     </div>
     </div>
     <div id="disabled" class="row"></div>
     <!-- Modal Structure -->
@@ -284,6 +388,9 @@ export default{
   components:{CodeEditor},
   data() {
       return {
+        "pages":{
+          "list":{}
+        },
         "home":{
           "upload":{"img":"","time":0},
           "gallery":{
@@ -302,6 +409,7 @@ export default{
         "about":{
           "code":""
         },
+        "birdwatching":{},
         "users":{
           "list":[],
           "length":0
@@ -314,6 +422,12 @@ export default{
       }
   },
   methods: {
+    // List Pages
+    listPages: function () {
+      firebase.database().ref("page").once('value', (snapshot)=> {
+        this.pages.list = snapshot.val()
+      })
+    },
     //Home Methods
     homeGallery: function () {
       firebase.database().ref("page/home/gallery").once('value', (snapshot)=> {
@@ -457,6 +571,7 @@ export default{
   created(){
     this.homeGallery()
     this.getAbout()
+    this.listPages()
   },
   mounted(){
     const elems = document.querySelectorAll('.collapsible')

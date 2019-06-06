@@ -20,8 +20,8 @@
 </template>
 
 <script>
-import $ from 'jquery'
-import Prism from 'prismjs'
+//import $ from 'jquery'
+//import Prism from 'prismjs'
 
 export default {
   name:'CodeEditor',
@@ -31,6 +31,7 @@ export default {
     }
   },
   mounted(){
+		/*
     var MicroCode = function () {
         return {
             init: function (inputSel, outputSel, languageSel) {
@@ -82,6 +83,7 @@ export default {
         };
     }();
     MicroCode.init('.code-input', '.code-output', '.language');
+		*/
   }
 }
 </script>
@@ -181,7 +183,7 @@ main {
 .window .window-body .code-input {
   opacity: 0.7;
   margin: 0;
-  color: #999;
+  color: #263238;
   resize: none;
 }
 .window .window-body .code-output {

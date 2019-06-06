@@ -1,6 +1,6 @@
 <template lang="html">
   <div>
-    <PageTemplate :background="staff.background">
+    <PageTemplate :background="tours.background">
       <div class="col s12">
         <div class="col s12 m6 l6 white-text">
           <h1 class="bebasbold">Tours</h1>
@@ -11,8 +11,8 @@
             <div class="carousel-fixed-item center">
               <a class="btn waves-effect white grey-text darken-text-2">I wanna go!</a>
             </div>
-            <div class="carousel-item red white-text" href="#one!">
-              <h2>First Panel</h2>
+            <div class="carousel-item red white-text"  v-for="(tour,key) in tours.list" v-bind:key="key">
+              <h2>{{tour.title}}</h2>
               <p class="white-text">This is your first panel</p>
             </div>
           </div>
@@ -24,6 +24,7 @@
 </template>
 
 <script>
+import firebase from 'firebase'
 import M from 'materialize-css'
 
 import PageTemplate from './PageTemplate.vue'
@@ -33,8 +34,9 @@ export default {
   components: { PageTemplate },
   data() {
       return {
-        "staff":{
-          "background":"/img/"+"Tangara-Cyanicollis.png"
+        "tours":{
+          "background":"/img/"+"Tangara-Cyanicollis.png",
+          "list":{}
         },
         "title": 'Birdwatching Colombia',
         "description":'Avistamiento de aves, viaja por el país con la mayor diversidad de aves del mundo. Ofrecemos rutas que cubren casi el 80% del país.',
@@ -42,16 +44,23 @@ export default {
       }
   },
   methods: {
-
+    // List Pages
+    listPages: function () {
+      firebase.database().ref("page/tours").once('value', (snapshot)=> {
+        this.tours.list = snapshot.val()
+        setTimeout(function () {
+          M.Carousel.init(document.querySelectorAll('.carousel'),{
+            fullWidth: true,
+            indicators: true
+          })
+        }, 2000)
+      })
+    }
   },
   created(){
-
+    this.listPages()
   },
   mounted(){
-    M.Carousel.init(document.querySelectorAll('.carousel'),{
-      fullWidth: true,
-      indicators: true
-    })
   },
   beforeMount: ()=> {
   },
