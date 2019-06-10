@@ -2,21 +2,17 @@
   <div>
     <PageTemplate :background="tours.background">
       <div class="col s12">
-        <div class="col s12 m6 l6 white-text">
-          <h1 class="bebasbold">Tours</h1>
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. </p>
-        </div>
-        <div class="col s12 m6 l6">
-          <div class="carousel carousel-slider center">
-            <div class="carousel-fixed-item center">
-              <a class="btn waves-effect white grey-text darken-text-2">I wanna go!</a>
-            </div>
-            <div class="carousel-item red white-text"  v-for="(tour,key) in tours.list" v-bind:key="key">
-              <h2>{{tour.title}}</h2>
-              <p class="white-text">This is your first panel</p>
-            </div>
-          </div>
-
+        <div class="slider">
+          <ul class="slides transparent">
+            <li v-for="(tour,key) in tours.list" v-bind:key="key">
+               <!--<img :src="getSrc(key)"> random image -->
+              <div class="caption">
+                <h1 class="bebasbold">Tour: {{key}}</h1>
+                <p>{{tour.description}}</p>
+                <a :href="'/tour/'+key" class="button-shadow" >See More!</a>
+              </div>
+            </li>
+          </ul>
         </div>
       </div>
     </PageTemplate>
@@ -49,11 +45,8 @@ export default {
       firebase.database().ref("page/tours").once('value', (snapshot)=> {
         this.tours.list = snapshot.val()
         setTimeout(function () {
-          M.Carousel.init(document.querySelectorAll('.carousel'),{
-            fullWidth: true,
-            indicators: true
-          })
-        }, 2000)
+            M.Slider.init(document.querySelectorAll('.slider'))
+        }, 1000)
       })
     }
   },

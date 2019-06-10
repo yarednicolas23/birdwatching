@@ -6,15 +6,15 @@
       <form class="container" v-on:submit.prevent="submit">
         <div class="col s12">
           <div class="input-field">
-            <input id="name" type="text" class="validate white-text">
+            <input id="name" type="text" v-model="form.name" class="validate white-text" required>
             <label for="name">Name</label>
           </div>
           <div class="input-field">
-            <input id="email" type="email" class="validate white-text">
+            <input id="email" type="email" v-model="form.email" class="validate white-text" required>
             <label for="email">Email</label>
           </div>
           <div class="input-field">
-            <input id="phone" type="number" class="validate white-text">
+            <input id="phone" type="number" v-model="form.phone" class="validate white-text" required>
             <label for="phone">Phone</label>
           </div>
           <GrandientButton text="Enviar"></GrandientButton>
@@ -36,6 +36,12 @@ export default {
   components: { PageTemplate, GrandientButton },
   data() {
       return {
+        "form":{
+          "name":"",
+          "email":"",
+          "phone":"",
+          "date":new Date().toString()
+        },
         "staff":{
           "background":this.getSrc("Momotus-Momota")
         },

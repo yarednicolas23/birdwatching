@@ -19,7 +19,7 @@
     <!-- Content of tabs -->
     <div id="users" class="row">
       <div class="row">
-        <div class="col s12 m6 l6">
+        <div class="col s12 m8 l8">
           <h5 class="thin blue-grey-text text-lighten-3">Usuarios Registrados</h5>
           <div class="divider "></div>
           <table class="blue-grey-text text-lighten-3">
@@ -28,6 +28,7 @@
                   <th>Nombre</th>
                   <th>Email</th>
                   <th>Telefóno</th>
+                  <th>Fecha</th>
               </tr>
             </thead>
             <tbody class="thin" v-if="users.list != 0">
@@ -35,6 +36,7 @@
                 <td class="capitalize">{{user.name}}</td>
                 <td>{{user.email}}</td>
                 <td>{{user.phone}}</td>
+                <td>{{user.date}}</td>
               </tr>
             </tbody>
             <div class="center" v-else>

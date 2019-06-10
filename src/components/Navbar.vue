@@ -43,7 +43,7 @@ export default {
             "dropdown":{
               "tour/amazonian":"Amazonas",
               "tour/caribe":"Caribbean Coast",
-              "tour/andian":"Andes"
+              "tour/andes":"Andes"
             }
           },
           "short-programs":{
