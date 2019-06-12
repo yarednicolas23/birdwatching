@@ -69,8 +69,8 @@ export default {
         },
         "users":[],
         "title": 'Birdwatching Colombia',
-        "description":'Avistamiento de aves, viaja por el país con la mayor diversidad de aves del mundo. Ofrecemos rutas que cubren casi el 80% del país.',
-        "keywords": 'Aviatur, Birdwatching, avistamiento de aves, diversidad, fauna, especies, aves exóticas, aves, rutas, Colombia, aves de Colombia'
+        "description":'Bird watching, travel through the country with the greatest diversity of birds in the world. We offer routes that cover almost 80% of the country.',
+        "keywords": 'Aviatur, Bird Watching, Bird Watching, diversity, Birdwatching fauna, species, exotic birds, birds, routes, Colombia, birds of Colombia'
       }
   },
   methods: {

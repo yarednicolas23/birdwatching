@@ -1,6 +1,6 @@
 <template lang="html">
   <div id="home" v-bind:style="{'background-image': 'url(' + background + ')'}">
-    <Loader class="hide"/>
+    <Loader/>
     <SocialShare/>
     <FooterFixed/>
       <div id="content" class="row">
@@ -27,6 +27,12 @@ export default{
         "background":"https://apimgs.000webhostapp.com/img/"+"hummingbird.png"
       }
     }
+  },
+  methods:{
+    
+  },
+  beforeCreate(){
+
   },
   mounted(){
     $("#home").mousemove(function(e) {

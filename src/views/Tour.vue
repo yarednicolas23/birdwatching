@@ -58,7 +58,7 @@ export default {
     // List Pages
     getTour(){
       this.$route.params.id
-      firebase.database().ref("page/tours").once('value', (snapshot)=> {
+      firebase.database().ref("page/tours/list").once('value', (snapshot)=> {
         this.tours = snapshot.val()
         snapshot.forEach((childSnapshot) => {
           if (this.$route.params.id == childSnapshot.key) {

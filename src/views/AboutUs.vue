@@ -7,6 +7,7 @@
 </template>
 <script>
 import PageTemplate from './PageTemplate.vue'
+import Loader from '../components/Loader.vue'
 
 import firebase from 'firebase'
 export default{
@@ -15,17 +16,21 @@ export default{
   data() {
     return {
       "about":{
-        "data":"",
+        "data":{},
         //"background":"/img/hummingbird.png"
-        "background":this.getSrc("Momotus-Momota")
+        //"background":this.getSrc("Momotus-Momota")
       }
     }
+  },
+  beforeCreate(){
+    
   },
   methods:{
     getAbout(){
       firebase.database().ref("page/about-us").once('value', (snapshot)=> {
         this.about.data = snapshot.val()
         this.about.background=this.getSrc(this.about.data.background)
+
       })
     },
     getSrc(name) {

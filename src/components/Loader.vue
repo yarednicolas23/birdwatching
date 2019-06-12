@@ -1,9 +1,23 @@
 <template lang="html">
-  <div class="loader"></div>
+  <div class="loader" v-if="loader"></div>
 </template>
 
 <script>
 export default {
+  name:"Loader",
+  data() {
+    return {
+      "loader":false
+    }
+  },
+  methods:{
+    "show":()=>{
+      loader = true
+    },
+    "hide":()=>{
+      loader = false
+    }
+  },
 }
 </script>
 
