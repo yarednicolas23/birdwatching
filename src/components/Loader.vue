@@ -12,10 +12,10 @@ export default {
   },
   methods:{
     "show":()=>{
-      loader = true
+      this.loader = true
     },
     "hide":()=>{
-      loader = false
+      this.loader = false
     }
   },
 }

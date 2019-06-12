@@ -7,7 +7,6 @@
 </template>
 <script>
 import PageTemplate from './PageTemplate.vue'
-import Loader from '../components/Loader.vue'
 
 import firebase from 'firebase'
 export default{
@@ -23,7 +22,7 @@ export default{
     }
   },
   beforeCreate(){
-    
+
   },
   methods:{
     getAbout(){
@@ -48,4 +47,7 @@ export default{
 </script>
 
 <style lang="css">
+.map{
+  filter:invert(1) contrast(0.8);
+}
 </style>

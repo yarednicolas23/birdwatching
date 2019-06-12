@@ -10,6 +10,7 @@
         <li class="tab"><a href="#pages">Paginas</a></li>
         <li class="tab"><a class="active" href="#home">Home</a></li>
         <li class="tab"><a href="#about-us">About us</a></li>
+        <li class="tab"><a href="#staff">Staff</a></li>
         <li class="tab"><a href="#birdwatching-colombia">Birdwatching Colombia</a></li>
         <li class="tab"><a href="#short-programs">Short Programs</a></li>
         <li class="tab disabled"><a href="#disabled">Disabled Tab</a></li>
@@ -151,6 +152,11 @@
        </div>
        <button class="btn col s12 green" v-on:click="updateAbout">Guardar Cambios <i class="material-icons right">save</i> </button>
      </div>
+    </div>
+    <div id="staff" class="row">
+      <div class="col s12">
+        |
+      </div>
     </div>
     <div id="birdwatching-colombia" class="row">
       <div class="col s12">

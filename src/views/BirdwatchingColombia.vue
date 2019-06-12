@@ -57,6 +57,6 @@ export default {
 
 <style lang="css" scoped>
 .map{
-  filter: invert(1);
+  filter:invert(1) contrast(0.8);
 }
 </style>

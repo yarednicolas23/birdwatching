@@ -44,7 +44,7 @@ export default {
     listPages: function () {
       firebase.database().ref("page/tours/list").once('value', (snapshot)=> {
         this.tours.list = snapshot.val()
-            M.Slider.init(document.querySelectorAll('.slider'))
+        M.Slider.init(document.querySelectorAll('.slider'))
         setTimeout(function () {
             M.Slider.init(document.querySelectorAll('.slider'))
         }, 1000)
@@ -70,6 +70,12 @@ export default {
 }
 </script>
 
-<style lang="css" scoped>
-
+<style lang="css">
+.slider .indicators .indicator-item {
+  height: 10px !important;
+  width: 10px !important;
+}
+.slider .indicators .indicator-item.active {
+    background-color: #3f51b5 !important;
+}
 </style>

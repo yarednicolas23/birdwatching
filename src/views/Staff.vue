@@ -2,18 +2,37 @@
   <div>
     <PageTemplate :background="staff.background">
       <div class="col s12">
-        <div class="col s4 offset-s4 center">
+        <div class="col s4 center">
           <figure>
             <img class="" :src="getSrc('samy-bessudo-staff')" alt="Samy Bessudo">
-            <figcaption><h3 class="white-text bebasbold">Samy Bessudo</h3></figcaption>
+            <figcaption>
+              <h3 class="white-text bebasbold">
+                Samy Bessudo
+                <a :href="'/'" target="_blank"><i class="icon ion-logo-facebook white-text"></i></a>
+                <a :href="'/'" target="_blank"><i class="icon ion-logo-instagram white-text"></i></a>
+                <a :href="'/'" target="_blank"><i class="icon ion-logo-twitter white-text"></i></a>
+              </h3>
+            </figcaption>
           </figure>
         </div>
-          <div class="col s4 offset-s4 center">
+
+          <div class="col s4 center">
             <figure>
-              <img class="" :src="getSrc('oswaldo-cortes-staff')" alt="Oswaldo Cortes">
-              <figcaption><h3 class="white-text bebasbold">Oswaldo Cortes</h3></figcaption>
+              <img class=""  :src="getSrc('oswaldo-cortes-staff')" alt="Oswaldo Cortes">
+              <figcaption>
+                <h3 class="white-text bebasbold">
+                  Oswaldo Cortes
+                  <i class="icon ion-logo-facebook white-text"></i>
+                  <i class="icon ion-logo-instagram white-text"></i>
+                  <i class="icon ion-logo-twitter white-text"></i>
+                </h3>
+              </figcaption>
             </figure>
           </div>
+        <div class="col s3 center hide">
+            <img class="responsive-img circle" :src="getSrc('oswaldo-cortes-staff')" alt="Oswaldo Cortes">
+            <h3 class="white-text bebasbold">Oswaldo Cortes</h3>
+        </div>
       </div>
     </PageTemplate>
   </div>
@@ -62,57 +81,82 @@ export default {
 </script>
 
 <style lang="css" scoped>
-
 figure {
-  cursor: pointer;
-  box-shadow: 0 3px 20px rgba( 0, 0, 0, 0.35 );
+ background-color: #000;
+ display: inline-block;
+ font-family: 'Open Sans', sans-serif;
+ font-size: 16px;
+ margin: 10px;
+ max-width: 315px;
+ min-width: 230px;
+ overflow: hidden;
+ position: relative;
+ text-align: center;
+ width: 100%;
 }
-
+figure *,
+figure *:before {
+ -webkit-box-sizing: border-box;
+ box-sizing: border-box;
+ -webkit-transition: all 0.35s ease;
+ transition: all 0.35s ease;
+}
 figure img {
-  width: 100%;
-  height: 100%;
-  transition: all 0.3s ease-in-out;
+ backface-visibility: hidden;
+ max-width: 100%;
+ vertical-align: top;
 }
-
-figure:hover img {
-    width: 100%;
-    height: 100%;
-}
-
 figure figcaption {
-  display: block;
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba( 0, 0, 0, 0 );
-  transition: all 0.2s 0.1s ease-in-out;
+ bottom: 30px;
+ left: 0;
+ position: absolute;
+ z-index: 0;
+}
+figure figcaption:before {
+ background-color: #ffffff;
+ bottom: -5px;
+ content: '';
+ left: 0;
+ position: absolute;
+ right: 100%;
+ top: -5px;
+ z-index: -1;
+}
+figure h3 {
+ background-color: black;
+ color: #ffffff;
+ font-size: 1.5em;
+ font-weight: 600;
+ letter-spacing: 1px;
+ margin: 0;
+ padding: 5px 10px;
+ text-transform: uppercase;
+ z-index: 1;
+}
+figure h3 i{
+  margin:0 5px;
+  display: none;
+}
+figure > a {
+ position: absolute;
+ top: 0;
+ bottom: 0;
+ left: 0;
+ right: 0;
+ z-index: 1;
+}
+figure:hover > img,
+figure.hover > img {
+ opacity: 0.4;
 }
 
-figure:hover figcaption {
-  background: rgba( 0, 0, 0, 0.7 );
-  transition: all 0.2s ease-in-out;
+figure:hover h3 i{
+  display: inline-block;
+}
+figure:hover figcaption:before,
+figure.hover figcaption:before {
+ right: -5px;
 }
 
-figure figcaption h3 {
-  position: absolute;
-  color: #fff;
-  opacity: 0;
-  top: 50%;
-  left: 25%;
-  transform: translate( -50%, -50% );
-  transition: all 0.1s ease-in-out;
-}
-
-figure:hover figcaption h3 {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate( -50%, -50% );
-  color: #fff;
-  opacity: 1;
-  transition: all 0.1s 0.15s ease-in-out;
-}
 
 </style>
