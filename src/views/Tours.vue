@@ -2,7 +2,8 @@
   <div>
     <PageTemplate :background="tours.background">
       <div class="col s12">
-        <div class="slider">
+        <div class="slider white-text">
+          <Loader v-if="Object.keys(tours.list).length == 0"/>
           <ul class="slides transparent">
             <li v-for="(tour,key) in tours.list" v-bind:key="key">
                <!--<img :src="getSrc(key)"> random image -->
@@ -22,12 +23,13 @@
 <script>
 import firebase from 'firebase'
 import M from 'materialize-css'
+import Loader from '../components/Loader.vue'
 
 import PageTemplate from './PageTemplate.vue'
 
 export default {
   name:'Tours',
-  components: { PageTemplate },
+  components: { PageTemplate ,Loader  },
   data() {
       return {
         "tours":{
@@ -44,10 +46,9 @@ export default {
     listPages: function () {
       firebase.database().ref("page/tours/list").once('value', (snapshot)=> {
         this.tours.list = snapshot.val()
-        M.Slider.init(document.querySelectorAll('.slider'))
         setTimeout(function () {
-            M.Slider.init(document.querySelectorAll('.slider'))
-        }, 1000)
+            M.Slider.init(document.querySelectorAll('.slider'),{duration:200,interval:2000})
+        }, 100)
       })
     }
   },

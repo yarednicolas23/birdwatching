@@ -29,7 +29,7 @@ export default{
       firebase.database().ref("page/about-us").once('value', (snapshot)=> {
         this.about.data = snapshot.val()
         this.about.background=this.getSrc(this.about.data.background)
-
+        this.loader = false
       })
     },
     getSrc(name) {

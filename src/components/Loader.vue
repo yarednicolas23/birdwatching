@@ -1,22 +1,22 @@
 <template lang="html">
-  <div class="loader" v-if="loader"></div>
+  <div class="loader"></div>
 </template>
 
 <script>
 export default {
   name:"Loader",
+  props: {
+    loader: {
+      type: Boolean
+    }
+  },
+  /*
   data() {
     return {
       "loader":false
     }
-  },
+  },*/
   methods:{
-    "show":()=>{
-      this.loader = true
-    },
-    "hide":()=>{
-      this.loader = false
-    }
   },
 }
 </script>
@@ -28,10 +28,10 @@ export default {
   animation: bg 15s linear infinite;
   background-clip: text;
   -webkit-background-clip: text;
-  background: linear-gradient(to left, #1a237e, #3f51b5, #303f9f, #283593, #1a237e);
+  background: linear-gradient(to left, #1a237e, #3f51b5, #2196f3, #283593, #1a237e);
   color: #FFF;
   min-height: 0.5vh;
-  width: 100vw;
+  width: 90%;
   transition: 0.3s ease background-position;
 }
 @keyframes bg {

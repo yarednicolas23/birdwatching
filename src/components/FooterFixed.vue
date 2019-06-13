@@ -37,7 +37,13 @@ export default {
   left:50px;
 }
 img{
-  max-width: 200px;
+  max-width: 0px;
+}
+@media only screen and (min-width: 601px)
+{
+  img{
+    max-width: 200px;
+  }
 }
 .no-margin{
   margin: 0px;

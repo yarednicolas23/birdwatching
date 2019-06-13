@@ -1,6 +1,5 @@
 <template lang="html">
   <div id="home" v-bind:style="{'background-image': 'url(' + background + ')'}">
-    <Loader/>
     <SocialShare/>
     <FooterFixed/>
       <div id="content" class="row">
@@ -11,14 +10,13 @@
 </template>
 <script>
 import Navbar from '../components/Navbar.vue'
-import Loader from '../components/Loader.vue'
 import SocialShare from '../components/SocialShare.vue'
 import FooterFixed from '../components/FooterFixed.vue'
 
 import $ from 'jquery'
 export default{
   name:'PageTemplate',
-  components: { Navbar,SocialShare,FooterFixed,Loader },
+  components: { Navbar,SocialShare,FooterFixed },
   props: ['background'],
   data() {
     return {
@@ -29,7 +27,7 @@ export default{
     }
   },
   methods:{
-    
+
   },
   beforeCreate(){
 
@@ -51,6 +49,7 @@ export default{
 #home{
   background-size: cover;
   filter:saturate(1.4) contrast(1.1);
+  min-width: 100vh;
 }
 #content{
   min-height: 100vh;

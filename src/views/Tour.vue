@@ -4,16 +4,37 @@
         <div class="col s12 m6 l6">
           <h1 class="bebasbold">{{ tour.info.title }}</h1>
           <p>{{tour.info.description}}</p>
+          <ul class="collapsible no-border scrollspy">
+            <li>
+              <div class="collapsible-header transparent no-border tooltipped" data-position="left" data-tooltip="Group of people">
+                <i class="material-icons">group</i>
+                {{tour.info.group}}
+              </div>
+            </li>
+            <li>
+              <div class="collapsible-header transparent no-border tooltipped" data-position="left" data-tooltip="Router">
+                <i class="material-icons">near_me</i>
+                {{tour.info.route}}
+              </div>
+            </li>
+            <li>
+              <div class="collapsible-header transparent no-border tooltipped" data-position="left" data-tooltip="Price in Dollar">
+                <i class="material-icons">monetization_on</i>
+                {{tour.info.price}}
+              </div>
+            </li>
+          </ul>
+          <a :href="'/buy/'" class="button-shadow" >Buy Now!</a>
         </div>
         <div class="col s12 m6 l6">
           <div class="slider">
             <ul class="slides transparent">
-              <li   v-for="(tour,key) in tours" v-bind:key="key">
+              <li v-for="(tour,key) in tours" v-bind:key="key">
                  <!--<img :src="getSrc(key)"> random image -->
-                <div class="caption center-align">
+                <div class="caption right-align">
                   <h3 class="capitalize">{{key}}</h3>
                   <p>{{tour.description}}</p>
-                  <button class="btn black" type="button" name="button">See More!</button>
+                  <a :href="'/tour/'+key" class="btn black" type="button" name="button">See More!</a>
                 </div>
               </li>
             </ul>
@@ -60,13 +81,13 @@ export default {
       this.$route.params.id
       firebase.database().ref("page/tours/list").once('value', (snapshot)=> {
         this.tours = snapshot.val()
+        M.Tooltip.init(document.querySelectorAll('.tooltipped'))
         snapshot.forEach((childSnapshot) => {
           if (this.$route.params.id == childSnapshot.key) {
             this.tour.info = childSnapshot.val()
           }
-
           setTimeout(function () {
-            M.Slider.init(document.querySelectorAll('.slider'))
+            M.Slider.init(document.querySelectorAll('.slider'),{height:250})
           }, 2000)
         })
       })
@@ -74,15 +95,21 @@ export default {
   },
   metaInfo () {
     return {
-      title: this.admin.title,
+      title: this.title,
       meta: [
-        { vmid: 'description', name: 'description', content: this.admin.description },
-        { vmid: 'keywords', name: 'keywords', content: this.admin.keywords }
+        { vmid: 'description', name: 'description', content: this.description },
+        { vmid: 'keywords', name: 'keywords', content: this.keywords }
       ]
     }
   }
 }
 </script>
 
-<style lang="css">
+<style lang="css" scoped>
+.collapsible{
+  box-shadow: none !important;
+}
+.collapsible-header{
+  padding-left: 0px;
+}
 </style>

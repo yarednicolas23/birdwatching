@@ -28,6 +28,10 @@
            </div>
         </div>
       </div>
+      <audio id="audio" autoplay controls loop class="hide">
+        <source src="../assets/mp3/birdwatching.mp3" type="audio/mpeg">
+      </audio>
+
     </PageTemplate>
   </div>
 </template>
@@ -92,10 +96,12 @@ export default {
         window.setInterval(() => {
             const elem = document.querySelectorAll('.carousel')
             elem[0].M_Carousel.next(1)
-        },2000)
+        },3000)
     })
     const tooltipped = document.querySelectorAll('.tooltipped')
     M.Tooltip.init(tooltipped)
+
+    $("#audio").play()
   },
   beforeMount: ()=> {
   },

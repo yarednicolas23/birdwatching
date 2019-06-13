@@ -1,45 +1,14 @@
 <template lang="html">
   <div>
     <PageTemplate :background="staff.background">
-      <div class="col s12">
-        <div class="col s4 center">
-          <figure>
-            <img class="" :src="getSrc('samy-bessudo-staff')" alt="Samy Bessudo">
-            <figcaption>
-              <h3 class="white-text bebasbold">
-                Samy Bessudo
-                <a :href="'/'" target="_blank"><i class="icon ion-logo-facebook white-text"></i></a>
-                <a :href="'/'" target="_blank"><i class="icon ion-logo-instagram white-text"></i></a>
-                <a :href="'/'" target="_blank"><i class="icon ion-logo-twitter white-text"></i></a>
-              </h3>
-            </figcaption>
-          </figure>
-        </div>
-
-          <div class="col s4 center">
-            <figure>
-              <img class=""  :src="getSrc('oswaldo-cortes-staff')" alt="Oswaldo Cortes">
-              <figcaption>
-                <h3 class="white-text bebasbold">
-                  Oswaldo Cortes
-                  <i class="icon ion-logo-facebook white-text"></i>
-                  <i class="icon ion-logo-instagram white-text"></i>
-                  <i class="icon ion-logo-twitter white-text"></i>
-                </h3>
-              </figcaption>
-            </figure>
-          </div>
-        <div class="col s3 center hide">
-            <img class="responsive-img circle" :src="getSrc('oswaldo-cortes-staff')" alt="Oswaldo Cortes">
-            <h3 class="white-text bebasbold">Oswaldo Cortes</h3>
-        </div>
-      </div>
+      <div class="col s12 scrollspy" v-html="staff.code"></div>
     </PageTemplate>
   </div>
 </template>
 
 <script>
 import PageTemplate from './PageTemplate.vue'
+import firebase from 'firebase'
 
 export default {
   components: { PageTemplate },
@@ -54,6 +23,13 @@ export default {
       }
   },
   methods: {
+    // Staff Methods
+    getStaff(){
+      firebase.database().ref("page/staff").once('value', (snapshot)=> {
+        this.staff = snapshot.val()
+        this.staff.background = this.getSrc(this.staff.background)
+      })
+    },
     getSrc(name) {
       //return 'https://apimgs.000webhostapp.com/img/'+ name + ".png"
       require('../assets/img/'+ name + '.png')
@@ -61,7 +37,7 @@ export default {
     }
   },
   created(){
-
+    this.getStaff()
   },
   mounted(){
 
@@ -80,7 +56,7 @@ export default {
 }
 </script>
 
-<style lang="css" scoped>
+<style lang="css">
 figure {
  background-color: #000;
  display: inline-block;

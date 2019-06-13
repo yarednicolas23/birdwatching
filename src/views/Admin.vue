@@ -12,6 +12,7 @@
         <li class="tab"><a href="#about-us">About us</a></li>
         <li class="tab"><a href="#staff">Staff</a></li>
         <li class="tab"><a href="#birdwatching-colombia">Birdwatching Colombia</a></li>
+        <li class="tab"><a href="#tours">Tours</a></li>
         <li class="tab"><a href="#short-programs">Short Programs</a></li>
         <li class="tab disabled"><a href="#disabled">Disabled Tab</a></li>
       </ul>
@@ -155,7 +156,17 @@
     </div>
     <div id="staff" class="row">
       <div class="col s12">
-        |
+        <div class="card blue-grey darken-1">
+          <div class="card-content white-text">
+            <span class="card-title">Codigo del contenido</span>
+            <div class="row">
+               <div class="col s12">
+                 <CodeEditor><textarea class="code-input" v-model="staff.code"></textarea></CodeEditor>
+               </div>
+            </div>
+          </div>
+        </div>
+        <button class="btn col s12 green" v-on:click="updateStaff">Guardar Cambios <i class="material-icons right">save</i> </button>
       </div>
     </div>
     <div id="birdwatching-colombia" class="row">
@@ -199,6 +210,80 @@
        </div>
        <button class="btn col s12 green" v-on:click="updateAbout">Guardar Cambios <i class="material-icons right">save</i> </button>
      </div>
+    </div>
+    <div id="tours" class="row">
+      <div class="col s12">
+        <div class="col s12 m6 l4"  v-for="(tour,key) in tours.list" v-bind:key="key">
+          <div class="card blue-grey darken-3 white-text z-depth-4">
+            <div class="card-content white-text">
+              <span class="card-title">{{tour.title}} <i class="material-icons right activator pointer">edit</i></span>
+              <div class="row">
+                <div class="col s12">
+                  <p>{{tour.description}}</p>
+                </div>
+                <div class="col s12">
+                  <ul class="collapsible no-border">
+                    <li>
+                      <div class="collapsible-header blue-grey darken-3 no-border">
+                        <i class="material-icons">group</i>
+                        {{tour.group}}
+                      </div>
+                    </li>
+                    <li>
+                      <div class="collapsible-header blue-grey darken-3 no-border">
+                        <i class="material-icons">near_me</i>
+                        {{tour.route}}
+                      </div>
+                    </li>
+                    <li>
+                      <div class="collapsible-header blue-grey darken-3 no-border">
+                        <i class="material-icons">monetization_on</i>
+                        {{tour.price}}
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="card-reveal blue-grey darken-3 white-text z-depth-4">
+              <span class="card-title">Editar<i class="material-icons right">close</i></span>
+              <div class="row">
+                <div class="input-field col s12">
+                  <i class="material-icons prefix">title</i>
+                  <input :id="key+'title'" type="text" v-model="tour.title" class="validate white-text">
+                  <label :for="key+'title'">Title</label>
+                </div>
+                <div class="input-field col s12">
+                  <i class="material-icons prefix">description</i>
+                  <textarea :id="key+'description'" class="materialize-textarea white-text" v-model="tour.description"></textarea>
+                  <label :for="key+'description'">Description</label>
+                </div>
+                <div class="input-field col s12">
+                  <i class="material-icons prefix">title</i>
+                  <input :id="key+'background'" type="text" v-model="tour.background" class="validate white-text">
+                  <label :for="key+'background'">Background</label>
+                </div>
+                <div class="input-field col s12">
+                  <i class="material-icons prefix">group</i>
+                  <input :id="key+'group'" type="text" v-model="tour.group" class="validate white-text">
+                  <label :for="key+'group'">Group</label>
+                </div>
+                <div class="input-field col s12">
+                  <i class="material-icons prefix">near_me</i>
+                  <input :id="key+'route'" type="text" v-model="tour.route" class="validate white-text">
+                  <label :for="key+'route'">Route</label>
+                </div>
+                <div class="input-field col s12">
+                  <i class="material-icons prefix">monetization_on</i>
+                  <input :id="key+'price'" type="text" v-model="tour.price" class="validate white-text">
+                  <label :for="key+'price'">Price</label>
+                </div>
+                <button class="btn col s12 green" v-on:click="updateTour(tour,key)">Guardar Cambios <i class="material-icons right">save</i> </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
     <div id="short-programs" class="row">
       <div class="col s12">
@@ -247,7 +332,7 @@
     <div id="addgallery" class="modal">
       <form v-on:submit.prevent="addPicture">
         <div class="modal-content">
-          <h4>Añadir Imagen</h4>
+          <h4>Add Imagen</h4>
           <div class="row">
             <div class="input-field col s12">
               <input v-model="home.gallery.new.model.name" id="name" type="text" class="validate" required>
@@ -316,7 +401,7 @@
     <div id="editgallery" class="modal">
       <form v-on:submit.prevent="editPicture">
         <div class="modal-content">
-          <h4>Editar Imagen</h4>
+          <h4>Edit Imagen</h4>
           <div class="col s12">
             <div class="input-field col s12">
               <input v-model="home.gallery.edit.name" id="name" type="text" class="validate" required>
@@ -382,6 +467,51 @@
         </div>
       </form>
     </div>
+
+    <div id="addtour" class="modal">
+      <form v-on:submit.prevent="addPicture">
+        <div class="modal-content">
+          <h4>Add Tour</h4>
+          <div class="row">
+            <div class="input-field col s12">
+              <i class="material-icons prefix">title</i>
+              <input :id="'title'" type="text" v-model="tours.new.title" class="validate white-text">
+              <label :for="'title'">Title</label>
+            </div>
+            <div class="input-field col s12">
+              <i class="material-icons prefix">description</i>
+              <textarea :id="'description'" class="materialize-textarea white-text" v-model="tours.new.description"></textarea>
+              <label :for="'description'">Description</label>
+            </div>
+            <div class="input-field col s12">
+              <i class="material-icons prefix">title</i>
+              <input :id="'background'" type="text" v-model="tours.new.background" class="validate white-text">
+              <label :for="'background'">Background</label>
+            </div>
+            <div class="input-field col s12">
+              <i class="material-icons prefix">group</i>
+              <input :id="'group'" type="text" v-model="tours.new.group" class="validate white-text">
+              <label :for="'group'">Group</label>
+            </div>
+            <div class="input-field col s12">
+              <i class="material-icons prefix">near_me</i>
+              <input :id="'route'" type="text" v-model="tours.new.route" class="validate white-text">
+              <label :for="'route'">Route</label>
+            </div>
+            <div class="input-field col s12">
+              <i class="material-icons prefix">monetization_on</i>
+              <input :id="'price'" type="text" v-model="tours.new.price" class="validate white-text">
+              <label :for="'price'">Price</label>
+            </div>
+            <button class="btn col s12 green" v-on:click="updateTour(tour,key)">Guardar Cambios <i class="material-icons right">save</i> </button>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button :disabled="home.gallery.new.valid ? false : true" type="submit" class="waves-effect waves-green btn green">Guardar</button>
+          <a class="modal-close waves-effect waves-green btn-flat">Cerrar</a>
+        </div>
+      </form>
+    </div>
   </div>
 </template>
 <script>
@@ -417,7 +547,9 @@ export default{
         "about":{
           "code":""
         },
+        "staff":{"code":""},
         "birdwatching":{},
+        "tours":{"new":{}},
         "users":{
           "list":[],
           "length":0
@@ -564,6 +696,46 @@ export default{
         }
       })
     },
+    // Staff Methods
+    getStaff(){
+      firebase.database().ref("page/staff").once('value', (snapshot)=> {
+        this.staff = snapshot.val()
+      })
+    },
+    updateStaff(){
+      M.toast({html: 'Cargando...'})
+      firebase.database().ref('page/staff/')
+      .set(this.staff, function(error) {
+        if (error) {
+          // The write failed...
+          M.toast({html: 'Ups:'+error})
+        } else {
+          // Data saved successfully!
+          M.toast({html: 'Tu Registro fue Exitoso'})
+        }
+      })
+    },
+
+    //Tours
+    getTours(){
+      firebase.database().ref("page/tours/list").once('value', (snapshot)=> {
+        this.tours.list = snapshot.val()
+      })
+    },
+
+    updateTour(tour,key){
+      M.toast({html: 'Cargando...'})
+      firebase.database().ref('page/tours/list/'+key)
+      .set(tour, function(error) {
+        if (error) {
+          // The write failed...
+          M.toast({html: 'Ups:'+error})
+        } else {
+          // Data saved successfully!
+          M.toast({html: 'Tu Registro fue Exitoso'})
+        }
+      })
+    },
 
     getUsers: function () {
       firebase.database().ref("users").once('value', (snapshot)=> {
@@ -579,7 +751,9 @@ export default{
   created(){
     this.homeGallery()
     this.getAbout()
+    this.getStaff()
     this.listPages()
+    this.getTours()
   },
   mounted(){
     const elems = document.querySelectorAll('.collapsible')
@@ -613,5 +787,8 @@ export default{
 }
 nav {
   padding:0 10px;
+}
+.no-border{
+  border: 0px solid transparent !important;
 }
 </style>
