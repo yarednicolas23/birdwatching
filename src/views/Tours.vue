@@ -46,8 +46,10 @@ export default {
     listPages: function () {
       firebase.database().ref("page/tours/list").once('value', (snapshot)=> {
         this.tours.list = snapshot.val()
+
+        M.Slider.init(document.querySelector('.slider')).next()
         setTimeout(function () {
-            M.Slider.init(document.querySelectorAll('.slider'),{duration:200,interval:2000})
+            M.Slider.init(document.querySelectorAll('.slider'),{duration:200,interval:3000})
         }, 100)
       })
     }

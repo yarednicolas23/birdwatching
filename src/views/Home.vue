@@ -101,7 +101,18 @@ export default {
     const tooltipped = document.querySelectorAll('.tooltipped')
     M.Tooltip.init(tooltipped)
 
-    $("#audio").play()
+    setTimeout( ()=> {
+      var promise = document.querySelector('#audio').play()
+      if (promise !== undefined) {
+          promise.then( ()=> {
+              // Autoplay started!
+          }).catch( ()=> {
+              // Autoplay was prevented.
+              // Show a "Play" button so that user can start playback.
+              document.querySelector('#audio').play()
+          })
+      }
+    }, 2000)
   },
   beforeMount: ()=> {
   },
@@ -126,10 +137,17 @@ export default {
   top: 25vh;
   max-height: 60vh;
 }
+.carousel .carousel-item > img{
+  width: 100%;
+}
 @media only screen and (max-width: 601px){
   .carousel{
     top: 0vh;
     max-height: 60vh;
+  }
+  .carousel .carousel-item > img{
+    width: 100%;
+    margin-left: 10%;
   }
 }
 </style>

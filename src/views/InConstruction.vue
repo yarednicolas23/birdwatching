@@ -44,12 +44,24 @@
       <audio id="audio" autoplay controls loop class="hide">
         <source src="../assets/mp3/birdwatching.mp3" type="audio/mpeg">
       </audio>
+      <div class="fixed-action-btn horizontal click-to-toggle">
+        <!-- Element Showed -->
+        <a id="menu" class="waves-effect waves-light btn btn-floating grey darken-4" onclick="$('#audio')[0].play()"><i class="material-icons">hearing</i></a>
+
+        <!-- Tap Target Structure -->
+        <div class="tap-target grey darken-4 white-text" data-target="menu">
+          <div class="tap-target-content">
+            <h5>Da click aquí</h5>
+            <p>Y sube un poco el volumen para una nueva experiencia </p>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
-import jQuery from 'jquery'
+
 import firebase from 'firebase'
 import M from 'materialize-css'
 
@@ -67,6 +79,7 @@ export default {
           "email":"",
           "phone":""
         },
+        "audio":true,
         "users":[],
         "title": 'Birdwatching Colombia',
         "description":'Bird watching, travel through the country with the greatest diversity of birds in the world. We offer routes that cover almost 80% of the country.',
@@ -85,8 +98,20 @@ export default {
     }
   },
   mounted() {
-    //M.updateTextFields();
-    jQuery("#audio").play()
+    setTimeout( ()=> {
+      var promise = document.querySelector('#audio').play()
+      if (promise !== undefined) {
+          promise.then( ()=> {
+              // Autoplay started!
+          }).catch( ()=> {
+              // Autoplay was prevented.
+              // Show a "Play" button so that user can start playback.
+              var elem= document.querySelector('.tap-target')
+              var instance = M.TapTarget.init(elem)
+              instance.open()
+          })
+      }
+    }, 3000)
   },
   beforeCreate: ()=> {
 
