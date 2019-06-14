@@ -1,7 +1,7 @@
 <template lang="html">
   <div>
     <PageTemplate :background="home.background">
-      <div class="col s12">
+      <div class="row">
         <div class="col s12 m12 l6 white-text">
           <h1 id="title" style="display:none" class="bebasbold no-margin scrollspy ">{{home.title}}</h1>
           <div id="description" style="display:none" class="scrollspy">
@@ -28,11 +28,22 @@
            </div>
         </div>
       </div>
-      <audio id="audio" autoplay controls loop class="hide">
-        <source src="../assets/mp3/birdwatching.mp3" type="audio/mpeg">
-      </audio>
-
     </PageTemplate>
+    <audio id="audio" autoplay controls loop class="hide">
+      <source src="../assets/mp3/birdwatching.mp3" type="audio/mpeg">
+    </audio>
+    <div class="fixed-action-btn horizontal click-to-toggle">
+      <!-- Element Showed -->
+      <a id="menu" class="waves-effect waves-light btn btn-floating grey darken-4" v-on:click="togglePlay()"><i class="material-icons">hearing</i></a>
+
+      <!-- Tap Target Structure -->
+      <div class="tap-target grey darken-4 white-text" data-target="menu">
+        <div class="tap-target-content">
+          <h5>Da click aquí</h5>
+          <p>Y sube un poco el volumen para una nueva experiencia </p>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -86,6 +97,10 @@ export default {
       this.home.title = title
       this.home.description = description
       this.home.background = this.getSrc(background)
+    },
+    togglePlay() {
+      const myAudio = document.querySelector('#audio')
+      return myAudio.paused ? myAudio.play() : myAudio.pause();
     }
   },
   created(){
@@ -109,10 +124,12 @@ export default {
           }).catch( ()=> {
               // Autoplay was prevented.
               // Show a "Play" button so that user can start playback.
-              document.querySelector('#audio').play()
+              var elem= document.querySelector('.tap-target')
+              var instance = M.TapTarget.init(elem)
+              instance.open()
           })
       }
-    }, 2000)
+    }, 3000)
   },
   beforeMount: ()=> {
   },

@@ -52,6 +52,7 @@ export default{
 }
 #content{
   min-height: 100vh;
+  height: 100%;
   /*width: 100%;*/
   margin:0px;
   padding:0% 5%;

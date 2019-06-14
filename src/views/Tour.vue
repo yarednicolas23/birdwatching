@@ -34,7 +34,7 @@
                 <div class="caption right-align">
                   <h3 class="capitalize">{{key}}</h3>
                   <p>{{tour.description}}</p>
-                  <a :href="'/tour/'+key" class="btn black" type="button" name="button">See More!</a>
+                  <a :href="'/tour/'+key" class="btn black" name="button">See More!</a>
                 </div>
               </li>
             </ul>

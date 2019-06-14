@@ -1,5 +1,5 @@
 <template>
-  <div><router-view></router-view></div> 
+  <div><router-view></router-view></div>
 </template>
 
 <script>
@@ -66,7 +66,7 @@ body{
 ::-webkit-scrollbar-thumb {
     background-color: rgba(0, 0, 0, .5);
     border-radius: 10px;
-    border: 2px solid #ffffff;
+    border: 1px solid transparent;
 }
 
 ::-webkit-scrollbar-track {

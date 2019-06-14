@@ -46,7 +46,7 @@
       </audio>
       <div class="fixed-action-btn horizontal click-to-toggle">
         <!-- Element Showed -->
-        <a id="menu" class="waves-effect waves-light btn btn-floating grey darken-4" onclick="$('#audio')[0].play()"><i class="material-icons">hearing</i></a>
+        <a id="menu" class="waves-effect waves-light btn btn-floating grey darken-4" v-on:click="togglePlay()"><i class="material-icons">hearing</i></a>
 
         <!-- Tap Target Structure -->
         <div class="tap-target grey darken-4 white-text" data-target="menu">
@@ -95,6 +95,10 @@ export default {
       }, function (error) {
         M.toast({html: 'Ups:'+error})
       })
+    },
+    togglePlay() {
+      const myAudio = document.querySelector('#audio')
+      return myAudio.paused ? myAudio.play() : myAudio.pause();
     }
   },
   mounted() {
