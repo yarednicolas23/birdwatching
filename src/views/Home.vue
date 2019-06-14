@@ -147,7 +147,7 @@ export default {
   }
   .carousel .carousel-item > img{
     width: 100%;
-    margin-left: 10%;
+    margin: 10%;
   }
 }
 </style>

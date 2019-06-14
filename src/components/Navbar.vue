@@ -17,21 +17,21 @@
             </a>
           </li>
         </ul>
+        <ul id="slide-out" class="sidenav">
+          <li v-for="(button,key) in page.buttons" v-bind:key="key">
+            <a :href="'/'+key" v-if="button.dropdown==false">{{button.name}}</a>
+            <a v-if="button.dropdown!=false" :href="'/'+key">
+              {{button.name}}
+              <i class="material-icons right">arrow_drop_down</i>
+              <!-- Dropdown Structure -->
+              <ul :id="key" class="jdropdown-menu">
+                <li v-for="(btn,key) in button.dropdown" v-bind:key="key"><a :href="'/'+key" class="white-text">{{btn}}</a></li>
+              </ul>
+            </a>
+          </li>
+        </ul>
       </div>
     </nav>
-    <ul id="slide-out" class="sidenav">
-      <li v-for="(button,key) in page.buttons" v-bind:key="key">
-        <a :href="'/'+key" v-if="button.dropdown==false">{{button.name}}</a>
-        <a v-if="button.dropdown!=false" :href="'/'+key">
-          {{button.name}}
-          <i class="material-icons right">arrow_drop_down</i>
-          <!-- Dropdown Structure -->
-          <ul :id="key" class="jdropdown-menu">
-            <li v-for="(btn,key) in button.dropdown" v-bind:key="key"><a :href="'/'+key" class="white-text">{{btn}}</a></li>
-          </ul>
-        </a>
-      </li>
-    </ul>
   </div>
 </template>
 
@@ -101,6 +101,9 @@ export default {
 }
 #logo{
   max-height: 50px;
+}
+.sidenav{
+  height: calc(100% + 0px) !important;
 }
 .sidenav-overlay{
   width: 20vh;

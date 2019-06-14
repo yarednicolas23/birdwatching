@@ -49,12 +49,10 @@ export default{
 #home{
   background-size: cover;
   filter:saturate(1.4) contrast(1.1);
-  /*min-width: 100vh;*/
 }
 #content{
   min-height: 100vh;
-  /*min-width: 100vh;*/
-  width: 100%;
+  /*width: 100%;*/
   margin:0px;
   padding:0% 5%;
   background: linear-gradient(to right,black, transparent);
