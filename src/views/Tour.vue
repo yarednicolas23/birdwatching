@@ -72,9 +72,9 @@ export default {
   },
   methods:{
     getSrc(name) {
-      //return 'https://apimgs.000webhostapp.com/img/'+ name + ".png?"
-      require('../assets/img/'+ name + '.png')
-      return '/img/'+ name + '.png'
+      return 'https://apimgs.000webhostapp.com/img/'+ name + ".png?"
+      //require('../assets/img/'+ name + '.png')
+      //return '/img/'+ name + '.png'
     },
     // List Pages
     getTour(){
@@ -85,6 +85,9 @@ export default {
         snapshot.forEach((childSnapshot) => {
           if (this.$route.params.id == childSnapshot.key) {
             this.tour.info = childSnapshot.val()
+            if (childSnapshot.val().background != "") {
+              this.tour.background = this.getSrc(childSnapshot.val().background)
+            }
           }
           setTimeout(function () {
             M.Slider.init(document.querySelectorAll('.slider'),{height:250})

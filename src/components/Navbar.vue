@@ -113,6 +113,7 @@ export default {
 .jnav {
   margin: auto; /* centers the ul.jnav */
   position: relative; /* CRITICAL gives ul.jbrand & ul.jmenu-right absolute base */
+  z-index: 99;
 }
 .jnav ul li {
   position: relative; /* CRITICAL gives ul.jdropdown-menu absolute base */

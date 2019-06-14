@@ -21,8 +21,8 @@ export default{
   data() {
     return {
       "home":{
-        //"background":"/img/hummingbird.png"
-        "background":"https://apimgs.000webhostapp.com/img/"+"hummingbird.png"
+        "background":"/img/hummingbird.png"
+        //"background":"https://apimgs.000webhostapp.com/img/"+"hummingbird.png"
       }
     }
   },

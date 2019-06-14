@@ -42,11 +42,18 @@ export default {
       }
   },
   methods: {
+    getSrc(name) {
+      return 'https://apimgs.000webhostapp.com/img/'+ name + ".png?"
+      //require('../assets/img/'+ name + '.png')
+      //return '/img/'+ name + '.png'
+    },
     // List Pages
     listPages: function () {
-      firebase.database().ref("page/tours/list").once('value', (snapshot)=> {
-        this.tours.list = snapshot.val()
-
+      firebase.database().ref("page/tours").once('value', (snapshot)=> {
+        this.tours.list = snapshot.val().list
+        if (snapshot.val().background != "") {
+          this.tours.background = this.getSrc(snapshot.val().background)
+        }
         M.Slider.init(document.querySelector('.slider')).next()
         setTimeout(function () {
             M.Slider.init(document.querySelectorAll('.slider'),{duration:200,interval:3000})

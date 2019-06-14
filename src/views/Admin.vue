@@ -347,8 +347,8 @@
               <label for="audio">Audio link xenocanto</label>
             </div>
             <div class="input-field col s12">
-              <input v-model="home.gallery.edit.ubication" id="name" type="text" class="validate" required>
-              <label for="name">Ubicacion</label>
+              <input v-model="home.gallery.edit.ubication" type="text" class="validate" required>
+              <label>Ubicacion</label>
             </div>
             <img class="responsive-img" style="max-width: 150px;" :src="home.upload.img+'?'+home.upload.time" alt="">
             <div class="preloader-wrapper small active" v-if="this.home.gallery.new.loader">
@@ -623,14 +623,14 @@ export default{
       M.updateTextFields()
     },
     uploadImg(e,size){
-      this.gallery.new.loader = true
+      this.home.gallery.new.loader = true
       var data= new FormData()
       data.append('attachment_file', e.target.files[0])
       data.append('type', "upload_img")
       if (size==true) {
-        data.append('name', this.gallery.new.model.name.replace(" ","-")+"-400")
+        data.append('name', this.home.gallery.new.model.name.replace(" ","-")+"-400")
       }else {
-        data.append('name', this.gallery.new.model.name.replace(" ","-"))
+        data.append('name', this.home.gallery.new.model.name.replace(" ","-"))
       }
       $.ajax({
         url: 'https://apimgs.000webhostapp.com/api/upload/index.php',
@@ -644,7 +644,7 @@ export default{
             if (data=="ok") {
               M.toast({html: 'Imagen subida 👾'})
               this.home.gallery.new.valid = true
-              this.home.upload.img = "https://apimgs.000webhostapp.com/img/"+this.gallery.new.model.name.replace(" ","-")+".png"
+              this.home.upload.img = "https://apimgs.000webhostapp.com/img/"+this.home.gallery.new.model.name.replace(" ","-")+".png"
               this.home.upload.time = new Date().getTime()
               this.home.gallery.new.loader = false
             }

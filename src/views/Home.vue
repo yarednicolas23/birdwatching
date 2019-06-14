@@ -9,13 +9,13 @@
             <br>
             <div class="col 12 no-padding">
               <div class="col s4">
-                <a class="btn-floating pulse waves-effect blue darken-3 waves-light tooltipped" data-position="bottom" :data-tooltip="'Ubication'"><i class="material-icons">place</i></a>
+                <a class="btn-floating waves-effect blue darken-3 waves-light tooltipped" data-position="bottom" :data-tooltip="'Ubication'"><i class="material-icons">place</i></a>
               </div>
               <div class="col s4">
                 <a class="btn-floating pulse waves-effect blue darken-3 waves-light tooltipped" data-position="bottom" data-tooltip="Lisent Bird"><i class="material-icons">hearing</i></a>
               </div>
               <div class="col s4">
-                <a class="btn-floating pulse waves-effect blue darken-3 waves-light tooltipped" data-position="bottom" data-tooltip="More Info"><i class="material-icons">help_outline</i></a>
+                <a class="btn-floating waves-effect blue darken-3 waves-light tooltipped" data-position="bottom" data-tooltip="More Info"><i class="material-icons">help_outline</i></a>
               </div>
             </div>
           </div>
@@ -23,7 +23,7 @@
         <div class="col s12 m12 l6">
           <div class="carousel">
              <a class="carousel-item waves-effect waves-light" v-for="(bird,key) in home.gallery.list" v-bind:key="key" v-on:click="setInfo(bird.name,bird.description,key)">
-               <img class="scrollspy z-depth-5" style="display:none" v-bind:src="getSrc(key+'-400')">
+               <img class="scrollspy z-depth-5" style="display:none" v-bind:src="getSrc(key+'-400')" :alt="key">
              </a>
            </div>
         </div>
