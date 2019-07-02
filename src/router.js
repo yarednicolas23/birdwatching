@@ -22,9 +22,14 @@ export default new Router({
   base: process.env.BASE_URL,
   routes: [
     {
-      path: '/',
+      path: '/InConstruction',
       name: 'InConstruction',
       component: InConstruction
+    },
+    {
+      path: '/',
+      name: 'Home',
+      component: Home
     },
     {
       path: '/home',

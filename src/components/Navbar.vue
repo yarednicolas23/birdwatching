@@ -2,7 +2,7 @@
   <div>
     <nav id="nav" class="transparent jnav">
       <div class="nav-wrapper">
-        <a href="#" class="brand-logo"><img id="logo" class="responsive-img" src="../assets/img/logo.png" alt=""> </a>
+        <a href="/" class="brand-logo"><img id="logo" class="responsive-img" src="../assets/img/logo.png" alt=""> </a>
         <a  data-target="slide-out" class="sidenav-trigger"><i class="material-icons">menu</i></a>
         <ul id="nav-mobile" class="right hide-on-med-and-down">
           <li v-for="(button,key) in page.buttons" v-bind:key="key">
