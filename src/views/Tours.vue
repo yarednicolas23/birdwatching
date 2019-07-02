@@ -1,9 +1,10 @@
 <template lang="html">
   <div>
+  <Loader v-if="Object.keys(tours.list).length == 0"/>
     <PageTemplate :background="tours.background">
       <div class="col s12">
         <div class="slider white-text">
-          <Loader v-if="Object.keys(tours.list).length == 0"/>
+          <!---->
           <ul class="slides transparent">
             <li v-for="(tour,key) in tours.list" v-bind:key="key">
                <!--<img :src="getSrc(key)"> random image -->

@@ -1,5 +1,7 @@
 <template lang="html">
-  <div class="loader"></div>
+  <div class="loader center">
+    <img class="responsive-img" src="../assets/img/birdwatching.gif">
+  </div>
 </template>
 
 <script>
@@ -22,7 +24,7 @@ export default {
 </script>
 
 <style lang="css">
-.loader {
+.loader-gradient {
   top: 0px;
   position: fixed;
   animation: bg 15s linear infinite;
@@ -33,6 +35,13 @@ export default {
   min-height: 0.5vh;
   width: 90%;
   transition: 0.3s ease background-position;
+}
+.loader{
+  height: 100vh;
+  width: 100%;
+  position: fixed;
+  background: black;
+  z-index: 10;
 }
 @keyframes bg {
   0% {
