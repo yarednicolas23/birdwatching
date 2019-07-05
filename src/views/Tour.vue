@@ -24,7 +24,7 @@
               </div>
             </li>
           </ul>
-          <a :href="'/buy/'" class="button-shadow" >Buy Now!</a>
+          <a :href="'/contact-us/'" class="button-shadow" >Buy Now!</a>
         </div>
         <div class="col s12 m6 l6">
           <div class="slider">
@@ -34,7 +34,7 @@
                 <div class="caption right-align">
                   <h3 class="capitalize">{{key}}</h3>
                   <p>{{tour.description}}</p>
-                  <a :href="'/tour/'+key" class="btn black" name="button">See More!</a>
+                  <a :href="'/contact-us'" class="btn black" name="button">Buy Now!</a>
                 </div>
               </li>
             </ul>

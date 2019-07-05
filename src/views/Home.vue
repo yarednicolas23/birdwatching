@@ -1,5 +1,6 @@
 <template lang="html">
   <div>
+    <Loader v-if="home.loader"/>
     <PageTemplate :background="home.background">
       <div class="row">
         <div class="col s12 m12 l6 white-text">
@@ -9,20 +10,20 @@
             <br>
             <div class="col 12 no-padding">
               <div class="col s4">
-                <a class="btn-floating waves-effect blue darken-3 waves-light tooltipped" data-position="bottom" :data-tooltip="'Ubication'"><i class="material-icons">place</i></a>
+                <a class="btn-floating waves-effect blue darken-3 waves-light tooltipped" data-position="bottom" :data-tooltip="'Ubication: '+home.ubication"><i class="material-icons">place</i></a>
               </div>
               <div class="col s4">
-                <a class="btn-floating pulse waves-effect blue darken-3 waves-light tooltipped" data-position="bottom" data-tooltip="Lisent Bird"><i class="material-icons">hearing</i></a>
+                <a class="btn-floating pulse waves-effect blue darken-3 waves-light tooltipped"  v-on:click="soundBird(home.sound)" data-position="bottom" data-tooltip="Lisent Bird"><i class="material-icons">hearing</i></a>
               </div>
               <div class="col s4">
-                <a class="btn-floating waves-effect blue darken-3 waves-light tooltipped" data-position="bottom" data-tooltip="More Info"><i class="material-icons">help_outline</i></a>
+                <a :href="'/bird/'+home.sound" class="btn-floating waves-effect blue darken-3 waves-light tooltipped" data-position="bottom" data-tooltip="More Info"><i class="material-icons">help_outline</i></a>
               </div>
             </div>
           </div>
         </div>
         <div class="col s12 m12 l6">
           <div class="carousel">
-             <a class="carousel-item waves-effect waves-light" v-for="(bird,key) in home.gallery.list" v-bind:key="key" v-on:click="setInfo(bird.name,bird.description,key)">
+             <a class="carousel-item waves-effect waves-light" v-for="(bird,key) in home.gallery.list" v-bind:key="key" v-on:click="setInfo(bird.name,bird.description,bird.ubication,key)">
                <img class="scrollspy z-depth-5" style="display:none" v-bind:src="getSrc(key+'-400')" :alt="key">
              </a>
            </div>
@@ -30,8 +31,20 @@
       </div>
     </PageTemplate>
 
-    <audio id="birdsound" controls loop class="hide">
-      <source :src="'../assets/mp3/'+home.sound+'.mp3'" type="audio/mpeg">
+    <audio id="Hummingbird" controls loop class="hide">
+      <source src="../assets/mp3/Hummingbird.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="Momotus-Momota" controls loop class="hide">
+      <source src="../assets/mp3/Momotus-Momota.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="Scarlet-Macaw" controls loop class="hide">
+      <source src="../assets/mp3/Scarlet-Macaw.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="Tangara-Cyanicollis" controls loop class="hide">
+      <source src="../assets/mp3/Tangara-Cyanicollis.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="Galbula-ruficauda" controls loop class="hide">
+      <source src="../assets/mp3/Galbula-ruficauda.mp3" type="audio/mpeg">
     </audio>
 
     <audio id="audio" autoplay controls loop class="hide">
@@ -54,15 +67,17 @@
 
 <script>
 import PageTemplate from './PageTemplate.vue'
+import Loader from '../components/Loader.vue'
 
 import $ from 'jquery'
 import firebase from 'firebase'
 import M from 'materialize-css'
 export default {
-  components: { PageTemplate },
+  components: { PageTemplate,Loader },
   data() {
       return {
         "home":{
+          "loader":true,
           "gallery":{
             "list":[]
           },
@@ -70,7 +85,8 @@ export default {
           "description":"Hummingbirds are birds native to the Americas and constitute the biological family Trochilidae. They are among the smallest of birds, most species measuring 7.5–13 cm (3–5 in) in length.",
           //"background":"/img/hummingbird.png"
           "background":this.getSrc("Hummingbird"),
-          "sound":"hummingbird"
+          "sound":"Hummingbird",
+          "ubication":"South America"
         },
         "title": 'Birdwatching Colombia',
         "description":'Avistamiento de aves, viaja por el país con la mayor diversidad de aves del mundo. Ofrecemos rutas que cubren casi el 80% del país.',
@@ -99,33 +115,43 @@ export default {
       //require('../assets/img/'+ name + '.png')
       //return './img/'+ name + '.png'
     },
-    setInfo(title,description,background){
+    setInfo(title,description,ubication,background){
       this.home.title = title
       this.home.description = description
       this.home.background = this.getSrc(background)
       this.home.sound = background
+      this.home.ubication = ubication
     },
     togglePlay() {
       const myAudio = document.querySelector('#audio')
       return myAudio.paused ? myAudio.play() : myAudio.pause();
     },
-    soundBird(){
-      var audiopromise = document.querySelector('#birdsound').play()
-      if (audiopromise !== undefined) {
-          promise.then( ()=> {
-              // Autoplay started!
-          }).catch( ()=> {
-              // Autoplay was prevented.
-              // Show a "Play" button so that user can start playback.
-              //var elem= document.querySelector('.tap-target')
-              //var instance = M.TapTarget.init(elem)
-              //instance.open()
-          })
-      }
+    soundBird(bird){
+      const Hummingbird = document.querySelector('#Hummingbird')
+      const Momotus = document.querySelector('#Momotus-Momota')
+      const Scarlet = document.querySelector('#Scarlet-Macaw')
+      const Tangara = document.querySelector('#Tangara-Cyanicollis')
+      const Galbula = document.querySelector('#Galbula-ruficauda')
+      const homeaudio = document.querySelector('#audio')
+
+      Hummingbird.pause()
+      Momotus.pause()
+      Scarlet.pause()
+      Tangara.pause()
+      Galbula.pause()
+      homeaudio.pause()
+
+      const myAudio = document.querySelector('#'+bird+'')
+      myAudio.paused ? myAudio.play() : myAudio.pause()
     }
   },
   created(){
     this.getGallery()
+    setTimeout( ()=> {
+
+      $(".loader").fadeOut(3000)
+      //this.home.loader = false
+    }, 5000)
   },
   mounted(){
     this.$nextTick(function () {

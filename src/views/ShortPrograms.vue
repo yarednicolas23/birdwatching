@@ -9,7 +9,7 @@
               <div class="caption">
                 <h1 class="bebasbold">Program: {{key}}</h1>
                 <p>{{short.description}}</p>
-                <a :href="'/tour/'+key" class="button-shadow" >Buy Now ${{short.price}}</a>
+                <a :href="'/contact-us'" class="button-shadow" >Buy Now ${{short.price}}</a>
               </div>
             </li>
           </ul>
@@ -34,14 +34,14 @@ export default {
         },
         "shorts":{
           "list":{
-            "example":{
-              "name":"Example",
-              "description":"Lorem ipsum dolor sit amet, consectetur adipisicing elit.",
-              "price":"100"
+            "ARRIVING-IN-BOGOTA":{
+              "name":"ARRIVING IN BOGOTA",
+              "description":"Reception of the group at El Dorado International Airport in charge of the agency's logistics team, transfer to the hotel, registration and accommodation. It also includes dinner and then they can rest.",
+              "price":"6300"
             },
-            "example2":{
-              "name":"Example2",
-              "description":"Lorem ipsum dolor sit amet, consectetur adipisicing elit.",
+            "LA-FLORIDA-WETLAND":{
+              "name":"LA FLORIDA WETLAND",
+              "description":"We start our first birding activity in La Florida wetland. In this place there are more than 40 different kind of birds, some of them endemic species and a significant number of migratory birds. With our specialized guides you will find some special birds as: -Rallus semiplumbeus / Bogotá Rail –E -Cistothorus apolinari /Apolinar´s Wren –E -Synallaxis subpudica / Silvery-throated Spinetail – E -Conirostrum rufum  / Rufous-browed Conebill - CE-Grey-rumped Tapaculo CE Gallinula melanops  / Spot-flanked Gallinule R.",
               "price":"100"
             }
           }

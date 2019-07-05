@@ -284,6 +284,12 @@
           </div>
         </div>
       </div>
+      <div class="col s12">
+        <button data-target="addtour" class="btn waves-effect waves-light blue-grey col s12 modal-trigger" type="button" name="button">
+          Agregar Tour
+          <i class="material-icons right">add</i>
+        </button>
+      </div>
     </div>
     <div id="short-programs" class="row">
       <div class="col s12">
@@ -469,46 +475,49 @@
     </div>
 
     <div id="addtour" class="modal">
-      <form v-on:submit.prevent="addPicture">
+      <!-- v-on:submit.prevent="addPicture"-->
+      <form>
         <div class="modal-content">
           <h4>Add Tour</h4>
           <div class="row">
             <div class="input-field col s12">
+              <i class="material-icons prefix">map</i>
+              <input :id="'key'" type="text" v-model="tours.new.key" class="validate">
+              <label :for="'key'">Key</label>
+            </div>
+            <div class="input-field col s12">
               <i class="material-icons prefix">title</i>
-              <input :id="'title'" type="text" v-model="tours.new.title" class="validate white-text">
+              <input :id="'title'" type="text" v-model="tours.new.title" class="validate">
               <label :for="'title'">Title</label>
             </div>
             <div class="input-field col s12">
               <i class="material-icons prefix">description</i>
-              <textarea :id="'description'" class="materialize-textarea white-text" v-model="tours.new.description"></textarea>
+              <textarea :id="'description'" class="materialize-textarea" v-model="tours.new.description"></textarea>
               <label :for="'description'">Description</label>
             </div>
             <div class="input-field col s12">
               <i class="material-icons prefix">title</i>
-              <input :id="'background'" type="text" v-model="tours.new.background" class="validate white-text">
+              <input :id="'background'" type="text" v-model="tours.new.background" class="validate">
               <label :for="'background'">Background</label>
             </div>
             <div class="input-field col s12">
               <i class="material-icons prefix">group</i>
-              <input :id="'group'" type="text" v-model="tours.new.group" class="validate white-text">
+              <input :id="'group'" type="text" v-model="tours.new.group" class="validate">
               <label :for="'group'">Group</label>
             </div>
             <div class="input-field col s12">
               <i class="material-icons prefix">near_me</i>
-              <input :id="'route'" type="text" v-model="tours.new.route" class="validate white-text">
+              <input :id="'route'" type="text" v-model="tours.new.route" class="validate">
               <label :for="'route'">Route</label>
             </div>
             <div class="input-field col s12">
               <i class="material-icons prefix">monetization_on</i>
-              <input :id="'price'" type="text" v-model="tours.new.price" class="validate white-text">
+              <input :id="'price'" type="text" v-model="tours.new.price" class="validate">
               <label :for="'price'">Price</label>
             </div>
-            <button class="btn col s12 green" v-on:click="updateTour(tour,key)">Guardar Cambios <i class="material-icons right">save</i> </button>
+            <button class="btn col s12 green" v-on:click="updateTour(tours.new,tours.new.key)">Guardar Cambios <i class="material-icons right">save</i> </button>
+            <a class="col s12 center modal-close waves-effect waves-green btn-flat">Cerrar</a>
           </div>
-        </div>
-        <div class="modal-footer">
-          <button :disabled="home.gallery.new.valid ? false : true" type="submit" class="waves-effect waves-green btn green">Guardar</button>
-          <a class="modal-close waves-effect waves-green btn-flat">Cerrar</a>
         </div>
       </form>
     </div>
