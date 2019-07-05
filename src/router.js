@@ -4,6 +4,7 @@ import Router from 'vue-router'
 import InConstruction from './views/InConstruction.vue'
 import Admin from './views/Admin.vue'
 import Home from './views/Home.vue'
+import Bird from './views/Bird.vue'
 import AboutUs from './views/AboutUs.vue'
 import Staff from './views/Staff.vue'
 import ContactUs from './views/ContactUs.vue'
@@ -64,6 +65,10 @@ export default new Router({
     {
       path: '/tour/:id',
       component: Tour
+    },
+    {
+      path: '/bird/:id',
+      component: Bird
     },
     {
       path: '/short-programs',

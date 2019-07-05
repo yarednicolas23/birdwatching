@@ -29,6 +29,11 @@
         </div>
       </div>
     </PageTemplate>
+
+    <audio id="birdsound" controls loop class="hide">
+      <source :src="'../assets/mp3/'+home.sound+'.mp3'" type="audio/mpeg">
+    </audio>
+
     <audio id="audio" autoplay controls loop class="hide">
       <source src="../assets/mp3/birdwatching.mp3" type="audio/mpeg">
     </audio>
@@ -64,7 +69,8 @@ export default {
           "title":"Hummingbird",
           "description":"Hummingbirds are birds native to the Americas and constitute the biological family Trochilidae. They are among the smallest of birds, most species measuring 7.5–13 cm (3–5 in) in length.",
           //"background":"/img/hummingbird.png"
-          "background":this.getSrc("Hummingbird")
+          "background":this.getSrc("Hummingbird"),
+          "sound":"hummingbird"
         },
         "title": 'Birdwatching Colombia',
         "description":'Avistamiento de aves, viaja por el país con la mayor diversidad de aves del mundo. Ofrecemos rutas que cubren casi el 80% del país.',
@@ -97,10 +103,25 @@ export default {
       this.home.title = title
       this.home.description = description
       this.home.background = this.getSrc(background)
+      this.home.sound = background
     },
     togglePlay() {
       const myAudio = document.querySelector('#audio')
       return myAudio.paused ? myAudio.play() : myAudio.pause();
+    },
+    soundBird(){
+      var audiopromise = document.querySelector('#birdsound').play()
+      if (audiopromise !== undefined) {
+          promise.then( ()=> {
+              // Autoplay started!
+          }).catch( ()=> {
+              // Autoplay was prevented.
+              // Show a "Play" button so that user can start playback.
+              //var elem= document.querySelector('.tap-target')
+              //var instance = M.TapTarget.init(elem)
+              //instance.open()
+          })
+      }
     }
   },
   created(){
