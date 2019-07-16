@@ -40,8 +40,11 @@ export default {
   height: 100vh;
   width: 100%;
   position: fixed;
-  background: black;
+  background: #030303;
   z-index: 10;
+}
+.loader img{
+  max-height: 90vh;
 }
 @keyframes bg {
   0% {

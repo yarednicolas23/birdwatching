@@ -95,12 +95,13 @@ export default {
 <style lang="css">
 #nav{
   box-shadow: none;
+  padding:0;
 }
 .nav-wrapper{
   padding:2% 0%;
 }
 #logo{
-  max-height: 50px;
+  max-height: 60px;
 }
 .sidenav{
   height: calc(100% + 0px) !important;
