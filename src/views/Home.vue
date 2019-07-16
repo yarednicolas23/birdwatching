@@ -6,11 +6,11 @@
         <div class="col s12 m12 l6 white-text">
           <h1 id="title" style="display:none" class="bebasbold scrollspy ">{{home.title}}</h1>
           <div id="description" style="display:none" class="scrollspy">
-            <p>{{home.description}}</p>
+            <p v-html="home.description"></p>
             <br>
             <div class="col 12 no-padding">
               <div class="col s4">
-                <a class="btn-floating waves-effect blue darken-3 waves-light tooltipped" data-position="bottom" :data-tooltip="'Ubication: '+home.ubication"><i class="material-icons">place</i></a>
+                <a :href="'/bird/'+home.sound" class="btn-floating waves-effect blue darken-3 waves-light tooltipped" data-position="bottom" :data-tooltip="'Ubication: '+home.ubication"><i class="material-icons">place</i></a>
               </div>
               <div class="col s4">
                 <a class="btn-floating pulse waves-effect blue darken-3 waves-light tooltipped"  v-on:click="soundBird(home.sound)" data-position="bottom" data-tooltip="Lisent Bird"><i class="material-icons">hearing</i></a>
@@ -82,7 +82,7 @@ export default {
             "list":[]
           },
           "title":"Hummingbird",
-          "description":"Hummingbirds are birds native to the Americas and constitute the biological family Trochilidae. They are among the smallest of birds, most species measuring 7.5–13 cm (3–5 in) in length.",
+          "description":"Hummingbirds are birds native to the Americas and constitute the biological family Trochilidae. They are among the smallest of birds, most species measuring 7.5–13 cm (3–5 in) in length.<br/> Scientific name: trochilidae <br/> Average life: 3 - 5 years. <br/> Family: Trochilidae; <br/> Speed: 79 km / h (Maximum, Slashed).",
           //"background":"/img/hummingbird.png"
           "background":this.getSrc("Hummingbird"),
           "sound":"Hummingbird",
@@ -149,7 +149,7 @@ export default {
     this.getGallery()
     setTimeout( ()=> {
 
-      $(".loader").fadeOut(3000)
+      $(".loader").fadeOut(2500)
       //this.home.loader = false
     }, 5000)
   },

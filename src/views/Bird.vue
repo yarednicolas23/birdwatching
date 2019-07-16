@@ -6,7 +6,7 @@
         <div class="col s12 m4 l4">
           <h1 class="bebasbold">{{ bird.info.name }}</h1>
           <div id="description">
-            <p>{{bird.info.description}}</p>
+            <p v-html="bird.info.description"></p>
             <div class="col 12 no-padding">
               <div class="col s4">
                 <a class="btn-floating waves-effect blue darken-3 waves-light tooltipped" data-position="bottom" :data-tooltip="'Ubication: '+bird.info.ubication"><i class="material-icons">place</i></a>

@@ -14,9 +14,9 @@ export default {
     return {
       "page":{
         "links":{
-          "facebook":"https://es-la.facebook.com/AVIATUR.SA/",
-          "instagram":"https://www.instagram.com/aviaturoficial",
-          "twitter":"https://twitter.com/aviatur"
+          "facebook":"https://www.facebook.com/birdwatchingco/",
+          "instagram":"https://www.instagram.com/birdwatchingco/"
+          //"twitter":"https://twitter.com/aviatur"
         }
       }
     }

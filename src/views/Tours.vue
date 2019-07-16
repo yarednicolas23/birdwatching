@@ -10,7 +10,7 @@
                <!--<img :src="getSrc(key)"> random image -->
               <div class="caption">
                 <h1 class="bebasbold">Tour: {{key}}</h1>
-                <p>{{tour.description}}</p>
+                <p v-html="tour.description"></p>
                 <a :href="'/tour/'+key" class="button-shadow" >See More!</a>
               </div>
             </li>

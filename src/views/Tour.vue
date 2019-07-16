@@ -3,7 +3,7 @@
       <div class="col s12 white-text">
         <div class="col s12 m6 l6">
           <h1 class="bebasbold">{{ tour.info.title }}</h1>
-          <p>{{tour.info.description}}</p>
+          <p v-html="tour.info.description"></p>
           <ul class="collapsible no-border scrollspy">
             <li>
               <div class="collapsible-header transparent no-border tooltipped" data-position="left" data-tooltip="Group of people">
@@ -33,7 +33,7 @@
                  <!--<img :src="getSrc(key)"> random image -->
                 <div class="caption right-align">
                   <h3 class="capitalize">{{key}}</h3>
-                  <p>{{tour.description}}</p>
+                  <p v-html="tour.description"></p>
                   <a :href="'/contact-us'" class="btn black" name="button">Buy Now!</a>
                 </div>
               </li>
