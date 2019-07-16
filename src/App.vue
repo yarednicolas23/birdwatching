@@ -50,7 +50,9 @@ body{
 .futura-bold{
   font-family: 'FuturaBold';
 }
-
+.no-margin{
+  margin:inherit;
+}
 ::-webkit-scrollbar {
     -webkit-appearance: none;
 }

@@ -4,7 +4,7 @@
     <PageTemplate :background="home.background">
       <div class="row">
         <div class="col s12 m12 l6 white-text">
-          <h1 id="title" style="display:none" class="bebasbold no-margin scrollspy ">{{home.title}}</h1>
+          <h1 id="title" style="display:none" class="bebasbold scrollspy ">{{home.title}}</h1>
           <div id="description" style="display:none" class="scrollspy">
             <p>{{home.description}}</p>
             <br>

@@ -2,7 +2,7 @@
 <div>
   <PageTemplate :background="staff.background">
     <div id="contact-us" class="col s12 center">
-      <h5 class="thin no-margin white-text">If you want more information, leave us your data and we will contact you</h5>
+      <h5 class="thin white-text">If you want more information, leave us your data and we will contact you</h5>
       <form class="container" v-on:submit.prevent="submit">
         <div class="col s12">
           <div class="input-field">
