@@ -42,7 +42,7 @@ export default {
             "LA-FLORIDA-WETLAND":{
               "name":"LA FLORIDA WETLAND",
               "description":"We start our first birding activity in La Florida wetland. In this place there are more than 40 different kind of birds, some of them endemic species and a significant number of migratory birds. With our specialized guides you will find some special birds as: -Rallus semiplumbeus / Bogotá Rail –E -Cistothorus apolinari /Apolinar´s Wren –E -Synallaxis subpudica / Silvery-throated Spinetail – E -Conirostrum rufum  / Rufous-browed Conebill - CE-Grey-rumped Tapaculo CE Gallinula melanops  / Spot-flanked Gallinule R.",
-              "price":"3700"
+              "price":"5000"
             }
           }
         },

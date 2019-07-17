@@ -5,17 +5,25 @@
       <h5 class="thin white-text">If you want more information, leave us your data and we will contact you</h5>
       <form class="container" v-on:submit.prevent="submit">
         <div class="col s12">
-          <div class="input-field">
+          <div class="input-field col s12 m6 l6">
+            <i class="material-icons prefix white-text">mood</i>
             <input id="name" type="text" v-model="form.name" class="validate white-text" required>
             <label for="name">Name</label>
           </div>
-          <div class="input-field">
+          <div class="input-field col s12 m6 l6">
+            <i class="material-icons prefix white-text">phone</i>
+            <input id="phone" type="number" v-model="form.phone" class="validate white-text" required>
+            <label for="phone">Phone</label>
+          </div>
+          <div class="input-field col s12">
+            <i class="material-icons prefix white-text">email</i>
             <input id="email" type="email" v-model="form.email" class="validate white-text" required>
             <label for="email">Email</label>
           </div>
-          <div class="input-field">
-            <input id="phone" type="number" v-model="form.phone" class="validate white-text" required>
-            <label for="phone">Phone</label>
+          <div class="input-field col s12">
+            <i class="material-icons prefix white-text">comment</i>
+            <textarea id="textarea1" class="materialize-textarea white-text" v-model="form.message" data-length="250" required></textarea>
+            <label for="textarea1">Message</label>
           </div>
           <GrandientButton text="Enviar"></GrandientButton>
         </div>
@@ -67,9 +75,10 @@ export default {
     }
   },
   created(){
-
   },
   mounted(){
+    const characterCounter = document.querySelectorAll('.materialize-textarea')
+    M.CharacterCounter.init(characterCounter)
 
   },
   beforeMount: ()=> {
@@ -88,6 +97,9 @@ export default {
 
 <style lang="css">
 #contact-us{
-  margin-top: 70px;
+  margin-top: 5px;
+}
+.character-counter{
+  color:white;
 }
 </style>

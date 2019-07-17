@@ -22,7 +22,7 @@
         </div>
 
         <div class="col s12 m4 l4">
-          <iframe class="map" :src="bird.info.map" width="400" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
+          <iframe class="map" :src="bird.info.map"  height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
         </div>
         <audio :id="this.$route.params.id" controls loop class="hide">
           <source :src="getSound(this.$route.params.id)" type="audio/mpeg">
@@ -34,7 +34,7 @@
                  <!--<img :src="getSrc(key)"> random image -->
                 <div class="caption right-align">
                   <h4 class="capitalize">Find the species {{ bird.info.name }} on our tour of the {{key}}</h4>
-                  <p>{{tour.description}}</p>
+                  <p v-html="tour.description"></p>
                   <a :href="'/contact-us'" class="btn black" name="button">Buy Now!</a>
                 </div>
               </li>
@@ -136,5 +136,27 @@ export default {
 </script>
 
 <style lang="css">
-
+.map{
+  width:300px;
+}
+.slider{
+  height: 600px !important;
+}
+.slides{
+  height: 500px !important;
+}
+.slider .slides li .caption {
+  top: 0%;
+}
+@media only screen and (min-width: 993px){
+  .map{
+    width:400px;
+  }
+  .slider{
+    height: 450px !important;
+  }
+  .slides{
+    height: 400px !important;
+  }
+}
 </style>
