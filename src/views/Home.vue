@@ -57,8 +57,10 @@
       <!-- Tap Target Structure -->
       <div class="tap-target grey darken-4 white-text" data-target="menu">
         <div class="tap-target-content">
-          <h5>Da click aquí</h5>
-          <p>Y sube un poco el volumen para una nueva experiencia </p>
+          <h5>Click in here</h5>
+          <p>
+            Turn up the volume for a new experience
+          </p>
         </div>
       </div>
     </div>
@@ -111,9 +113,9 @@ export default {
       })
     },
     getSrc(name) {
-      return 'https://apimgs.000webhostapp.com/img/'+ name + ".png?"
-      //require('../assets/img/'+ name + '.png')
-      //return './img/'+ name + '.png'
+      //return 'https://apimgs.000webhostapp.com/img/'+ name + ".png?"
+      require('../assets/img/'+ name + '.png')
+      return './img/'+ name + '.png'
     },
     setInfo(title,description,ubication,background){
       this.home.title = title
