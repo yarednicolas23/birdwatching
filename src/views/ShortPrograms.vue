@@ -30,7 +30,7 @@ export default {
   data() {
       return {
         "shortprograms":{
-          "background":"https://apimgs.000webhostapp.com/img/"+"Tangara-Cyanicollis.png"
+          "background":this.getSrc("Tangara-Cyanicollis")
         },
         "shorts":{
           "list":{
@@ -52,7 +52,11 @@ export default {
       }
   },
   methods: {
-
+    getSrc(name) {
+      //return 'https://apimgs.000webhostapp.com/img/'+ name + ".png?"
+      require('../assets/img/'+ name + '.png')
+      return '/img/'+ name + '.png'
+    }
   },
   created(){
     M.Slider.init(document.querySelector('.slider'))

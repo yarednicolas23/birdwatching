@@ -57,10 +57,8 @@
       <!-- Tap Target Structure -->
       <div class="tap-target grey darken-4 white-text" data-target="menu">
         <div class="tap-target-content">
-          <h5>Click in here</h5>
-          <p>
-            Turn up the volume for a new experience
-          </p>
+          <h5>Da click aquí</h5>
+          <p>Y sube un poco el volumen para una nueva experiencia </p>
         </div>
       </div>
     </div>

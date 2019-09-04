@@ -72,9 +72,9 @@ export default {
   },
   methods:{
     getSrc(name) {
-      return 'https://apimgs.000webhostapp.com/img/'+ name + ".png?"
-      //require('../assets/img/'+ name + '.png')
-      //return '/img/'+ name + '.png'
+      //return 'https://apimgs.000webhostapp.com/img/'+ name + ".png?"
+      require('../assets/img/'+ name + '.png')
+      return '/img/'+ name + '.png'
     },
     // List Pages
     getTour(){

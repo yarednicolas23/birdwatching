@@ -755,8 +755,8 @@ export default{
       })
     },
     getSrc(name) {
-      return 'https://apimgs.000webhostapp.com/img/'+ name.replace(" ","-") + "-400.png"
-      //return require('../assets/img/'+name+'/'+ name + "-400.png")
+      //return 'https://apimgs.000webhostapp.com/img/'+ name.replace(" ","-") + "-400.png"
+      return require('../assets/img/'+ name + ".png")
     },
   },
   created(){
