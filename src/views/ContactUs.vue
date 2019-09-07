@@ -51,7 +51,7 @@ export default {
           "date":new Date().toString()
         },
         "staff":{
-          "background":this.getSrc("Momotus-Momota")
+          "background":this.getSrc("Eubucco-Bourcierii")
         },
         "title": 'Contact Us - Birdwatching Colombia',
         "description":'Avistamiento de aves, viaja por el país con la mayor diversidad de aves del mundo. Ofrecemos rutas que cubren casi el 80% del país.',

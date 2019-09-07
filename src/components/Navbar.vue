@@ -60,7 +60,7 @@ export default {
             "name":"Tours",
             "dropdown":{
               "tour/amazonian":"Amazonas",
-              "tour/caribe":"Caribbean Coast",
+              "tour/caribbean":"Caribbean Coast",
               "tour/andes":"Andes"
             }
           },

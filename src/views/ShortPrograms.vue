@@ -30,7 +30,7 @@ export default {
   data() {
       return {
         "shortprograms":{
-          "background":this.getSrc("Tangara-Cyanicollis")
+          "background":this.getSrc("Eubucco-Bourcierii")
         },
         "shorts":{
           "list":{

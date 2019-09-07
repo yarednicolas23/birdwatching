@@ -58,7 +58,7 @@ export default {
   data() {
       return {
         "tour":{
-          "background":this.getSrc("Scarlet-Macaw"),
+          "background":this.getSrc("Hummingbird"),
           "info":{}
         },
         "tours":{},

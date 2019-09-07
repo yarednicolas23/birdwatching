@@ -111,9 +111,9 @@ export default {
       })
     },
     getSrc(name) {
-      //return 'https://apimgs.000webhostapp.com/img/'+ name + ".png?"
-      require('../assets/img/'+ name + '.png')
-      return './img/'+ name + '.png'
+      return 'https://apiforimgs.000webhostapp.com/img/'+ name + ".png?"
+      //require('../assets/img/'+ name + '.png')
+      //return './img/'+ name + '.png'
     },
     setInfo(title,description,ubication,background){
       this.home.title = title
@@ -151,7 +151,7 @@ export default {
 
       $(".loader").fadeOut(2500)
       //this.home.loader = false
-    }, 5000)
+    }, 3500)
   },
   mounted(){
     this.$nextTick(function () {
