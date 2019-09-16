@@ -6,16 +6,15 @@
       </div>
       <div class="nav-content">
       <ul class="tabs tabs-transparent">
-        <li class="tab"><a href="#users">Usuarios Registrados</a></li>
+        <li class="tab"><a href="#users"><i class="material-icons">mood</i></a></li>
         <li class="tab"><a href="#gallery" v-on:click="listImgs()">Gallery🦉</a></li>
         <li class="tab"><a href="#pages">Paginas</a></li>
-        <li class="tab"><a class="active" href="#home">Home</a></li>
+        <li class="tab"><a href="#home">Home</a></li>
         <li class="tab"><a href="#about-us">About us</a></li>
         <li class="tab"><a href="#staff">Staff</a></li>
         <li class="tab"><a href="#birdwatching-colombia">Birdwatching Colombia</a></li>
         <li class="tab"><a href="#tours">Tours</a></li>
-        <li class="tab"><a href="#short-programs">Short Programs</a></li>
-        <li class="tab disabled"><a href="#disabled">Disabled Tab</a></li>
+        <li class="tab"><a class="active" href="#short-programs" v-on:click="getShortPrograms()">Short Programs</a></li>
       </ul>
     </div>
     </nav>
@@ -66,7 +65,7 @@
           <div class="col s12 m3 l3" v-for="(i,key) in gallery" v-bind:key="key">
             <div class="card blue-grey darken-3 white-text z-depth-4">
               <div class="card-image">
-                <img :src="'https://apiforimgs.000webhostapp.com/img/'+i">
+                <img :src="'https://imgsapi.000webhostapp.com/img/'+i">
               </div>
               <div class="card-stacked">
                 <div class="card-content">
@@ -92,7 +91,7 @@
         <div class="col s12 m3 l3" v-for="(page,key) in pages.list" v-bind:key="key">
           <div class="card horizontal blue-grey darken-3 white-text z-depth-4">
             <div class="card-image">
-              <img :src="getSrc(page.background)">
+                <img :src="getSrc(page.background)">
             </div>
             <div class="card-stacked">
               <div class="card-content">
@@ -322,44 +321,18 @@
     </div>
     <div id="short-programs" class="row">
       <div class="col s12">
-        <div class="col s12 m8 l8">
-         <div class="card blue-grey darken-1">
-           <div class="card-content white-text">
-             <span class="card-title">Codigo del contenido</span>
-             <div class="row">
-                <div class="col s12">
-                  <CodeEditor><textarea class="code-input" v-model="birdwatching.code"></textarea></CodeEditor>
-                </div>
-             </div>
-           </div>
-         </div>
-       </div>
-       <div class="col s12 m4 l4">
-         <div class="card blue-grey darken-1">
-           <div class="card-content white-text">
-             <span class="card-title">Background Image</span>
-             <div class="row">
-               <div class="slider">
-                 <ul class="slides">
-                   <li  v-for="(bird,key) in home.gallery.list" v-bind:key="key">
-                     <img :src="getSrc(key)"> <!-- random image -->
-                     <div class="caption center-align">
-                       <h3>{{key}}</h3>
-                       <p>
-                         <label class="white-text">
-                           <input name="group1" type="radio" v-on:click="birdwatching.background = key" />
-                           <span>Select image</span>
-                         </label>
-                       </p>
-                     </div>
-                   </li>
-                 </ul>
-               </div>
-             </div>
-           </div>
-         </div>
-       </div>
-       <button class="btn col s12 green" v-on:click="updateAbout">Guardar Cambios <i class="material-icons right">save</i> </button>
+        <div class="col s12 m4 l4" v-for="(short,key) in shortprograms.list" v-bind:key="key">
+          <div class="card" style="border-radius:10px;">
+            <div class="card-image">
+              <img :src="getSrc(key)" style="width:100%;border-radius:10px;">
+              <span class="card-title">{{short.name}}</span>
+            </div>
+          </div>
+        </div>
+       <button data-target="addshortprogram" class="btn waves-effect waves-light blue-grey col s12 modal-trigger" type="button" name="button">
+         Add Short Program
+         <i class="material-icons right">add</i>
+       </button>
      </div>
     </div>
     <div id="disabled" class="row"></div>
@@ -397,38 +370,12 @@
                 </div>
               </div>
             </div>
-            <div class="col s12">
-              <span class="add">
-                <div class="file-field input-field">
-                  <div class="btn indigo" :disabled="home.gallery.new.model.name ? null : !null">
-                    <i class="material-icons left">cloud_upload</i>
-                    <span>Subir Imagen 400x400</span>
-                    <input type="file" multiple v-on:change="uploadImg($event,true)">
-                  </div>
-                  <div class="file-path-wrapper">
-                    <input class="file-path validate" type="text" placeholder="Upload one file of 400px">
-                  </div>
-                </div>
-              </span>
-            </div>
-            <div class="col s12">
-              <span class="add">
-                <div class="file-field input-field">
-                  <div class="btn indigo" :disabled="home.gallery.new.model.name ? null : !null">
-                    <i class="material-icons left">cloud_upload</i>
-                    <span>Subir Imagen Background</span>
-                    <input type="file" multiple v-on:change="uploadImg($event)">
-                  </div>
-                  <div class="file-path-wrapper">
-                    <input class="file-path validate" type="text" placeholder="Upload one file Background">
-                  </div>
-                </div>
-              </span>
-            </div>
+
           </div>
         </div>
         <div class="modal-footer">
-          <button :disabled="home.gallery.new.valid ? false : true" type="submit" class="waves-effect waves-green btn green">Guardar</button>
+          <!-- :disabled="home.gallery.new.valid ? false : true" -->
+          <button type="submit" class="waves-effect waves-green btn green">Guardar</button>
           <a class="modal-close waves-effect waves-green btn-flat">Cerrar</a>
         </div>
       </form>
@@ -502,43 +449,40 @@
         </div>
       </form>
     </div>
-
     <div id="addgallery" class="modal">
-      <form v-on:submit.prevent="addPicture">
-        <div class="modal-content">
-          <h4>Add Imagen</h4>
-          <div class="row">
-            <div class="preloader-wrapper small active" v-if="this.home.gallery.new.loader">
-              <div class="spinner-layer spinner-green-only">
-                <div class="circle-clipper left">
-                  <div class="circle"></div>
-                </div><div class="gap-patch">
-                  <div class="circle"></div>
-                </div><div class="circle-clipper right">
-                  <div class="circle"></div>
-                </div>
+      <div class="modal-content">
+        <h4>Add Imagen</h4>
+        <div class="row">
+          <div class="preloader-wrapper small active" v-if="this.home.gallery.new.loader">
+            <div class="spinner-layer spinner-green-only">
+              <div class="circle-clipper left">
+                <div class="circle"></div>
+              </div><div class="gap-patch">
+                <div class="circle"></div>
+              </div><div class="circle-clipper right">
+                <div class="circle"></div>
               </div>
             </div>
-            <div class="col s12">
-              <span class="add">
-                <div class="file-field input-field">
-                  <div class="btn indigo">
-                    <i class="material-icons left">cloud_upload</i>
-                    <span>Subir Imagen Background</span>
-                    <input type="file" multiple v-on:change="uploadImg($event)">
-                  </div>
-                  <div class="file-path-wrapper">
-                    <input class="file-path validate" type="text" placeholder="Upload one file Background">
-                  </div>
+          </div>
+          <div class="col s12">
+            <span class="add">
+              <div class="file-field input-field">
+                <div class="btn indigo">
+                  <i class="material-icons left">cloud_upload</i>
+                  <span>Subir Imagen Background</span>
+                  <input type="file" multiple v-on:change="uploadImg($event)">
                 </div>
-              </span>
-            </div>
+                <div class="file-path-wrapper">
+                  <input class="file-path validate" type="text" placeholder="Upload one file Background">
+                </div>
+              </div>
+            </span>
           </div>
         </div>
-        <div class="modal-footer">
-          <a class="modal-close waves-effect waves-green btn-flat">Cerrar</a>
-        </div>
-      </form>
+      </div>
+      <div class="modal-footer">
+        <a class="modal-close waves-effect waves-green btn-flat">Cerrar</a>
+      </div>
     </div>
     <div id="addtour" class="modal">
       <!-- v-on:submit.prevent="addPicture"-->
@@ -587,6 +531,68 @@
         </div>
       </form>
     </div>
+
+    <div id="addshortprogram" class="modal">
+      <form v-on:submit.prevent="addPicture">
+        <div class="modal-content">
+          <h4>Add Short Program</h4>
+          <div class="row">
+            <div class="input-field col s12">
+              <input v-model="shortprograms.create.key" id="key" type="text" class="validate"  required>
+              <label for="name">Key (program identifier)</label>
+            </div>
+            <div class="input-field col s12">
+              <input v-model="shortprograms.create.name" id="name" type="text" class="validate" required>
+              <label for="name">Nombre</label>
+            </div>
+            <div class="input-field col s12">
+              <textarea v-model="shortprograms.create.description" id="description" class="materialize-textarea" data-length="250" required></textarea>
+              <label for="description">Descripción</label>
+            </div>
+            <div class="input-field col s12">
+              <input v-model="shortprograms.create.location" type="text" class="validate" required>
+              <label>Ubicacion</label>
+            </div>
+            <img class="responsive-img" style="max-width: 150px;" :src="home.upload.img+'?'+home.upload.time" alt="">
+            <div class="preloader-wrapper small active" v-if="this.home.gallery.new.loader">
+              <div class="spinner-layer spinner-green-only">
+                <div class="circle-clipper left">
+                  <div class="circle"></div>
+                </div><div class="gap-patch">
+                  <div class="circle"></div>
+                </div><div class="circle-clipper right">
+                  <div class="circle"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="slider">
+              <ul class="slides">
+                <li  v-for="(bird,key) in home.gallery.list" v-bind:key="key">
+                  <img :src="getSrc(key)"> <!-- random image -->
+                  <div class="caption center-align">
+                    <h3>{{key}}</h3>
+                    <p>
+                      <label class="white-text">
+                        <input name="group1" type="radio" v-on:click="birdwatching.background = key" />
+                        <span>Select image</span>
+                      </label>
+                    </p>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <!-- :disabled="home.gallery.new.valid ? false : true" -->
+          <button type="submit" class="waves-effect waves-green btn green">Guardar</button>
+          <a class="modal-close waves-effect waves-green btn-flat">Cerrar</a>
+        </div>
+      </form>
+    </div>
   </div>
 </template>
 <script>
@@ -626,6 +632,10 @@ export default{
         "staff":{"code":""},
         "birdwatching":{},
         "tours":{"new":{}},
+        "shortprograms":{
+          "create":{},
+          "list":{}
+        },
         "users":{
           "list":[],
           "length":0
@@ -709,7 +719,7 @@ export default{
         data.append('name', this.home.gallery.new.model.name.replace(" ","-"))
       }
       $.ajax({
-        url: 'https://apiforimgs.000webhostapp.com/api/upload/index.php',
+        url: 'https://imgsapi.000webhostapp.com/api/upload/index.php',
         data: data,
         cache: false,
         contentType: false,
@@ -720,7 +730,7 @@ export default{
             if (data=="ok") {
               M.toast({html: 'Imagen subida 🐦'})
               this.home.gallery.new.valid = true
-              this.home.upload.img = "https://apiforimgs.000webhostapp.com/img/"+this.home.gallery.new.model.name.replace(" ","-")+".png"
+              this.home.upload.img = "https://imgsapi.000webhostapp.com/img/"+this.home.gallery.new.model.name.replace(" ","-")+".png"
               this.home.upload.time = new Date().getTime()
               this.home.gallery.new.loader = false
             }
@@ -736,14 +746,14 @@ export default{
     listImgs() {
       M.toast({html: 'Cargando...! 🐦'})
       $.ajax({
-        url: 'https://apiforimgs.000webhostapp.com/api/list/',
+        url: 'https://imgsapi.000webhostapp.com/api/list/',
         method: 'GET',
         data:{
           "type":"imgs"
         },
         success: (data)=> {
           this.gallery = JSON.parse(data)
-          console.log(JSON.parse(data));
+          //console.log(JSON.parse(data));
           if (data == "ok") {
             M.toast({html: 'Listo! 🐦'})
           }
@@ -756,7 +766,7 @@ export default{
     deleteImg(name) {
       M.toast({html: 'Cargando...! 🐦'})
       $.ajax({
-        url: 'https://apiforimgs.000webhostapp.com/api/delete/',
+        url: 'https://imgsapi.000webhostapp.com/api/delete/',
         method: 'GET',
         data:{
           "type":"delete",
@@ -818,6 +828,14 @@ export default{
         this.tours.list = snapshot.val()
       })
     },
+    //Short Programs
+    getShortPrograms(){
+      M.toast({html: 'Cargando...'})
+      firebase.database().ref("page/shortprograms/list").once('value', (snapshot)=> {
+        M.toast({html: 'Ok 🐦'})
+        this.shortprograms.list = snapshot.val()
+      })
+    },
 
     updateTour(tour,key){
       M.toast({html: 'Cargando...'})
@@ -841,10 +859,11 @@ export default{
     },
     getSrc(name) {
       if (name!=undefined) {
-        if (require('../assets/img/'+ name + ".png") != null) {
-          //return 'https://apiforimgs.000webhostapp.com/img/'+ name.replace(" ","-") + "-400.png"
-          return require('../assets/img/'+ name + ".png")
-        }
+        return 'https://imgsapi.000webhostapp.com/img/'+ name.replace(" ","-") + ".png"
+        //if (require('../assets/img/'+ name + ".png") != null) {
+          //return 'https://imgsapi.000webhostapp.com//img/'+ name.replace(" ","-") + ".png"
+          //return require('../assets/img/'+ name + ".png")
+        //}
       }
 
     },

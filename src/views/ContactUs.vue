@@ -22,7 +22,7 @@
           </div>
           <div class="input-field col s12">
             <i class="material-icons prefix white-text">comment</i>
-            <textarea id="textarea1" class="materialize-textarea white-text" v-model="form.message" data-length="250" required></textarea>
+            <textarea id="textarea1" class="materialize-textarea white-text" v-model="form.message" data-length="450" required></textarea>
             <label for="textarea1">Message</label>
           </div>
           <GrandientButton text="Enviar"></GrandientButton>
@@ -95,7 +95,7 @@ export default {
 }
 </script>
 
-<style lang="css">
+<style lang="css" scoped>
 #contact-us{
   margin-top: 5px;
 }
