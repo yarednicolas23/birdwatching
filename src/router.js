@@ -12,6 +12,7 @@ import BirdwatchingColombia from './views/BirdwatchingColombia.vue'
 import Tours from './views/Tours.vue'
 import Tour from './views/Tour.vue'
 import ShortPrograms from './views/ShortPrograms.vue'
+import ShortProgram from './views/ShortProgram.vue'
 
 import Error404 from './views/Error404.vue'
 
@@ -74,6 +75,10 @@ export default new Router({
       path: '/short-programs',
       name: 'ShortPrograms',
       component: ShortPrograms
+    },
+    {
+      path: '/short-program/:id',
+      component: ShortProgram
     },
     {
       path: '/Admin',

@@ -325,12 +325,13 @@
           <div class="card" style="border-radius:10px;">
             <div class="card-image">
               <img :src="getSrc(key)" style="width:100%;border-radius:10px;">
-              <span class="card-title">{{short.name}}</span>
+              <span class="card-title">{{short.name}}
+                 <a class="waves-effect waves-green btn-flat green-text modal-trigger" v-on:click="editProgram(key)" data-target="editshortprogram">Edit</a><a class="waves-effect waves-red btn-flat red-text"  v-on:click="deleteProgram(key)">Delete</a></span>
             </div>
           </div>
         </div>
        <button data-target="addshortprogram" class="btn waves-effect waves-light blue-grey col s12 modal-trigger" type="button" name="button">
-         Add Short Program
+         add short program
          <i class="material-icons right">add</i>
        </button>
      </div>
@@ -533,7 +534,7 @@
     </div>
 
     <div id="addshortprogram" class="modal">
-      <form v-on:submit.prevent="addPicture">
+      <form v-on:submit.prevent="addProgram">
         <div class="modal-content">
           <h4>Add Short Program</h4>
           <div class="row">
@@ -546,43 +547,42 @@
               <label for="name">Nombre</label>
             </div>
             <div class="input-field col s12">
-              <textarea v-model="shortprograms.create.description" id="description" class="materialize-textarea" data-length="250" required></textarea>
+              <textarea v-model="shortprograms.create.description" id="description" class="materialize-textarea" required></textarea>
               <label for="description">Descripción</label>
             </div>
             <div class="input-field col s12">
               <input v-model="shortprograms.create.location" type="text" class="validate" required>
               <label>Ubicacion</label>
             </div>
-            <img class="responsive-img" style="max-width: 150px;" :src="home.upload.img+'?'+home.upload.time" alt="">
-            <div class="preloader-wrapper small active" v-if="this.home.gallery.new.loader">
-              <div class="spinner-layer spinner-green-only">
-                <div class="circle-clipper left">
-                  <div class="circle"></div>
-                </div><div class="gap-patch">
-                  <div class="circle"></div>
-                </div><div class="circle-clipper right">
-                  <div class="circle"></div>
-                </div>
-              </div>
-            </div>
           </div>
-
+        </div>
+        <div class="modal-footer">
+          <!-- :disabled="home.gallery.new.valid ? false : true" -->
+          <button type="submit" class="waves-effect waves-green btn green">Guardar</button>
+          <a class="modal-close waves-effect waves-green btn-flat">Cerrar</a>
+        </div>
+      </form>
+    </div>
+    <div id="editshortprogram" class="modal">
+      <form v-on:submit.prevent="updateProgram">
+        <div class="modal-content">
+          <h4>Edit Short Program</h4>
           <div class="row">
-            <div class="slider">
-              <ul class="slides">
-                <li  v-for="(bird,key) in home.gallery.list" v-bind:key="key">
-                  <img :src="getSrc(key)"> <!-- random image -->
-                  <div class="caption center-align">
-                    <h3>{{key}}</h3>
-                    <p>
-                      <label class="white-text">
-                        <input name="group1" type="radio" v-on:click="birdwatching.background = key" />
-                        <span>Select image</span>
-                      </label>
-                    </p>
-                  </div>
-                </li>
-              </ul>
+            <div class="input-field col s12">
+              <input v-model="shortprograms.edit.key" id="editkey" type="text" class="validate" disabled required>
+              <label class="active" for="editname">Key (program identifier)</label>
+            </div>
+            <div class="input-field col s12">
+              <input v-model="shortprograms.edit.name" id="editname" type="text" class="validate" required>
+              <label class="active" for="editname">Nombre</label>
+            </div>
+            <div class="input-field col s12">
+              <textarea v-model="shortprograms.edit.description" id="editdescription" class="materialize-textarea" required></textarea>
+              <label class="active" for="editdescription">Descripción</label>
+            </div>
+            <div class="input-field col s12">
+              <input v-model="shortprograms.edit.location" type="text" class="validate" required>
+              <label class="active">Ubicacion</label>
             </div>
           </div>
         </div>
@@ -634,6 +634,7 @@ export default{
         "tours":{"new":{}},
         "shortprograms":{
           "create":{},
+          "edit":{},
           "list":{}
         },
         "users":{
@@ -829,11 +830,55 @@ export default{
       })
     },
     //Short Programs
+    addProgram() {
+      M.toast({html: 'Cargando...'})
+      firebase.database().ref('page/shortprograms/list/'+this.shortprograms.create.key)
+      .set(this.shortprograms.create, function(error) {
+        if (error) {
+          // The write failed...
+          M.toast({html: 'Ups:'+error})
+        } else {
+          // Data saved successfully!
+          M.toast({html: 'Tu Registro fue Exitoso'})
+        }
+      })
+    },
     getShortPrograms(){
       M.toast({html: 'Cargando...'})
       firebase.database().ref("page/shortprograms/list").once('value', (snapshot)=> {
         M.toast({html: 'Ok 🐦'})
         this.shortprograms.list = snapshot.val()
+      })
+    },
+    editProgram(program){
+      firebase.database().ref("page/shortprograms/list/"+ program).once('value', (snapshot)=> {
+        this.shortprograms.edit = snapshot.val()
+      })
+    },
+    updateProgram(){
+      M.toast({html: 'Cargando...'})
+      firebase.database().ref('page/shortprograms/list/'+this.shortprograms.edit.key)
+      .set(this.shortprograms.edit, function(error) {
+        if (error) {
+          // The write failed...
+          M.toast({html: 'Ups:'+error})
+        } else {
+          // Data saved successfully!
+          M.toast({html: 'Tu Registro fue Exitoso'})
+        }
+      })
+    },
+    deleteProgram(k){
+      M.toast({html: 'Cargando...'})
+      firebase.database().ref('page/shortprograms/list/'+k)
+      .set(null, function(error) {
+        if (error) {
+          // The write failed...
+          M.toast({html: 'Ups:'+error})
+        } else {
+          // Data saved successfully!
+          M.toast({html: 'Eliminado'})
+        }
       })
     },
 
@@ -899,16 +944,16 @@ export default{
 }
 </script>
 <style lag="css">
-.pointer{
-  cursor: pointer;
-}
-.capitalize{
-  text-transform:capitalize;
-}
-nav {
-  padding:0 10px;
-}
-.no-border{
-  border: 0px solid transparent !important;
-}
+  .pointer{
+    cursor: pointer;
+  }
+  .capitalize{
+    text-transform:capitalize;
+  }
+  nav {
+    padding:0 10px;
+  }
+  .no-border{
+    border: 0px solid transparent !important;
+  }
 </style>

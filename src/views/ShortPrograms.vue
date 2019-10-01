@@ -3,7 +3,7 @@
     <PageTemplate :background="shortprograms.background">
       <div style="overflow: auto; white-space: nowrap;min-width:100%;">
         <div v-for="(short,key) in shortprograms.list" v-bind:key="key" style="min-height:60vh;display: inline-block;margin:20px;">
-          <div class="card" style="border-radius:10px;">
+          <a :href="'short-program/'+key" class="card" style="border-radius:10px;">
             <div class="card-image">
               <img :src="getSrc(key)" style="max-width:80vh;width:100%;border-radius:10px;">
               <div class="card-title">{{short.name}}
@@ -18,7 +18,7 @@
                 </span>
               </div>
             </div>
-          </div>
+          </a>
         </div>
         <div class="slider white-text" v-if='false'>
           <ul class="slides transparent">

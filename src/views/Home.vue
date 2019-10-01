@@ -203,6 +203,7 @@ export default {
 }
 .carousel .carousel-item > img{
   width: 100%;
+  border-radius: 20px;
 }
 @media only screen and (max-width: 601px){
   .carousel{
