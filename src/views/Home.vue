@@ -23,8 +23,9 @@
         </div>
         <div class="col s12 m12 l6">
           <div class="carousel">
-             <a class="carousel-item waves-effect waves-light" v-for="(bird,key) in home.gallery.list" v-bind:key="key" v-on:click="setInfo(bird.name,bird.description,bird.ubication,key)">
-               <img class="scrollspy z-depth-5" style="display:none" v-bind:src="getSrc(key+'-400')" :alt="key">
+             <a class="carousel-item waves-effect waves-light z-depth-2" v-for="(bird,key) in home.gallery.list" v-bind:key="key" v-on:click="setInfo(bird.name,bird.description,bird.ubication,key)">
+               <div class="background-img-bird" v-bind:style="'background-image:url('+getSrc(key)+')'"></div>
+               <!--<img class="scrollspy" style="display:none" v-bind:src="getSrc(key)" :alt="key">-->
              </a>
            </div>
         </div>
@@ -57,8 +58,8 @@
       <!-- Tap Target Structure -->
       <div class="tap-target grey darken-4 white-text" data-target="menu">
         <div class="tap-target-content">
-          <h5>Da click aquí</h5>
-          <p>Y sube un poco el volumen para una nueva experiencia </p>
+          <h5>Click here</h5>
+          <p>And turn up the volume for a new experience</p>
         </div>
       </div>
     </div>
@@ -201,8 +202,17 @@ export default {
   top: 25vh;
   max-height: 60vh;
 }
+.background-img-bird{
+  width:600px;
+  height:250px;
+  background-size:contain;
+  background-position-x: -100px;
+}
 .carousel .carousel-item > img{
   width: 100%;
+  border-radius: 20px;
+}
+.carousel .carousel-item{
   border-radius: 20px;
 }
 @media only screen and (max-width: 601px){

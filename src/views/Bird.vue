@@ -81,13 +81,15 @@ export default {
   },
   methods:{
     getSrc(name) {
-      //return 'https://apimgs.000webhostapp.com/img/'+ name + ".png?"
-      require('../assets/img/'+ name + '.png')
-      return '/img/'+ name + '.png'
+      return 'https://imgsapi.000webhostapp.com/img/'+ name + ".png?"
+      //require('../assets/img/'+ name + '.png')
+      //return '/img/'+ name + '.png'
     },
     getSound(name) {
-      require('../assets/mp3/'+ name + '.mp3')
-      return '/media/'+ name + '.mp3'
+      //if (require('../assets/mp3/'+ name + '.mp3')!=null) {
+        //  return '/media/'+ name + '.mp3'
+      //}
+
     },
     soundBird(bird){
       const myAudio = document.querySelector('#'+bird+'')
