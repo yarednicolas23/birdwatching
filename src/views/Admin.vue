@@ -10,8 +10,8 @@
         <li class="tab"><a href="#gallery" v-on:click="listImgs()">Gallery🦉</a></li>
         <li class="tab"><a href="#birds" class="active">Birds🐦</a></li>
         <li class="tab"><a href="#short-programs" v-on:click="getShortPrograms()">Short Programs🌳</a></li>
-        <li class="tab"><a href="#tours">Tours🌎</a></li>
-        <li class="tab hide"><a href="#pages">Paginas</a></li>
+        <li class="tab"><a href="#tours" v-on:click="getTours()">Tours🌎</a></li>
+        <li class="tab hide"><a href="#pages" v-on:click="this.listPages()">Paginas</a></li>
         <li class="tab hide"><a href="#about-us" v-on:click="this.getAbout()">About us</a></li>
         <li class="tab hide"><a href="#staff">Staff</a></li>
         <li class="tab hide"><a href="#birdwatching-colombia">Birdwatching Colombia</a></li>
@@ -215,7 +215,7 @@
          <i class="material-icons right">add</i>
        </button>
      </div>
-   </div>
+    </div>
     <div id="pages" class="row">
       <div class="col s12">
         <div class="col s12 m3 l3" v-for="(page,key) in pages.list" v-bind:key="key">
@@ -772,8 +772,10 @@ export default{
 
     //Tours
     getTours(){
+      M.toast({html: 'Cargando...'})
       firebase.database().ref("page/tours/list").once('value', (snapshot)=> {
         this.tours.list = snapshot.val()
+        M.toast({html: 'Ok 🐦'})
       })
     },
     //Short Programs
@@ -862,9 +864,6 @@ export default{
   },
   created(){
     this.homeGallery()
-    this.getStaff()
-    this.listPages()
-    this.getTours()
   },
   mounted(){
     const elems = document.querySelectorAll('.collapsible')

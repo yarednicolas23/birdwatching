@@ -2,7 +2,7 @@
   <div>
   <Loader v-if="Object.keys(tours.list).length == 0"/>
     <PageTemplate :background="tours.background">
-      <div class="col s12">
+      <div class="col s12 hide">
         <div class="slider white-text">
           <!---->
           <ul class="slides transparent">
@@ -15,6 +15,26 @@
               </div>
             </li>
           </ul>
+        </div>
+      </div>
+      <div style="overflow: auto; white-space: nowrap;min-width:100%;">
+        <div v-for="(short,key) in tours.list" v-bind:key="key" style="min-height:60vh;display: inline-block;margin:20px;">
+          <a :href="'tour/'+key" class="card" style="border-radius:10px;">
+            <div class="card-image">
+              <img :src="getSrc(short.background)" style="max-width:80vh;width:100%;border-radius:10px;">
+              <div class="card-title">Tour: {{key}}
+                <span style="font-size:16px"><br><i class="material-icons white-text" style="font-size:16px">room</i>
+                  Bogotá, Colombia <br>
+                  <i class="material-icons pointer tooltipped" data-position="bottom" data-tooltip="Includes transport">directions_bus</i>
+                  <i class="material-icons pointer tooltipped" data-position="bottom" data-tooltip="Includes hotel">hotel</i>
+                  <i class="material-icons pointer tooltipped" data-position="bottom" data-tooltip="Includes entrance tickets">local_play</i>
+                  <i class="material-icons pointer tooltipped" data-position="bottom" data-tooltip="Includes lunch">restaurant_menu</i>
+                  <i class="material-icons pointer tooltipped" data-position="bottom" data-tooltip="Includes snack food">free_breakfast</i>
+                  <i class="material-icons pointer tooltipped" data-position="bottom" data-tooltip="Specialized bird guide">record_voice_over</i>
+                </span>
+              </div>
+            </div>
+          </a>
         </div>
       </div>
     </PageTemplate>
@@ -34,7 +54,7 @@ export default {
   data() {
       return {
         "tours":{
-          "background":"/img/"+"Tangara-Cyanicollis.png",
+          "background":"Amazonian-Motmot.png",
           "list":{}
         },
         "title": 'Birdwatching Colombia',
@@ -44,9 +64,10 @@ export default {
   },
   methods: {
     getSrc(name) {
+      return 'https://imgsapi.000webhostapp.com/img/'+ name.replace(" ","-") + ".png"
       //return 'https://apimgs.000webhostapp.com/img/'+ name + ".png?"
-      require('../assets/img/'+ name + '.png')
-      return '/img/'+ name + '.png'
+      //require('../assets/img/'+ name + '.png')
+      //return '/img/'+ name + '.png'
     },
     // List Pages
     listPages: function () {

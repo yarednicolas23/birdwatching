@@ -82,11 +82,11 @@ export default {
           "gallery":{
             "list":[]
           },
-          "title":"Hummingbird",
+          "title":"White-necked Jacobin",
           "description":"Hummingbirds are birds native to the Americas and constitute the biological family Trochilidae. They are among the smallest of birds, most species measuring 7.5–13 cm (3–5 in) in length.<br/> Scientific name: trochilidae <br/> Average life: 3 - 5 years. <br/> Family: Trochilidae; <br/> Speed: 79 km / h (Maximum, Slashed).",
           //"background":"/img/hummingbird.png"
           "background":this.getSrc("Hummingbird"),
-          "sound":"Hummingbird",
+          "sound":"White-necked-Jacobin",
           "ubication":"South America"
         },
         "title": 'Birdwatching Colombia',

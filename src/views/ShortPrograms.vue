@@ -20,18 +20,6 @@
             </div>
           </a>
         </div>
-        <div class="slider white-text" v-if='false'>
-          <ul class="slides transparent">
-            <li v-for="(short,key) in shortprograms.list" v-bind:key="key">
-               <!--<img :src="getSrc(key)"> random image -->
-              <div class="caption">
-                <h1 class="bebasbold">Program: {{key}}</h1>
-                <p>{{short.description}}</p>
-                <a :href="'/contact-us'" class="button-shadow" >Buy Now USD ${{short.price}}</a>
-              </div>
-            </li>
-          </ul>
-        </div>
       </div>
     </PageTemplate>
   </div>

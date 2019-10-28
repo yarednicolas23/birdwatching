@@ -24,9 +24,9 @@
         <div class="col s12 m4 l4">
           <iframe class="map" :src="bird.info.map"  height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
         </div>
-        <audio :id="this.$route.params.id" controls loop class="hide">
+        <!--<audio :id="this.$route.params.id" controls loop class="hide">
           <source :src="getSound(this.$route.params.id)" type="audio/mpeg">
-        </audio>
+        </audio>-->
         <div class="col s12 m4 l4">
           <div class="slider">
             <ul class="slides transparent">
@@ -85,12 +85,11 @@ export default {
       //require('../assets/img/'+ name + '.png')
       //return '/img/'+ name + '.png'
     },
-    getSound(name) {
-      //if (require('../assets/mp3/'+ name + '.mp3')!=null) {
-        //  return '/media/'+ name + '.mp3'
-      //}
-
-    },
+    /* getSound(name) {
+      if (require('../assets/mp3/'+ name + '.mp3')!=null) {
+          return '/media/'+ name + '.mp3'
+      }
+    },*/
     soundBird(bird){
       const myAudio = document.querySelector('#'+bird+'')
       myAudio.paused ? myAudio.play() : myAudio.pause()
