@@ -19,6 +19,9 @@
               </div>
             </div>
           </div>
+          <div class="col s12">
+            <Suggestions/>
+          </div>
         </div>
         <div class="col s12 m4 l4">
           <iframe class="map" :src="bird.info.map"  height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
@@ -33,6 +36,7 @@
 
 <script>
 import PageTemplate from './PageTemplate.vue'
+import Suggestions from './Suggestions.vue'
 import Loader from '../components/Loader.vue'
 
 import M from 'materialize-css'
@@ -40,7 +44,7 @@ import firebase from 'firebase'
 import $ from 'jquery'
 export default {
   name:"Bird",
-  components: { PageTemplate,Loader },
+  components: { PageTemplate,Loader,Suggestions },
   data() {
     return {
       "id":"Hummingbird",
