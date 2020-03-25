@@ -38,7 +38,7 @@ export default {
       return {
         "shortprograms":{
           "list":{},
-          "background":this.getSrc("Eubucco-Bourcierii")
+          "background":this.getSrc("Scarlet-Macaw")
         },
         "title": 'Short Programs, Birdwatching Colombia',
         "description":'Avistamiento de aves, viaja por el país con la mayor diversidad de aves del mundo. Ofrecemos rutas que cubren casi el 80% del país.',

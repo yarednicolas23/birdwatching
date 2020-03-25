@@ -2,12 +2,12 @@
   <div class="row blue-grey darken-4">
     <nav class="nav-extended blue-grey darken-4">
       <div class="nav-wrapper" style="padding:0%">
-        <a href="#" class="brand-logo">🐦🦉🦅Administrador🦆🦃</a>
+        <a href="#" class="brand-logo">Birdwatching administrator</a>
       </div>
       <div class="nav-content">
       <ul class="tabs tabs-transparent">
-        <li class="tab"><a href="#users"><i class="material-icons">group</i></a></li>
-        <li class="tab"><a href="#gallery" v-on:click="listImgs()">Gallery🦉</a></li>
+        <li class="tab"><a href="#users">Users</a></li>
+        <li class="tab"><a href="#gallery" v-on:click="listImgs()">Gallery🖼</a></li>
         <li class="tab"><a href="#birds" class="active">Birds🐦</a></li>
         <li class="tab"><a href="#short-programs" v-on:click="getShortPrograms()">Short Programs🌳</a></li>
         <li class="tab"><a href="#tours" v-on:click="getTours()">Tours🌎</a></li>
@@ -39,8 +39,8 @@
                 <td class="capitalize">{{user.name}}</td>
                 <td>{{user.email}}</td>
                 <td>{{user.phone}}</td>
-                <td>{{user.message}}</td>
-                <td>{{user.date}}</td>
+                <td>{{user.message!=null?user.message:null}}</td>
+                <td>{{user.date!=null?user.date.substring(0,21):null}}</td>
               </tr>
             </tbody>
             <div class="center" v-else>
@@ -62,12 +62,12 @@
     </div>
     <div id="gallery" class="row">
         <div class="col s12">
-          <div class="col s12">
-            <button data-target="addgallery" class="btn waves-effect waves-light blue-grey col s12 modal-trigger" type="button" name="button">
-              Add Image
-              <i class="material-icons right">add</i>
-            </button>
-          </div>
+          <h5 class="thin blue-grey-text text-lighten-3 col s6">Birds Gallery Home</h5>
+          <button data-target="addgallery" style="margin-top:10px" class="btn waves-effect waves-light blue-grey col s6 modal-trigger" type="button" name="button">
+            Add Image
+            <i class="material-icons right">add</i>
+          </button>
+          <div class="col s12 divider"></div>
           <table class="white-text">
             <thead>
               <th>Image</th>
@@ -115,6 +115,12 @@
     </div>
     <div id="short-programs" class="row">
       <div class="col s12">
+        <h5 class="thin blue-grey-text text-lighten-3 col s6">Short Programs List</h5>
+       <button data-target="addshortprogram" style="margin-top:10px" class="btn waves-effect waves-light blue-grey col s6 modal-trigger" type="button" name="button">
+         add short program
+         <i class="material-icons right">add</i>
+       </button>
+        <div class="col s12 divider"></div>
         <div class="col s12 m6 l6" v-for="(short,key) in shortprograms.list" v-bind:key="key">
           <div class="card" style="border-radius:10px;">
             <div class="card-image">
@@ -124,20 +130,16 @@
             </div>
           </div>
         </div>
-       <button data-target="addshortprogram" class="btn waves-effect waves-light blue-grey col s12 modal-trigger" type="button" name="button">
-         add short program
-         <i class="material-icons right">add</i>
-       </button>
      </div>
     </div>
     <div id="tours" class="row">
      <div class="col s12">
-         <h5 class="thin blue-grey-text text-lighten-3 col s6">Tours List</h5>
-         <button data-target="addtour" style="margin-top:10px" class="btn waves-effect waves-light blue-grey col s6 modal-trigger" type="button" name="button">
-           Agregar Tour
-           <i class="material-icons right">add</i>
-         </button>
-         <div class="col s12 divider"></div>
+       <h5 class="thin blue-grey-text text-lighten-3 col s6">Tours List</h5>
+       <button data-target="addtour" style="margin-top:10px" class="btn waves-effect waves-light blue-grey col s6 modal-trigger" type="button" name="button">
+         Agregar Tour
+         <i class="material-icons right">add</i>
+       </button>
+       <div class="col s12 divider"></div>
        <table class="white-text">
          <thead>
            <th>Image</th>
@@ -280,26 +282,44 @@
     <div id="disabled" class="row"></div>
 
     <!-- Modal Structure -->
-    <div id="addbird" class="modal">
+    <div id="addbird" class="modal" style="width:90%;height:90vh">
       <form v-on:submit.prevent="addPicture">
         <div class="modal-content">
-          <h4>Add Imagen</h4>
+          <h4>Add Bird</h4>
           <div class="row">
-            <div class="input-field col s12">
-              <input v-model="home.gallery.new.model.name" id="nameNew" type="text" class="validate" required>
-              <label for="nameNew">Nombre</label>
+            <div class="col s12 m5 l5">
+              <div class="input-field">
+                <i class="material-icons prefix">link</i>
+                <input id="add-bird-url" v-model="home.gallery.new.model.url" type="text" class="validate" required>
+                <label for="add-bird-url">URL</label>
+              </div>
+              <div class="input-field">
+                <i class="material-icons prefix">title</i>
+                <input id="add-bird-name" v-model="home.gallery.new.model.name" type="text" class="validate" required>
+                <label for="add-bird-name">Name</label>
+              </div>
+              <div class="input-field">
+                <i class="material-icons prefix">photo</i>
+                <input id="add-bird-photo" v-model="home.gallery.new.model.photo" type="text" class="validate" required>
+                <label for="add-bird-photo">Photo</label>
+              </div>
+              <div class="input-field">
+                <i class="material-icons prefix">gps_fixed</i>
+                <input id="add-bird-ubication" v-model="home.gallery.new.model.ubication" type="text" class="validate" required>
+                <label for="add-bird-ubication">Ubicacion</label>
+              </div>
+              <div class="input-field">
+                <i class="material-icons prefix">map</i>
+                <input id="add-bird-map" v-model="home.gallery.new.model.map" type="text" class="validate" required>
+                <label for="add-bird-map">Map</label>
+              </div>
             </div>
-            <div class="input-field col s12">
-              <textarea v-model="home.gallery.new.model.description" id="descriptionNew" class="materialize-textarea" data-length="250" required></textarea>
-              <label for="descriptionNew">Descripción</label>
-            </div>
-            <div class="input-field col s12">
-              <input id="ubicationnew" v-model="home.gallery.new.model.ubication" type="text" class="validate" required>
-              <label for="ubicationnew">Ubicacion</label>
-            </div>
-            <div class="input-field col s12">
-              <input id="mapnew" v-model="home.gallery.new.model.map" type="text" class="validate" required>
-              <label for="mapnew">Map</label>
+            <div class="col s12 m7 l7">
+              <div class="input-field col s12">
+                <i class="material-icons prefix">code</i>
+                <textarea id="add-bird-description" style="min-height:300px" v-model="home.gallery.new.model.description" class="materialize-textarea" required></textarea>
+                <label for="add-bird-description">HTML code</label>
+              </div>
             </div>
           </div>
         </div>
@@ -313,26 +333,41 @@
     <div id="editgallery" class="modal" style="width:90%;height:90vh">
       <form v-on:submit.prevent="editPicture">
         <div class="modal-content">
-          <h4>Edit Imagen</h4>
-          <div class="col s4">
-            <div class="input-field col s12">
-              <input id="nameEdit" v-model="home.gallery.edit.name" type="text" class="validate" required>
-              <label class="active" for="nameEdit">Nombre</label>
+          <h4>Edit bird info</h4>
+          <div class="row">
+            <div class="col s12 m5 l5">
+              <div class="input-field">
+                <i class="material-icons prefix">link</i>
+                <input id="edit-bird-url" v-model="home.gallery.edit.url" type="text" class="validate" required/>
+                <label for="edit-bird-url">URL</label>
+              </div>
+              <div class="input-field">
+                <i class="material-icons prefix">title</i>
+                <input id="edit-bird-name" v-model="home.gallery.edit.name" type="text" class="validate" required/>
+                <label for="edit-bird-name" class="active">Name</label>
+              </div>
+              <div class="input-field">
+                <i class="material-icons prefix">photo</i>
+                <input id="edit-bird-photo" v-model="home.gallery.edit.photo" type="text" class="validate" required>
+                <label for="edit-bird-photo">Photo</label>
+              </div>
+              <div class="input-field col s12">
+                <i class="material-icons prefix">gps_fixed</i>
+                <input id="edit-bird-ubication" v-model="home.gallery.edit.ubication" type="text" class="validate" required/>
+                <label for="edit-bird-ubication" class="active">Ubication</label>
+              </div>
+              <div class="input-field col s12">
+                <i class="material-icons prefix">map</i>
+                <input id="edit-bird-map" v-model="home.gallery.edit.map" type="text" class="validate" required>
+                <label for="edit-bird-map" class="active">Url Google Maps</label>
+              </div>
             </div>
+            <div class="col s12 m7 l7">
             <div class="input-field col s12">
-              <input id="ubicationEdit" v-model="home.gallery.edit.ubication" type="text" class="validate" required>
-              <label class="active" for="ubicationEdit">Ubicacion</label>
-            </div>
-            <div class="input-field col s12">
-              <input id="ubicationEdit" v-model="home.gallery.edit.map" type="text" class="validate" required>
-              <label class="active" for="ubicationEdit">Url Google Maps</label>
+              <textarea id="edit-bird-code" v-model="home.gallery.edit.description" style="min-height:300px" class="materialize-textarea" required></textarea>
+              <label for="edit-bird-code" class="active">HMTL code</label>
             </div>
           </div>
-          <div class="col s8">
-            <div class="input-field col s12">
-              <textarea id="descriptionEdit" v-model="home.gallery.edit.description" style="min-height:300px" class="materialize-textarea" required></textarea>
-              <label class="active" for="descriptionEdit">Descripción</label>
-            </div>
           </div>
         </div>
         <div class="modal-footer">
@@ -341,6 +376,7 @@
         </div>
       </form>
     </div>
+
     <div id="addgallery" class="modal">
       <div class="modal-content">
         <h4>Add Imagen</h4>
@@ -378,7 +414,6 @@
     </div>
 
     <div id="addtour" class="modal" style="width:90%;height:90vh">
-      <!-- v-on:submit.prevent="addPicture"-->
       <form>
         <div class="modal-content">
           <h4>Add Tour</h4>
@@ -476,26 +511,34 @@
       </div>
     </div>
 
-    <div id="addshortprogram" class="modal">
+    <div id="addshortprogram" class="modal" style="width:90%;height:90vh">
       <form v-on:submit.prevent="addProgram">
         <div class="modal-content">
           <h4>Add Short Program</h4>
           <div class="row">
-            <div class="input-field col s12">
-              <input v-model="shortprograms.create.key" id="key" type="text" class="validate"  required>
-              <label for="name">Key (program identifier)</label>
+            <div class="col s12 m5 l5">
+              <div class="input-field">
+                <i class="material-icons prefix">link</i>
+                <input id="short-key" v-model="shortprograms.create.key" type="text" class="validate"  required>
+                <label for="short-key">URL</label>
+              </div>
+              <div class="input-field">
+                <i class="material-icons prefix">title</i>
+                <input id="short-name" v-model="shortprograms.create.name" type="text" class="validate" required>
+                <label for="short-name">Name</label>
+              </div>
+              <div class="input-field">
+                <i class="material-icons prefix">map</i>
+                <input v-model="shortprograms.create.location" type="text" class="validate" required>
+                <label>Google maps url</label>
+              </div>
             </div>
-            <div class="input-field col s12">
-              <input v-model="shortprograms.create.name" id="name" type="text" class="validate" required>
-              <label for="name">Nombre</label>
-            </div>
-            <div class="input-field col s12">
-              <textarea v-model="shortprograms.create.description" id="description" class="materialize-textarea" required></textarea>
-              <label for="description">Descripción</label>
-            </div>
-            <div class="input-field col s12">
-              <input v-model="shortprograms.create.location" type="text" class="validate" required>
-              <label>Ubicacion</label>
+            <div class="col s12 m7 l7">
+              <div class="input-field">
+                <i class="material-icons prefix">code</i>
+                <textarea id="short-description" style="min-height:300px" v-model="shortprograms.create.description" class="materialize-textarea" required></textarea>
+                <label for="short-description">HTML code</label>
+              </div>
             </div>
           </div>
         </div>
@@ -506,26 +549,34 @@
         </div>
       </form>
     </div>
-    <div id="editshortprogram" class="modal">
+    <div id="editshortprogram" class="modal" style="width:90%;height:90vh">
       <form v-on:submit.prevent="updateProgram">
         <div class="modal-content">
           <h4>Edit Short Program</h4>
           <div class="row">
-            <div class="input-field col s12">
-              <input v-model="shortprograms.edit.key" id="editkey" type="text" class="validate" disabled required>
-              <label class="active" for="editname">Key (program identifier)</label>
+            <div class="col s12 m5 l5">
+              <div class="input-field">
+                <i class="material-icons prefix">link</i>
+                <input id="edit-short-key" v-model="shortprograms.edit.key" type="text" class="validate" disabled required>
+                <label class="active" for="editname">URL</label>
+              </div>
+              <div class="input-field">
+                <i class="material-icons prefix">title</i>
+                <input id="edit-short-name" v-model="shortprograms.edit.name" type="text" class="validate" required>
+                <label class="active" for="editname">Name</label>
+              </div>
+              <div class="input-field">
+                <i class="material-icons prefix">map</i>
+                <input v-model="shortprograms.edit.location" type="text" class="validate" required>
+                <label class="active">Google maps url</label>
+              </div>
             </div>
-            <div class="input-field col s12">
-              <input v-model="shortprograms.edit.name" id="editname" type="text" class="validate" required>
-              <label class="active" for="editname">Nombre</label>
-            </div>
-            <div class="input-field col s12">
-              <textarea v-model="shortprograms.edit.description" id="editdescription" class="materialize-textarea" required></textarea>
-              <label class="active" for="editdescription">Descripción</label>
-            </div>
-            <div class="input-field col s12">
-              <input v-model="shortprograms.edit.location" type="text" class="validate" required>
-              <label class="active">Ubicacion</label>
+            <div class="col s12 m7 l7">
+              <div class="input-field col s12">
+                <i class="material-icons prefix">code</i>
+                <textarea id="edit-short-description" style="min-height:300px" v-model="shortprograms.edit.description" class="materialize-textarea" required></textarea>
+                <label class="active" for="editdescription">HTML code</label>
+              </div>
             </div>
           </div>
         </div>
@@ -609,14 +660,14 @@ export default{
     },
     addPicture: function() {
       M.toast({html: 'Cargando...'})
-      firebase.database().ref('page/home/gallery/'+this.home.gallery.new.model.name.replace(" ","-"))
+      firebase.database().ref('page/home/gallery/'+this.home.gallery.new.model.url.replace(" ","-"))
       .set(this.home.gallery.new.model, function(error) {
         if (error) {
           // The write failed...
           M.toast({html: 'Ups:'+error})
         } else {
           // Data saved successfully!
-          M.toast({html: 'Tu Registro fue Exitoso'})
+          M.toast({html: 'Saved'})
         }
       })
     },

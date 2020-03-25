@@ -3,7 +3,7 @@
     <Loader v-if="bird.loader"/>
     <PageTemplate :background="bird.background">
       <div class="col s12 white-text">
-        <div class="col s12 m4 l4">
+        <div class="col s12 m8 l8">
           <h1 class="bebasbold">{{ bird.info.name }}</h1>
           <div id="description">
             <p v-html="bird.info.description"></p>
@@ -20,27 +20,12 @@
             </div>
           </div>
         </div>
-
         <div class="col s12 m4 l4">
           <iframe class="map" :src="bird.info.map"  height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
         </div>
         <!--<audio :id="this.$route.params.id" controls loop class="hide">
           <source :src="getSound(this.$route.params.id)" type="audio/mpeg">
         </audio>-->
-        <div class="col s12 m4 l4">
-          <div class="slider">
-            <ul class="slides transparent">
-              <li v-for="(tour,key) in tours" v-bind:key="key">
-                 <!--<img :src="getSrc(key)"> random image -->
-                <div class="caption right-align">
-                  <h4 class="capitalize">Find the species {{ bird.info.name }} on our tour of the {{key}}</h4>
-                  <p v-html="tour.description"></p>
-                  <a :href="'/contact-us'" class="btn black" name="button">Buy Now!</a>
-                </div>
-              </li>
-            </ul>
-          </div>
-        </div>
       </div>
     </PageTemplate>
   </div>
@@ -76,7 +61,6 @@ export default {
   created(){
       this.id = this.$route.params.id
       this.getBird(this.$route.params.id)
-      this.getTours()
       this.title = this.bird.info.name + ' Tours Birdwatching Colombia'
   },
   methods:{
@@ -100,29 +84,16 @@ export default {
         this.birds = snapshot.val()
         M.Tooltip.init(document.querySelectorAll('.tooltipped'))
         snapshot.forEach((childSnapshot) => {
-
           if (this.$route.params.id == childSnapshot.key) {
             this.bird.info = childSnapshot.val()
             if (childSnapshot.key != "") {
               this.bird.background = this.getSrc(childSnapshot.key)
               $(".loader").fadeOut(3000)
             }
-          }/*
-          setTimeout(function () {
-            M.Slider.init(document.querySelectorAll('.slider'),{height:250})
-          }, 2000)*/
+          }
         })
       })
     },
-    getTours(){
-      firebase.database().ref("page/tours/list").once('value', (snapshot)=> {
-        this.tours = snapshot.val()
-
-        setTimeout(function () {
-          M.Slider.init(document.querySelectorAll('.slider'),{height:400})
-        }, 2000)
-      })
-    }
   },
   metaInfo () {
     return {
@@ -140,24 +111,9 @@ export default {
 .map{
   width:300px;
 }
-.slider{
-  height: 600px !important;
-}
-.slides{
-  height: 500px !important;
-}
-.slider .slides li .caption {
-  top: 0%;
-}
 @media only screen and (min-width: 993px){
   .map{
     width:400px;
-  }
-  .slider{
-    height: 450px !important;
-  }
-  .slides{
-    height: 400px !important;
   }
 }
 </style>
