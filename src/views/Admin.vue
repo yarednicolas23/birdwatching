@@ -124,7 +124,7 @@
         <div class="col s12 m6 l6" v-for="(short,key) in shortprograms.list" v-bind:key="key">
           <div class="card" style="border-radius:10px;">
             <div class="card-image">
-              <img :src="getSrc(key)" style="width:100%;border-radius:10px;">
+              <img :src="getSrc(short.photo,true)" style="width:100%;border-radius:10px;">
               <span class="card-title">{{short.name}}
                  <a class="waves-effect waves-green btn-flat green-text modal-trigger" v-on:click="editProgram(key)" data-target="editshortprogram">Edit</a><a class="waves-effect waves-red btn-flat red-text"  v-on:click="deleteProgram(key)">Delete</a></span>
             </div>
@@ -566,6 +566,11 @@
                 <label class="active" for="editname">Name</label>
               </div>
               <div class="input-field">
+                <i class="material-icons prefix">photo</i>
+                <input id="edit-short-photo" v-model="shortprograms.edit.photo" type="text" class="validate" required>
+                <label for="edit-short-photo">Photo</label>
+              </div>
+              <div class="input-field">
                 <i class="material-icons prefix">map</i>
                 <input v-model="shortprograms.edit.location" type="text" class="validate" required>
                 <label class="active">Google maps url</label>
@@ -899,15 +904,17 @@ export default{
       })
     },
 
-
     getUsers: function () {
       firebase.database().ref("users").once('value', (snapshot)=> {
         this.users.list = snapshot.val()
         this.users.length = snapshot.numChildren()
       })
     },
-    getSrc(name) {
+    getSrc(name,extension) {
       if (name!=undefined) {
+        if (extension) {
+          return 'https://imgsapi.000webhostapp.com/img/'+ name
+        }
         return 'https://imgsapi.000webhostapp.com/img/'+ name.replace(" ","-") + ".png"
         //if (require('../assets/img/'+ name + ".png") != null) {
           //return 'https://imgsapi.000webhostapp.com//img/'+ name.replace(" ","-") + ".png"

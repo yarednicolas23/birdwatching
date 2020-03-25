@@ -13,7 +13,6 @@ import Tours from './views/Tours.vue'
 import Tour from './views/Tour.vue'
 import ShortPrograms from './views/ShortPrograms.vue'
 import ShortProgram from './views/ShortProgram.vue'
-import Suggestions from './views/Suggestions.vue'
 
 import Error404 from './views/Error404.vue'
 
@@ -37,7 +36,7 @@ export default new Router({
     {
       path: '/home',
       name: 'Home',
-      component: Home
+      redirect: '/'
     },
     {
       path: '/about-us',

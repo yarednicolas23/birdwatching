@@ -3,7 +3,7 @@
       <div class="col s12 white-text">
         <div v-html="shortprogram.description"></div>
         <div class="col s12" v-if="shortprogram.location!=null">
-          <iframe class="map" :src="shortprogram.location" frameborder="0" style="width:100%;height:200px;" allowfullscreen></iframe>
+          <iframe class="map" :src="shortprogram.location" frameborder="0" style="width:100%;height:400px;" allowfullscreen></iframe>
         </div>
         <div class="row"></div>
         <div class="row"></div>
