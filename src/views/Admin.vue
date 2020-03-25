@@ -62,59 +62,53 @@
     </div>
     <div id="gallery" class="row">
         <div class="col s12">
-          <div class="col s12 m3 l3" v-for="(i,key) in gallery" v-bind:key="key">
-            <div class="card blue-grey darken-3 white-text z-depth-4">
-              <div class="card-image">
-                <img :src="'https://imgsapi.000webhostapp.com/img/'+i">
-              </div>
-              <div class="card-stacked">
-                <div class="card-content">
-                  <span class="card-title">{{i}}</span>
-                  <p></p>
-                </div>
-                <div class="card-action">
-                  <a v-on:click="deleteImg(i.replace('.png',''))" class="pointer red-text">eliminar</a>
-                </div>
-              </div>
-            </div>
-          </div>
           <div class="col s12">
             <button data-target="addgallery" class="btn waves-effect waves-light blue-grey col s12 modal-trigger" type="button" name="button">
               Add Image
               <i class="material-icons right">add</i>
             </button>
           </div>
+          <table class="white-text">
+            <thead>
+              <th>Image</th>
+              <th>Name</th>
+            </thead>
+            <tbody>
+              <tr v-for="(i,key) in gallery" v-bind:key="key">
+                <td><img class="z-depth-4" style="height:50px;width:auto" :src="'https://imgsapi.000webhostapp.com/img/'+i"></td>
+                <td>{{i}}</td>
+                <td><a v-on:click="deleteImg(i.replace('.png',''))" class="pointer red-text">delete</a></td>
+              </tr>
+            </tbody>
+          </table>
         </div>
     </div>
     <div id="birds" class="row">
       <div class="row">
         <div class="col s12">
-            <h5 class="thin blue-grey-text text-lighten-3">Birds Gallery Home</h5>
-            <div class="divider"></div>
+            <h5 class="thin blue-grey-text text-lighten-3 col s6">Birds Gallery Home</h5>
+            <button data-target="addbird" style="margin-top:10px" class="btn waves-effect waves-light blue-grey col s6 modal-trigger" type="button" name="button">
+              Add image
+              <i class="material-icons right">add</i>
+            </button>
+            <div class="col s12 divider"></div>
             <div class="col s12">
-              <div class="col s12 m6 l6" v-for="(bird,key) in home.gallery.list" v-bind:key="key">
-                <div class="card horizontal blue-grey darken-3 white-text z-depth-4">
-                  <div class="card-image">
-                    <img :src="getSrc(key)">
-                    <span class="card-title">{{bird.name}}</span>
-                  </div>
-                  <div class="card-stacked">
-                    <div class="card-content">
-                      <p>{{bird.description}}</p>
-                    </div>
-                    <div class="card-action">
-                      <a v-on:click="modalEditPicture(key,bird)" class="pointer green-text modal-trigger" data-target="editgallery">editar</a>
-                      <a v-on:click="deletePicture(key)" class="pointer red-text">eliminar</a>
-                    </div>
-                  </div>
-                </div>
-              </div>
+              <table class="white-text">
+                <thead>
+                  <th>Image</th>
+                  <th>Name</th>
+                </thead>
+                <tbody>
+                  <tr v-for="(bird,key) in home.gallery.list" v-bind:key="key">
+                    <td><img class="z-depth-4" style="height:50px;width:auto" :src="getSrc(key)"></td>
+                    <td class="capitalize">{{bird.name}}</td>
+                    <td><a v-on:click="modalEditPicture(key,bird)" class="pointer green-text modal-trigger" data-target="editgallery">edit</a></td>
+                    <td><a v-on:click="deletePicture(key)" class="pointer red-text">delete</a></td>
+                  </tr>
+                </tbody>
+              </table>
             </div>
             <div class="col s12">
-              <button data-target="addbird" class="btn waves-effect waves-light blue-grey col s12 modal-trigger" type="button" name="button">
-                Agregar Imagen
-                <i class="material-icons right">add</i>
-              </button>
             </div>
         </div>
       </div>
@@ -135,85 +129,32 @@
          <i class="material-icons right">add</i>
        </button>
      </div>
-   </div>
+    </div>
     <div id="tours" class="row">
      <div class="col s12">
-       <div class="col s12 m6 l4"  v-for="(tour,key) in tours.list" v-bind:key="key">
-         <div class="card blue-grey darken-3 white-text z-depth-4">
-           <div class="card-content white-text">
-             <span class="card-title">{{tour.title}} <i class="material-icons right activator pointer">edit</i></span>
-             <div class="row">
-               <div class="col s12">
-                 <p>{{tour.description}}</p>
-               </div>
-               <div class="col s12">
-                 <ul class="collapsible no-border">
-                   <li>
-                     <div class="collapsible-header blue-grey darken-3 no-border">
-                       <i class="material-icons">group</i>
-                       {{tour.group}}
-                     </div>
-                   </li>
-                   <li>
-                     <div class="collapsible-header blue-grey darken-3 no-border">
-                       <i class="material-icons">near_me</i>
-                       {{tour.route}}
-                     </div>
-                   </li>
-                   <li>
-                     <div class="collapsible-header blue-grey darken-3 no-border">
-                       <i class="material-icons">monetization_on</i>
-                       {{tour.price}}
-                     </div>
-                   </li>
-                 </ul>
-               </div>
-             </div>
-           </div>
-           <div class="card-reveal blue-grey darken-3 white-text z-depth-4">
-             <span class="card-title">Editar<i class="material-icons right">close</i></span>
-             <div class="row">
-               <div class="input-field col s12">
-                 <i class="material-icons prefix">title</i>
-                 <input :id="key+'title'" type="text" v-model="tour.title" class="validate white-text">
-                 <label class="active" :for="key+'title'">Title</label>
-               </div>
-               <div class="input-field col s12">
-                 <i class="material-icons prefix">description</i>
-                 <textarea :id="key+'description'" class="materialize-textarea white-text" v-model="tour.description"></textarea>
-                 <label class="active" :for="key+'description'">Description</label>
-               </div>
-               <div class="input-field col s12">
-                 <i class="material-icons prefix">title</i>
-                 <input :id="key+'background'" type="text" v-model="tour.background" class="validate white-text">
-                 <label class="active" :for="key+'background'">Background</label>
-               </div>
-               <div class="input-field col s12">
-                 <i class="material-icons prefix">group</i>
-                 <input :id="key+'group'" type="text" v-model="tour.group" class="validate white-text">
-                 <label class="active" :for="key+'group'">Group</label>
-               </div>
-               <div class="input-field col s12">
-                 <i class="material-icons prefix">near_me</i>
-                 <input :id="key+'route'" type="text" v-model="tour.route" class="validate white-text">
-                 <label class="active" :for="key+'route'">Route</label>
-               </div>
-               <div class="input-field col s12">
-                 <i class="material-icons prefix">monetization_on</i>
-                 <input :id="key+'price'" type="text" v-model="tour.price" class="validate white-text">
-                 <label class="active" :for="key+'price'">Price</label>
-               </div>
-               <button class="btn col s12 green" v-on:click="updateTour(tour,key)">Guardar Cambios <i class="material-icons right">save</i> </button>
-             </div>
-           </div>
-         </div>
-       </div>
-     </div>
-     <div class="col s12">
-       <button data-target="addtour" class="btn waves-effect waves-light blue-grey col s12 modal-trigger" type="button" name="button">
-         Agregar Tour
-         <i class="material-icons right">add</i>
-       </button>
+         <h5 class="thin blue-grey-text text-lighten-3 col s6">Tours List</h5>
+         <button data-target="addtour" style="margin-top:10px" class="btn waves-effect waves-light blue-grey col s6 modal-trigger" type="button" name="button">
+           Agregar Tour
+           <i class="material-icons right">add</i>
+         </button>
+         <div class="col s12 divider"></div>
+       <table class="white-text">
+         <thead>
+           <th>Image</th>
+           <th>Name</th>
+           <th>Route</th>
+           <th>Price</th>
+         </thead>
+         <tbody>
+           <tr class="" v-for="(t,i) in tours.list" v-bind:key="i">
+             <td><img class="z-depth-4" style="height:50px;width:auto" :src="'https://imgsapi.000webhostapp.com/img/'+t.background+'.png'"></td>
+             <td>{{t.title}}</td>
+             <td>{{t.route}}</td>
+             <td>{{t.price}}</td>
+             <td><a v-on:click="modalEditTour(t,i)" class="pointer green-text modal-trigger" data-target="edittour">edit</a></td>
+           </tr>
+         </tbody>
+       </table>
      </div>
     </div>
     <div id="pages" class="row">
@@ -369,18 +310,14 @@
         </div>
       </form>
     </div>
-    <div id="editgallery" class="modal">
+    <div id="editgallery" class="modal" style="width:90%;height:90vh">
       <form v-on:submit.prevent="editPicture">
         <div class="modal-content">
           <h4>Edit Imagen</h4>
-          <div class="col s12">
+          <div class="col s4">
             <div class="input-field col s12">
               <input id="nameEdit" v-model="home.gallery.edit.name" type="text" class="validate" required>
-              <label class="active" for="name">Nombre</label>
-            </div>
-            <div class="input-field col s12">
-              <textarea id="descriptionEdit" v-model="home.gallery.edit.description" class="materialize-textarea" required></textarea>
-              <label class="active" for="description">Descripción</label>
+              <label class="active" for="nameEdit">Nombre</label>
             </div>
             <div class="input-field col s12">
               <input id="ubicationEdit" v-model="home.gallery.edit.ubication" type="text" class="validate" required>
@@ -388,7 +325,13 @@
             </div>
             <div class="input-field col s12">
               <input id="ubicationEdit" v-model="home.gallery.edit.map" type="text" class="validate" required>
-              <label class="active" for="ubicationEdit">Ubicacion</label>
+              <label class="active" for="ubicationEdit">Url Google Maps</label>
+            </div>
+          </div>
+          <div class="col s8">
+            <div class="input-field col s12">
+              <textarea id="descriptionEdit" v-model="home.gallery.edit.description" style="min-height:300px" class="materialize-textarea" required></textarea>
+              <label class="active" for="descriptionEdit">Descripción</label>
             </div>
           </div>
         </div>
@@ -433,52 +376,104 @@
         <a class="modal-close waves-effect waves-green btn-flat">Cerrar</a>
       </div>
     </div>
-    <div id="addtour" class="modal">
+
+    <div id="addtour" class="modal" style="width:90%;height:90vh">
       <!-- v-on:submit.prevent="addPicture"-->
       <form>
         <div class="modal-content">
           <h4>Add Tour</h4>
           <div class="row">
-            <div class="input-field col s12">
-              <i class="material-icons prefix">map</i>
-              <input :id="'key'" type="text" v-model="tours.new.key" class="validate">
-              <label :for="'key'">Key</label>
+            <div class="col s12 m5 l5">
+              <div class="input-field">
+                <i class="material-icons prefix">link</i>
+                <input :id="'key'" type="text" v-model="tours.new.key" class="validate">
+                <label :for="'key'">URL</label>
+              </div>
+              <div class="input-field">
+                <i class="material-icons prefix">title</i>
+                <input :id="'title'" type="text" v-model="tours.new.title" class="validate">
+                <label :for="'title'">Title</label>
+              </div>
+              <div class="input-field">
+                <i class="material-icons prefix">title</i>
+                <input :id="'background'" type="text" v-model="tours.new.background" class="validate">
+                <label :for="'background'">Background</label>
+              </div>
+              <div class="input-field col s12">
+                <i class="material-icons prefix">group</i>
+                <input :id="'group'" type="text" v-model="tours.new.group" class="validate">
+                <label :for="'group'">Group</label>
+              </div>
+              <div class="input-field col s12">
+                <i class="material-icons prefix">near_me</i>
+                <input :id="'route'" type="text" v-model="tours.new.route" class="validate">
+                <label :for="'route'">Route</label>
+              </div>
+              <div class="input-field col s12">
+                <i class="material-icons prefix">monetization_on</i>
+                <input :id="'price'" type="text" v-model="tours.new.price" class="validate">
+                <label :for="'price'">Price</label>
+              </div>
             </div>
-            <div class="input-field col s12">
-              <i class="material-icons prefix">title</i>
-              <input :id="'title'" type="text" v-model="tours.new.title" class="validate">
-              <label :for="'title'">Title</label>
-            </div>
-            <div class="input-field col s12">
-              <i class="material-icons prefix">description</i>
-              <textarea :id="'description'" class="materialize-textarea" v-model="tours.new.description"></textarea>
-              <label :for="'description'">Description</label>
-            </div>
-            <div class="input-field col s12">
-              <i class="material-icons prefix">title</i>
-              <input :id="'background'" type="text" v-model="tours.new.background" class="validate">
-              <label :for="'background'">Background</label>
-            </div>
-            <div class="input-field col s12">
-              <i class="material-icons prefix">group</i>
-              <input :id="'group'" type="text" v-model="tours.new.group" class="validate">
-              <label :for="'group'">Group</label>
-            </div>
-            <div class="input-field col s12">
-              <i class="material-icons prefix">near_me</i>
-              <input :id="'route'" type="text" v-model="tours.new.route" class="validate">
-              <label :for="'route'">Route</label>
-            </div>
-            <div class="input-field col s12">
-              <i class="material-icons prefix">monetization_on</i>
-              <input :id="'price'" type="text" v-model="tours.new.price" class="validate">
-              <label :for="'price'">Price</label>
+            <div class="col s12 m7 l7">
+              <div class="input-field">
+                <i class="material-icons prefix">code</i>
+                <textarea :id="'tour'+'description'" class="materialize-textarea" style="min-height:300px" v-model="tours.new.description"></textarea>
+                <label :for="'tour'+'description'">HTML code</label>
+              </div>
             </div>
             <button class="btn col s12 green" v-on:click="updateTour(tours.new,tours.new.key)">Guardar Cambios <i class="material-icons right">save</i> </button>
             <a class="col s12 center modal-close waves-effect waves-green btn-flat">Cerrar</a>
           </div>
         </div>
       </form>
+    </div>
+    <div id="edittour" class="modal" style="width:90%;height:90vh">
+      <div class="modal-content">
+        <h4>Edit Tour</h4>
+        <div class="row">
+          <div class="col s12 m5 l5">
+            <div class="input-field">
+              <i class="material-icons prefix">link</i>
+              <input :id="'edit'+'url'" type="text" v-model="tours.edit.url" class="validate">
+              <label class="active" :for="'edit'+'url'">URL</label>
+            </div>
+            <div class="input-field">
+              <i class="material-icons prefix">title</i>
+              <input :id="'edit'+'title'" type="text" v-model="tours.edit.title" class="validate">
+              <label class="active" :for="'edit'+'title'">Title</label>
+            </div>
+            <div class="input-field">
+              <i class="material-icons prefix">title</i>
+              <input :id="'edit'+'background'" type="text" v-model="tours.edit.background" class="validate">
+              <label class="active" :for="'edit'+'background'">Background</label>
+            </div>
+            <div class="input-field">
+              <i class="material-icons prefix">group</i>
+              <input :id="'edit'+'group'" type="text" v-model="tours.edit.group" class="validate">
+              <label class="active" :for="'edit'+'group'">Group</label>
+            </div>
+            <div class="input-field">
+              <i class="material-icons prefix">near_me</i>
+              <input :id="'edit'+'route'" type="text" v-model="tours.edit.route" class="validate">
+              <label class="active" :for="'edit'+'route'">Route</label>
+            </div>
+            <div class="input-field">
+              <i class="material-icons prefix">monetization_on</i>
+              <input :id="'edit'+'price'" type="text" v-model="tours.edit.price" class="validate">
+              <label class="active" :for="'edit'+'price'">Price</label>
+            </div>
+          </div>
+          <div class="col s12 m7 l7">
+            <div class="input-field">
+              <i class="material-icons prefix">code</i>
+              <textarea :id="'edit'+'description'" class="materialize-textarea" style="min-height:300px" v-model="tours.edit.description"></textarea>
+              <label class="active" :for="'edit'+'description'">HTML Code</label>
+            </div>
+          </div>
+          <button class="btn col s12 green" v-on:click="updateTour(tours.edit,tours.edit.url)">Guardar Cambios <i class="material-icons right">save</i> </button>
+        </div>
+      </div>
     </div>
 
     <div id="addshortprogram" class="modal">
@@ -579,7 +574,7 @@ export default{
         },
         "staff":{"code":""},
         "birdwatching":{},
-        "tours":{"new":{}},
+        "tours":{"new":{},"list":{},"edit":{}},
         "shortprograms":{
           "create":{},
           "edit":{},
@@ -654,7 +649,9 @@ export default{
 
     modalEditPicture:function(key,bird) {
       this.home.gallery.edit = bird
-      M.updateTextFields()
+      setTimeout(function () {
+        M.updateTextFields()
+      }, 1000);
     },
     uploadImg(e,size){
       this.home.gallery.new.loader = true
@@ -774,8 +771,28 @@ export default{
     getTours(){
       M.toast({html: 'Cargando...'})
       firebase.database().ref("page/tours/list").once('value', (snapshot)=> {
-        this.tours.list = snapshot.val()
         M.toast({html: 'Ok 🐦'})
+        this.tours.list = snapshot.val()
+      })
+    },
+    modalEditTour:function(tour,k) {
+      this.tours.edit=tour
+      this.tours.edit.url=k
+      setTimeout(function () {
+        M.updateTextFields()
+      }, 1000);
+    },
+    updateTour(tour,key){
+      M.toast({html: 'Cargando...'})
+      firebase.database().ref('page/tours/list/'+key)
+      .set(tour, function(error) {
+        if (error) {
+          // The write failed...
+          M.toast({html: 'Ups:'+error})
+        } else {
+          // Data saved successfully!
+          M.toast({html: 'Tu Registro fue Exitoso'})
+        }
       })
     },
     //Short Programs
@@ -831,19 +848,6 @@ export default{
       })
     },
 
-    updateTour(tour,key){
-      M.toast({html: 'Cargando...'})
-      firebase.database().ref('page/tours/list/'+key)
-      .set(tour, function(error) {
-        if (error) {
-          // The write failed...
-          M.toast({html: 'Ups:'+error})
-        } else {
-          // Data saved successfully!
-          M.toast({html: 'Tu Registro fue Exitoso'})
-        }
-      })
-    },
 
     getUsers: function () {
       firebase.database().ref("users").once('value', (snapshot)=> {

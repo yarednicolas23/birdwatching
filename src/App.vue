@@ -8,11 +8,11 @@ export default {
   name: 'app',
   metaInfo: {
     titleTemplate: '%s | Avistamiento de aves',
-      meta: [
-        { vmid: 'charset', charset: 'utf-8' },
-        { vmid: 'viewport',name: 'viewport', content: 'width=device-width, initial-scale=1' }
-      ]
-    }
+    meta: [
+      { vmid: 'charset', charset: 'utf-8' },
+      { vmid: 'viewport',name: 'viewport', content: 'width=device-width, initial-scale=1' }
+    ]
+  }
 }
 </script>
 
