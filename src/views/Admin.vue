@@ -840,16 +840,18 @@ export default{
     },
     updateTour(tour,key){
       M.toast({html: 'Cargando...'})
-      firebase.database().ref('page/tours/list/'+key)
-      .set(tour, function(error) {
-        if (error) {
-          // The write failed...
-          M.toast({html: 'Ups:'+error})
-        } else {
-          // Data saved successfully!
-          M.toast({html: 'Tu Registro fue Exitoso'})
-        }
-      })
+      if (key!=null) {
+        firebase.database().ref('page/tours/list/'+key)
+        .set(tour, function(error) {
+          if (error) {
+            // The write failed...
+            M.toast({html: 'Ups:'+error})
+          } else {
+            // Data saved successfully!
+            M.toast({html: 'Tu Registro fue Exitoso'})
+          }
+        })
+      }
     },
     //Short Programs
     addProgram() {

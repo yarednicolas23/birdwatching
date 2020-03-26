@@ -10,10 +10,10 @@
             <br>
             <div class="col 12 no-padding">
               <div class="col s4">
-                <a :href="'/bird/'+home.sound" class="btn-floating waves-effect blue darken-3 waves-light tooltipped" data-position="bottom" :data-tooltip="'Ubication: '+home.ubication"><i class="material-icons">place</i></a>
+                <a :href="'/bird/'+home.sound" class="btn-floating waves-effect blue darken-3 waves-light tooltipped" data-position="bottom" :data-tooltip="'Location: '+home.ubication"><i class="material-icons">place</i></a>
               </div>
               <div class="col s4">
-                <a class="btn-floating pulse waves-effect blue darken-3 waves-light tooltipped"  v-on:click="soundBird(home.sound)" data-position="bottom" data-tooltip="Lisent Bird"><i class="material-icons">hearing</i></a>
+                <a class="btn-floating pulse waves-effect blue darken-3 waves-light tooltipped"  v-on:click="soundBird(home.sound)" data-position="bottom" data-tooltip="Lisent to Bird"><i class="material-icons">hearing</i></a>
               </div>
               <div class="col s4">
                 <a :href="'/bird/'+home.sound" class="btn-floating waves-effect blue darken-3 waves-light tooltipped" data-position="bottom" data-tooltip="More Info"><i class="material-icons">help_outline</i></a>

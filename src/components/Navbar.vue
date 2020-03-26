@@ -58,11 +58,7 @@ export default {
           },
           "tours":{
             "name":"Tours",
-            "dropdown":{
-              "tour/amazonian":"Amazonas",
-              "tour/caribbean":"Caribbean Coast",
-              "tour/andes":"Andes"
-            }
+            "dropdown":false
           },
           "short-programs":{
             "name":"Short Programs",

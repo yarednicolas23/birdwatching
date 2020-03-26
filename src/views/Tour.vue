@@ -1,7 +1,7 @@
 <template lang="html">
   <PageTemplate :background="tour.background">
     <div class="col s12 white-text">
-      <div class="col s12 m6 l6">
+      <div>
         <h1 class="bebasbold">{{ tour.info.title }}</h1>
         <p v-html="tour.info.description"></p>
         <ul class="collapsible no-border scrollspy">
@@ -25,23 +25,6 @@
           </li>
         </ul>
         <a :href="'/contact-us/'" class="button-shadow" >Buy Now!</a>
-      </div>
-      <div class="col s12 m6 l6">
-        <div class="slider">
-          <ul class="slides transparent">
-            <li v-for="(tour,key) in tours" v-bind:key="key">
-               <!--<img :src="getSrc(key)"> random image -->
-              <div class="caption right-align">
-                <h3 class="capitalize">{{key}}</h3>
-                <p v-html="tour.description"></p>
-                <a :href="'/contact-us'" class="btn black" name="button">Buy Now!</a>
-              </div>
-            </li>
-          </ul>
-        </div>
-      </div>
-      <div class="col 12 m4 l4 hide">
-        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2011756.7151534874!2d-74.76246332613937!3d9.990870013944424!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e5f309f3b0773f3%3A0x29812374a959191b!2sMagdalena!5e0!3m2!1ses!2sco!4v1559860805264!5m2!1ses!2sco" width="400" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
       </div>
     </div>
   </PageTemplate>
@@ -89,9 +72,6 @@ export default {
               this.tour.background = this.getSrc(childSnapshot.val().background)
             }
           }
-          setTimeout(function () {
-            M.Slider.init(document.querySelectorAll('.slider'),{height:250})
-          }, 2000)
         })
       })
     }

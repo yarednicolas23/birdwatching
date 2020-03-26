@@ -15,7 +15,7 @@ export default {
   data() {
       return {
         "staff":{
-          "background":this.getSrc("staff-birdwatching-colombia")
+          "background":this.getSrc("hummingbird-observatory-birds-tour")
         },
         "title": 'Birdwatching Colombia',
         "description":'Avistamiento de aves, viaja por el país con la mayor diversidad de aves del mundo. Ofrecemos rutas que cubren casi el 80% del país.',
@@ -31,9 +31,9 @@ export default {
       })
     },
     getSrc(name) {
-      //return 'https://apimgs.000webhostapp.com/img/'+ name + ".png"
-      require('../assets/img/'+ name + '.png')
-      return './img/'+ name + '.png'
+      return 'https://imgsapi.000webhostapp.com/img/'+ name + ".png"
+      //require('../assets/img/'+ name + '.png')
+      //return './img/'+ name + '.png'
     }
   },
   created(){

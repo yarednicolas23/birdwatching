@@ -5,7 +5,7 @@
         <div v-for="(short,key) in shortprograms.list" v-bind:key="key" style="min-height:60vh;display: inline-block;margin:20px;">
           <a :href="'short-program/'+key" class="card" style="border-radius:10px;">
             <div class="card-image">
-              <img :src="getSrc(key)" style="max-width:80vh;width:100%;border-radius:10px;">
+              <img :src="getSrc(short.photo)" style="max-width:80vh;width:100%;border-radius:10px;">
               <div class="card-title">{{short.name}}
                 <span style="font-size:16px"><br><i class="material-icons white-text" style="font-size:16px">room</i>
                   Bogotá, Colombia <br>
@@ -38,7 +38,7 @@ export default {
       return {
         "shortprograms":{
           "list":{},
-          "background":this.getSrc("Scarlet-Macaw")
+          "background":this.getSrc("Scarlet-Macaw.png")
         },
         "title": 'Short Programs, Birdwatching Colombia',
         "description":'Avistamiento de aves, viaja por el país con la mayor diversidad de aves del mundo. Ofrecemos rutas que cubren casi el 80% del país.',
@@ -46,8 +46,8 @@ export default {
       }
   },
   methods: {
-    getSrc(name) {
-      return 'https://imgsapi.000webhostapp.com/img/'+ name.replace(" ","-") + ".png"
+    getSrc(n) {
+      return 'https://imgsapi.000webhostapp.com/img/'+ n
       //return 'https://apimgs.000webhostapp.com/img/'+ name + ".png?"
       //require('../assets/img/'+ name + '.png')
       //return '/img/'+ name + '.png'
