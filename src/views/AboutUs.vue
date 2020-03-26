@@ -18,7 +18,9 @@ export default{
         "data":{},
         //"background":"/img/hummingbird.png"
         //"background":this.getSrc("Momotus-Momota")
-      }
+      },
+       "title": 'About us | Birdwatching Colombia',
+        "description":'We create unique experiences in different regions of Colombia for beginners and experts in bird watching. We are supported by 62 years of experience in tourism',  
     }
   },
   beforeCreate(){
@@ -43,6 +45,14 @@ export default{
   },
   mounted(){
   },
+metaInfo () {
+    return {
+      title: this.title,
+      meta: [
+        { vmid: 'description', name: 'description', content: this.description }
+      ]
+    }
+  }
 }
 </script>
 

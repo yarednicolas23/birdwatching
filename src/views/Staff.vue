@@ -17,9 +17,8 @@ export default {
         "staff":{
           "background":this.getSrc("hummingbird-observatory-birds-tour")
         },
-        "title": 'Birdwatching Colombia',
-        "description":'Avistamiento de aves, viaja por el país con la mayor diversidad de aves del mundo. Ofrecemos rutas que cubren casi el 80% del país.',
-        "keywords": 'Aviatur, Birdwatching, avistamiento de aves, diversidad, fauna, especies, aves exóticas, aves, rutas, Colombia, aves de Colombia'
+        "title": 'Birdwatching Colombia Staff | Our team! ',
+        "description":'Know the Birdwatching Colombia’s team. Specialists in bird watching, orchids, photography and explorations of other kind of fauna and flora in Colombia.',
       }
   },
   methods: {

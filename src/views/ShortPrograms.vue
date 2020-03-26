@@ -40,9 +40,8 @@ export default {
           "list":{},
           "background":this.getSrc("Scarlet-Macaw.png")
         },
-        "title": 'Short Programs, Birdwatching Colombia',
-        "description":'Avistamiento de aves, viaja por el país con la mayor diversidad de aves del mundo. Ofrecemos rutas que cubren casi el 80% del país.',
-        "keywords": 'Aviatur, Birdwatching, avistamiento de aves, diversidad, fauna, especies, aves exóticas, aves, rutas, Colombia, aves de Colombia'
+        "title": 'Short tours in big cities surrounding’s | Birdwatching Colombia ',
+        "description":'Tours of 1 to 3 days, designed for experts and beginners, for exploring birds and nature around the main cities of Colombia'
       }
   },
   methods: {

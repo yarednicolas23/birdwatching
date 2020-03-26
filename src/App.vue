@@ -7,7 +7,7 @@
 export default {
   name: 'app',
   metaInfo: {
-    titleTemplate: '%s | Avistamiento de aves',
+    title: 'Birdwatching Colombia | Immersive nature experience',
     meta: [
       { vmid: 'charset', charset: 'utf-8' },
       { vmid: 'viewport',name: 'viewport', content: 'width=device-width, initial-scale=1' }
