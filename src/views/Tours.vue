@@ -2,7 +2,7 @@
   <div>
   <Loader v-if="Object.keys(tours.list).length == 0"/>
     <PageTemplate :background="tours.background">
-      <div style="overflow: auto; white-space: nowrap;min-width:100%;">
+      <div id="scroll" style="overflow: auto; white-space: nowrap;min-width:100%;">
         <div v-for="(tour,key) in tours.list" v-bind:key="key" style="min-height:60vh;display: inline-block;margin:20px;">
           <a :href="'tour/'+key" class="card" style="border-radius:10px;">
             <div class="card-image">
@@ -22,29 +22,31 @@
           </a>
         </div>
       </div>
+      <a style="position:absolute;top:40vh" class="btn-floating btn-large waves-effect waves-light blue darken-3" v-on:click="sideScroll('left')"><i class="material-icons">keyboard_arrow_left</i></a>
+      <a style="position:absolute;top:40vh;right:1vh" class="btn-floating btn-large waves-effect waves-light blue darken-3" v-on:click="sideScroll('right')"><i class="material-icons">keyboard_arrow_right</i></a>
     </PageTemplate>
   </div>
 </template>
 
 <script>
 import firebase from 'firebase'
-import M from 'materialize-css'
-import Loader from '../components/Loader.vue'
+import $ from 'jquery'
 
+import Loader from '../components/Loader.vue'
 import PageTemplate from './PageTemplate.vue'
 
 export default {
   name:'Tours',
   components: { PageTemplate ,Loader  },
   data() {
-      return {
-        "tours":{
-          "background":"Amazonian-Motmot.png",
-          "list":{}
-        },
-         "title": 'Our trips in Colombia | Birdwatching Colombia',
-        "description":'Within our portfolio we offer tours with different themes, routes and landscapes. The hotspot places are carefully selected for bird watching in Colombia'
-}
+    return {
+      "tours":{
+        "background":"Amazonian-Motmot.png",
+        "list":{}
+      },
+       "title": 'Our trips in Colombia | Birdwatching Colombia',
+      "description":'Within our portfolio we offer tours with different themes, routes and landscapes. The hotspot places are carefully selected for bird watching in Colombia'
+    }
   },
   methods: {
     getSrc(name) {
@@ -63,6 +65,25 @@ export default {
           this.tours.background = this.getSrc(snapshot.val().background)
         }
       })
+    },
+    sideScroll:function (type) {
+      if(type=='left'){$('#scroll').animate({scrollLeft: "-=550px"}, "slow")}
+      if(type=='right'){$('#scroll').animate({scrollLeft: "+=550px"}, "slow")}
+
+      /*
+      var scrollAmount = 0;
+      var slideTimer = setInterval(function(){
+          if(direction == 'left'){
+              document.getElementById('scroll').scrollLeft -= step;
+          } else {
+              document.getElementById('scroll').scrollLeft += step;
+          }
+          scrollAmount += step;
+          if(scrollAmount >= distance){
+              window.clearInterval(slideTimer);
+          }
+      }, speed);
+      */
     }
   },
   created(){
