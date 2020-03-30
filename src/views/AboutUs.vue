@@ -20,7 +20,7 @@ export default{
         //"background":this.getSrc("Momotus-Momota")
       },
        "title": 'About us | Birdwatching Colombia',
-        "description":'We create unique experiences in different regions of Colombia for beginners and experts in bird watching. We are supported by 62 years of experience in tourism',  
+        "description":'We create unique experiences in different regions of Colombia for beginners and experts in bird watching. We are supported by 62 years of experience in tourism',
     }
   },
   beforeCreate(){
@@ -35,9 +35,9 @@ export default{
       })
     },
     getSrc(name) {
-      //return 'https://apimgs.000webhostapp.com/img/'+ name + ".png?"
-      require('../assets/img/'+ name + '.png')
-      return './img/'+ name + '.png'
+      return 'https://imgsapi.000webhostapp.com/img/'+ name + ".png?"
+      //require('../assets/img/'+ name + '.png')
+      //return './img/'+ name + '.png'
     }
   },
   created(){

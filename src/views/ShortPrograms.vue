@@ -8,7 +8,7 @@
               <img :src="getSrc(short.photo)" style="max-width:80vh;width:100%;border-radius:10px;">
               <div class="card-title">{{short.name}}
                 <span style="font-size:16px"><br><i class="material-icons white-text" style="font-size:16px">room</i>
-                  Bogotá, Colombia <br>
+                  {{short.location}}<br>
                   <i class="material-icons pointer tooltipped" data-position="bottom" data-tooltip="Includes transport">directions_bus</i>
                   <i class="material-icons pointer tooltipped" data-position="bottom" data-tooltip="Includes hotel">hotel</i>
                   <i class="material-icons pointer tooltipped" data-position="bottom" data-tooltip="Includes entrance tickets">local_play</i>

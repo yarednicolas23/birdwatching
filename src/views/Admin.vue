@@ -11,9 +11,9 @@
         <li class="tab"><a href="#birds" class="active">Birds🐦</a></li>
         <li class="tab"><a href="#short-programs" v-on:click="getShortPrograms()">Short Programs🌳</a></li>
         <li class="tab"><a href="#tours" v-on:click="getTours()">Tours🌎</a></li>
-        <li class="tab hide"><a href="#pages" v-on:click="this.listPages()">Paginas</a></li>
+        <li class="tab"><a href="#pages" v-on:click="listPages()">Edit Pages</a></li>
         <li class="tab hide"><a href="#about-us" v-on:click="this.getAbout()">About us</a></li>
-        <li class="tab hide"><a href="#staff">Staff</a></li>
+        <li class="tab"><a href="#staff" v-on:click="getStaff()">Staff</a></li>
         <li class="tab hide"><a href="#birdwatching-colombia">Birdwatching Colombia</a></li>
       </ul>
     </div>
@@ -126,7 +126,7 @@
             <div class="card-image">
               <img :src="getSrc(short.photo,true)" style="width:100%;border-radius:10px;">
               <span class="card-title">{{short.name}}
-                 <a class="waves-effect waves-green btn-flat green-text modal-trigger" v-on:click="editProgram(key)" data-target="editshortprogram">Edit</a><a class="waves-effect waves-red btn-flat red-text"  v-on:click="deleteProgram(key)">Delete</a></span>
+                 <a class="waves-effect waves-green btn-flat green-text modal-trigger" v-on:click="editProgram(key);" data-target="editshortprogram">Edit</a><a class="waves-effect waves-red btn-flat red-text"  v-on:click="deleteProgram(key)">Delete</a></span>
             </div>
           </div>
         </div>
@@ -161,23 +161,19 @@
     </div>
     <div id="pages" class="row">
       <div class="col s12">
-        <div class="col s12 m3 l3" v-for="(page,key) in pages.list" v-bind:key="key">
-          <div class="card horizontal blue-grey darken-3 white-text z-depth-4">
-            <div class="card-image">
-                <img :src="getSrc(page.background)">
-            </div>
-            <div class="card-stacked">
-              <div class="card-content">
-                <span class="card-title">{{key}}</span>
-                <p></p>
-              </div>
-              <div class="card-action">
-                <a class="pointer green-text modal-trigger" data-target="editgallery">editar</a>
-                <a class="pointer red-text">eliminar</a>
-              </div>
-            </div>
-          </div>
-        </div>
+        <table class="white-text">
+          <thead>
+            <th>Image</th>
+            <th>Name</th>
+          </thead>
+          <tbody>
+            <tr v-for="(p,i) in pages.list" v-bind:key="i">
+              <td><img class="z-depth-4" style="height:50px;width:auto" :src="getSrc(p.background)"></td>
+              <td>{{i}}</td>
+              <td><a class="btn-flat green-text waves-effect modal-trigger" :class="i=='home'?'disabled':''" data-target="editpage" v-on:click="getPage(i)">editar</a></td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </div>
     <div id="about-us" class="row">
@@ -194,46 +190,13 @@
            </div>
          </div>
        </div>
-       <div class="col s12 m4 l4">
-         <div class="card blue-grey darken-1">
-           <div class="card-content white-text">
-             <span class="card-title">Background Image</span>
-             <div class="row">
-               <div class="slider">
-                 <ul class="slides">
-                   <li  v-for="(bird,key) in home.gallery.list" v-bind:key="key">
-                     <img :src="getSrc(key)"> <!-- random image -->
-                     <div class="caption center-align">
-                       <h3>{{key}}</h3>
-                       <p>
-                         <label class="white-text">
-                           <input name="group1" type="radio" v-on:click="about.background = key" />
-                           <span>Select image</span>
-                         </label>
-                       </p>
-                     </div>
-                   </li>
-                 </ul>
-               </div>
-             </div>
-           </div>
-         </div>
-       </div>
        <button class="btn col s12 green" v-on:click="updateAbout">Guardar Cambios <i class="material-icons right">save</i> </button>
      </div>
     </div>
     <div id="staff" class="row">
       <div class="col s12">
-        <div class="card blue-grey darken-1">
-          <div class="card-content white-text">
-            <span class="card-title">Codigo del contenido</span>
-            <div class="row">
-               <div class="col s12">
-                 <CodeEditor><textarea class="code-input" v-model="staff.code"></textarea></CodeEditor>
-               </div>
-            </div>
-          </div>
-        </div>
+        <CodeEditor><textarea class="code-input" v-model="staff.code"></textarea></CodeEditor>
+        <br>
         <button class="btn col s12 green" v-on:click="updateStaff">Guardar Cambios <i class="material-icons right">save</i> </button>
       </div>
     </div>
@@ -251,36 +214,9 @@
            </div>
          </div>
        </div>
-       <div class="col s12 m4 l4">
-         <div class="card blue-grey darken-1">
-           <div class="card-content white-text">
-             <span class="card-title">Background Image</span>
-             <div class="row">
-               <div class="slider">
-                 <ul class="slides">
-                   <li  v-for="(bird,key) in home.gallery.list" v-bind:key="key">
-                     <img :src="getSrc(key)"> <!-- random image -->
-                     <div class="caption center-align">
-                       <h3>{{key}}</h3>
-                       <p>
-                         <label class="white-text">
-                           <input name="group1" type="radio" v-on:click="birdwatching.background = key" />
-                           <span>Select image</span>
-                         </label>
-                       </p>
-                     </div>
-                   </li>
-                 </ul>
-               </div>
-             </div>
-           </div>
-         </div>
-       </div>
        <button class="btn col s12 green" v-on:click="updateAbout">Guardar Cambios <i class="material-icons right">save</i> </button>
      </div>
     </div>
-    <div id="disabled" class="row"></div>
-
     <!-- Modal Structure -->
     <div id="addbird" class="modal" style="width:90%;height:90vh">
       <form v-on:submit.prevent="addPicture">
@@ -421,7 +357,7 @@
             <div class="col s12 m5 l5">
               <div class="input-field">
                 <i class="material-icons prefix">link</i>
-                <input :id="'key'" type="text" v-model="tours.new.key" class="validate">
+                <input :id="'key'" type="text" v-model="tours.new.key" class="validate" required>
                 <label :for="'key'">URL</label>
               </div>
               <div class="input-field">
@@ -430,21 +366,21 @@
                 <label :for="'title'">Title</label>
               </div>
               <div class="input-field">
-                <i class="material-icons prefix">title</i>
+                <i class="material-icons prefix">photo</i>
                 <input :id="'background'" type="text" v-model="tours.new.background" class="validate">
                 <label :for="'background'">Background</label>
               </div>
-              <div class="input-field col s12">
+              <div class="input-field">
                 <i class="material-icons prefix">group</i>
                 <input :id="'group'" type="text" v-model="tours.new.group" class="validate">
                 <label :for="'group'">Group</label>
               </div>
-              <div class="input-field col s12">
+              <div class="input-field">
                 <i class="material-icons prefix">near_me</i>
                 <input :id="'route'" type="text" v-model="tours.new.route" class="validate">
                 <label :for="'route'">Route</label>
               </div>
-              <div class="input-field col s12">
+              <div class="input-field">
                 <i class="material-icons prefix">monetization_on</i>
                 <input :id="'price'" type="text" v-model="tours.new.price" class="validate">
                 <label :for="'price'">Price</label>
@@ -455,6 +391,11 @@
                 <i class="material-icons prefix">code</i>
                 <textarea :id="'tour'+'description'" class="materialize-textarea" style="min-height:300px" v-model="tours.new.description"></textarea>
                 <label :for="'tour'+'description'">HTML code</label>
+              </div>
+              <div class="input-field">
+                <i class="material-icons prefix">more</i>
+                <input :id="'metatags'" type="text" v-model="tours.new.metatags" class="validate">
+                <label :for="'metatags'">Meta tags</label>
               </div>
             </div>
             <button class="btn col s12 green" v-on:click="updateTour(tours.new,tours.new.key)">Guardar Cambios <i class="material-icons right">save</i> </button>
@@ -505,6 +446,11 @@
               <textarea :id="'edit'+'description'" class="materialize-textarea" style="min-height:300px" v-model="tours.edit.description"></textarea>
               <label class="active" :for="'edit'+'description'">HTML Code</label>
             </div>
+            <div class="input-field">
+              <i class="material-icons prefix">more</i>
+              <input :id="'metatags'" type="text" v-model="tours.edit.metatags" class="validate">
+              <label :for="'metatags'">Meta tags</label>
+            </div>
           </div>
           <button class="btn col s12 green" v-on:click="updateTour(tours.edit,tours.edit.url)">Guardar Cambios <i class="material-icons right">save</i> </button>
         </div>
@@ -529,8 +475,13 @@
               </div>
               <div class="input-field">
                 <i class="material-icons prefix">map</i>
-                <input v-model="shortprograms.create.location" type="text" class="validate" required>
+                <input v-model="shortprograms.create.map" type="text" class="validate" required>
                 <label>Google maps url</label>
+              </div>
+              <div class="input-field">
+                <i class="material-icons prefix">place</i>
+                <input v-model="shortprograms.create.location" type="text" class="validate" required>
+                <label>Location</label>
               </div>
             </div>
             <div class="col s12 m7 l7">
@@ -572,8 +523,13 @@
               </div>
               <div class="input-field">
                 <i class="material-icons prefix">map</i>
-                <input v-model="shortprograms.edit.location" type="text" class="validate" required>
-                <label class="active">Google maps url</label>
+                <input id="edit-short-map" v-model="shortprograms.edit.map" type="text" class="validate" required>
+                <label for="edit-short-map">Google maps url</label>
+              </div>
+              <div class="input-field">
+                <i class="material-icons prefix">place</i>
+                <input id="edit-short-location" v-model="shortprograms.edit.location" type="text" class="validate" required>
+                <label for="edit-short-location">Location</label>
               </div>
             </div>
             <div class="col s12 m7 l7">
@@ -581,6 +537,47 @@
                 <i class="material-icons prefix">code</i>
                 <textarea id="edit-short-description" style="min-height:300px" v-model="shortprograms.edit.description" class="materialize-textarea" required></textarea>
                 <label class="active" for="editdescription">HTML code</label>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <!-- :disabled="home.gallery.new.valid ? false : true" -->
+          <button type="submit" class="waves-effect waves-green btn green">Guardar</button>
+          <a class="modal-close waves-effect waves-green btn-flat">Cerrar</a>
+        </div>
+      </form>
+    </div>
+
+    <div id="editpage" class="modal" style="width:90%;height:100vh">
+      <form v-on:submit.prevent="updatePage">
+        <div class="modal-content">
+          <h4>Edit Page</h4>
+          <div class="row">
+            <div class="col s12 m5 l5">
+              <div class="input-field">
+                <i class="material-icons prefix">link</i>
+                <input id="edit-page-url" v-model="pages.edit.url" type="text" class="validate" disabled required>
+                <label class="active" for="editname">URL</label>
+              </div>
+              <div class="input-field">
+                <i class="material-icons prefix">photo</i>
+                <input id="edit-page-photo" v-model="pages.edit.background" type="text" class="validate" required>
+                <label for="edit-page-photo">Photo</label>
+              </div>
+              <div class="input-field">
+                <select id="select-images" class="icons">
+                  <option value="" disabled selected>Choose your option</option>
+                  <option v-for="(g,i) in gallery" v-bind:key="i" value="" :data-icon="getSrc(g,true)">{{g}}</option>
+                </select>
+                <label>Images in select</label>
+              </div>
+            </div>
+            <div class="col s12 m7 l7">
+              <div class="input-field col s12">
+                <i class="material-icons prefix">code</i>
+                <textarea id="edit-page-code" style="min-height:300px" v-model="pages.edit.code" class="materialize-textarea" required></textarea>
+                <label class="active" for="edit-page-code">HTML code</label>
               </div>
             </div>
           </div>
@@ -605,47 +602,48 @@ export default{
   name:'admin',
   components:{CodeEditor},
   data() {
-      return {
-        "pages":{
-          "list":{}
-        },
-        "home":{
-          "upload":{"img":"","time":0},
-          "gallery":{
-            "new":{
-              "model":{
-                "name":"",
-                "description":""
-              },
-              "valid":false,
-              "loader":false
+    return {
+      "pages":{
+        "list":{},
+        "edit":{}
+      },
+      "home":{
+        "upload":{"img":"","time":0},
+        "gallery":{
+          "new":{
+            "model":{
+              "name":"",
+              "description":""
             },
-            "edit":{},
-            "list":{}
+            "valid":false,
+            "loader":false
           },
-        },
-        "gallery":[],
-        "about":{
-          "code":""
-        },
-        "staff":{"code":""},
-        "birdwatching":{},
-        "tours":{"new":{},"list":{},"edit":{}},
-        "shortprograms":{
-          "create":{},
           "edit":{},
           "list":{}
         },
-        "users":{
-          "list":[],
-          "length":0
-        },
-        "admin":{
-          "title": 'Admin',
-          "description":'',
-          "keywords": ''
-        }
+      },
+      "gallery":[],
+      "about":{
+        "code":""
+      },
+      "staff":{"code":""},
+      "birdwatching":{},
+      "tours":{"new":{},"list":{},"edit":{}},
+      "shortprograms":{
+        "create":{},
+        "edit":{},
+        "list":{}
+      },
+      "users":{
+        "list":[],
+        "length":0
+      },
+      "admin":{
+        "title": 'Admin',
+        "description":'',
+        "keywords": ''
       }
+    }
   },
   methods: {
     // List Pages
@@ -654,13 +652,19 @@ export default{
         this.pages.list = snapshot.val()
       })
     },
+    getPage:function(n) {
+      firebase.database().ref("page").child(n).once('value', (snapshot)=> {
+        this.pages.edit=snapshot.val()
+        this.pages.edit.url = n
+      })
+      this.listImgs()
+      setTimeout(function(){M.updateTextFields()},1000)
+      setTimeout(function(){M.FormSelect.init(document.querySelectorAll('select'))},1000)
+    },
     //Home Methods
     homeGallery: function () {
       firebase.database().ref("page/home/gallery").once('value', (snapshot)=> {
         this.home.gallery.list = snapshot.val()
-        setTimeout(function () {
-          M.Slider.init(document.querySelectorAll('.slider'))
-        }, 2000)
       })
     },
     addPicture: function() {
@@ -818,7 +822,7 @@ export default{
           M.toast({html: 'Ups:'+error})
         } else {
           // Data saved successfully!
-          M.toast({html: 'Tu Registro fue Exitoso'})
+          M.toast({html: 'Saved :D'})
         }
       })
     },
@@ -834,9 +838,7 @@ export default{
     modalEditTour:function(tour,k) {
       this.tours.edit=tour
       this.tours.edit.url=k
-      setTimeout(function () {
-        M.updateTextFields()
-      }, 1000);
+      setTimeout(function(){M.updateTextFields()},1000)
     },
     updateTour(tour,key){
       M.toast({html: 'Cargando...'})
@@ -878,6 +880,7 @@ export default{
       firebase.database().ref("page/shortprograms/list/"+ program).once('value', (snapshot)=> {
         this.shortprograms.edit = snapshot.val()
       })
+      setTimeout(function(){M.updateTextFields()},1000)
     },
     updateProgram(){
       M.toast({html: 'Cargando...'})

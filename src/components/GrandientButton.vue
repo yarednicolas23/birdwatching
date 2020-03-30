@@ -1,5 +1,5 @@
 <template lang="html">
-    <button class="btn-design blue-gradient" type="submit"><span>{{text}}</span></button>
+    <button class="btn-design blue-gradient pointer" type="submit"><span>{{text}}</span></button>
 </template>
 
 <script>
@@ -21,10 +21,11 @@ export default {
   margin: 1em 0;
   padding: 0.5em 2em;
   background: transparent;
-  border-radius: 3px;
+  border-radius: 15px;
   font-weight:300;
   font-size: 1.3rem;
   text-align: center;
+
 }
 .green-gradient span {
   background: -webkit-linear-gradient(left, #add356, #00dfa6);

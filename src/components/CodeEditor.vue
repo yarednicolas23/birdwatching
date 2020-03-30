@@ -20,8 +20,8 @@
 </template>
 
 <script>
-//import $ from 'jquery'
-//import Prism from 'prismjs'
+import $ from 'jquery'
+import Prism from 'prismjs'
 
 export default {
   name:'CodeEditor',
@@ -30,60 +30,60 @@ export default {
       type: String
     }
   },
-  mounted(){
-		/*
-    var MicroCode = function () {
-        return {
-            init: function (inputSel, outputSel, languageSel) {
-                this.focusInput(inputSel);
-                this.listenForInput(inputSel);
-                this.listenForLanguage(languageSel, '.code-output', inputSel);
-                this.renderOutput(outputSel, $(inputSel)[0].value);
-                this.listenerForScroll(inputSel, outputSel);
-            },
-            listenForInput: function (inputSel) {
-                var self = this;
-                $(inputSel).on('input keydown', function (key) {
-                    var input = this, selStartPos = input.selectionStart, inputVal = input.value;
-                    if (key.keyCode === 9) {
-                        input.value = inputVal.substring(0, selStartPos) + '    ' + inputVal.substring(selStartPos, input.value.length);
-                        input.selectionStart = selStartPos + 4;
-                        input.selectionEnd = selStartPos + 4;
-                        key.preventDefault();
-                    }
-                    self.renderOutput('.code-output', this.value);
-                });
-                Prism.highlightAll();
-            },
-            listenForLanguage: function (languageSel, outputSel, inputSel) {
-                var self = this;
-                $(languageSel).on('change', function () {
-                    $('code', outputSel).removeClass().addClass('language-' + this.value).removeAttr('data-language');
-                    $(outputSel).removeClass().addClass('code-output language-' + this.value);
-                    $(inputSel).val('');
-                    $('code', outputSel).html('');
-                    self.focusInput(inputSel);
-                });
-            },
-            listenerForScroll: function (inputSel, outputSel) {
-                $(inputSel).on('scroll', function () {
-                    $(outputSel)[0].scrollTop = this.scrollTop;
-                });
-            },
-            renderOutput: function (outputSel, value) {
-                $('code', outputSel).html(value.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;') + '\n');
-                Prism.highlightAll();
-            },
-            focusInput: function (inputSel) {
-                var input = $(inputSel);
-                input.focus();
-                input[0].selectionStart = input[0].value.length;
-                input[0].selectionEnd = input[0].value.length;
+  componentBeforeMount(){
+			var MicroCode = function () {
+			return {
+				init: function (inputSel, outputSel, languageSel) {
+					this.focusInput(inputSel);
+					//this.listenForInput(inputSel);
+					this.listenForLanguage(languageSel, '.code-output', inputSel);
+					this.renderOutput(outputSel, $(inputSel)[0].value);
+					this.listenerForScroll(inputSel, outputSel);
+				},
+        /*listenForInput: function (inputSel) {
+          var self = this;
+          $(inputSel).on('input keydown', function (key) {
+            var input=this;
+						var selStartPos=input.selectionStart;
+						var inputVal=input.value;
+            if (key.keyCode === 9) {
+	            input.value = inputVal.substring(0, selStartPos) + '' + inputVal.substring(selStartPos, input.value.length);
+	            input.selectionStart = selStartPos + 4;
+	            input.selectionEnd = selStartPos + 4;
+	            key.preventDefault();
             }
-        };
+            self.renderOutput('.code-output', this.value);
+          });
+          Prism.highlightAll();
+        },*/
+        listenForLanguage: function (languageSel, outputSel, inputSel) {
+          var self = this;
+          $(languageSel).on('change', function () {
+            $('code', outputSel).removeClass().addClass('language-' + this.value).removeAttr('data-language');
+            $(outputSel).removeClass().addClass('code-output language-' + this.value);
+            $(inputSel).val('');
+            $('code', outputSel).html('');
+            self.focusInput(inputSel);
+          });
+        },
+        listenerForScroll: function (inputSel, outputSel) {
+          $(inputSel).on('scroll', function () {
+            $(outputSel)[0].scrollTop = this.scrollTop;
+          });
+        },
+        renderOutput: function (outputSel, value) {
+          $('code', outputSel).html(value.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;') + '\n');
+          Prism.highlightAll();
+        },
+        focusInput: function (inputSel) {
+          var input = $(inputSel);
+          input.focus();
+          input[0].selectionStart = input[0].value.length;
+          input[0].selectionEnd = input[0].value.length;
+        }
+      };
     }();
     MicroCode.init('.code-input', '.code-output', '.language');
-		*/
   }
 }
 </script>
@@ -116,7 +116,7 @@ main {
   opacity: 0.5;
 }
 .window {
-  background: GhostWhite;
+  background: #222;
   border-radius: 0.3rem;
   box-shadow: 0 8px 12px rgba(0, 0, 0, 0.1);
   overflow: hidden;
@@ -183,8 +183,7 @@ main {
 .window .window-body .code-input {
   opacity: 0.7;
   margin: 0;
-  color: #263238;
-  resize: none;
+  color: #fff;
 }
 .window .window-body .code-output {
   pointer-events: none;
@@ -199,7 +198,7 @@ main {
   margin: 0;
   padding: 1rem;
   display: block;
-  color: #666;
+  color: #fff;
   font-size: 0.8rem;
   font-family: 'PT Mono', monospace;
 }

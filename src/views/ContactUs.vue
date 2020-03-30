@@ -94,7 +94,7 @@ export default {
 }
 </script>
 
-<style lang="css" scoped>
+<style lang="css">
 #contact-us{
   margin-top: 5px;
 }
